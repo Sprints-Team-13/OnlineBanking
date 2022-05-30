@@ -77,3 +77,32 @@ exports.reqSignin = (req, res, next) => {
     next();
     //jwt.decode()
 }
+//accept or reject users to login
+exports.isAuthorized = (req, res, next) => {
+    User.findOne({email:req.body.email})
+    .exec( async (error, user) => {
+        console.log(req.body.email);
+        let email = req.body.email;
+        let authorized = req.body.authorized;
+        console.log(authorized);
+        if(error) return res.status(400).json({error});
+        User
+        .updateOne( {email: email}, {$set: {authorized: authorized}})
+        .exec( (error, user) => {
+            if(error) return res.status(400).json({error});
+            res.status(200).json({
+                message: 'Authorized status updated'
+            })
+        })
+    });
+}
+// get all users
+exports.getUsers = (req, res) => {
+    User.find({})
+    .exec( async (error, users) => {
+        if(error) return res.status(400).json({error});
+        res.status(200).json({
+            users
+        })
+    })
+}
