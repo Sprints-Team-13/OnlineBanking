@@ -6,7 +6,7 @@ const router = express.Router();
 
 router.post('/admin/signup', validateRequest, isRequestValidated, signup);
 router.post('/admin/signin', signin);
-router.post('/admin/verify', isAuthorized);
+router.post('/admin/verify', reqSignin, isAuthorized);
 router.get('/admin/list', reqSignin, getUsers);
 
 

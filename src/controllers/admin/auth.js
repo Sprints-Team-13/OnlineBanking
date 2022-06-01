@@ -1,5 +1,6 @@
 const User = require("../../models/user");
 const jwt = require('jsonwebtoken');
+const { findOne } = require("../../models/user");
 exports.signup = (req, res) => {
     User.findOne({email: req.body.email})
     .exec( async (error, user) => {
@@ -83,13 +84,24 @@ exports.reqSignin = (req, res, next) => {
         if(error) return res.status(401).json({
             message: "Auth Failed"
             });
-   
+           
     req.user = user;
+    User.findOne({_id: req.user._id})
+    .exec( async (error, user) => {
+        if(error) return res.status(400).json({error});
+        if(user.role === 'user') {
+            return res.status(400).json({
+                message: 'User not authorized'
+            });
+        }
+        next();
+    });
     //console.log(req.user);
-    next();
+
     //jwt.decode()
 });
 }
+
 //accept or reject users to login
 exports.isAuthorized = (req, res, next) => {
     User.findOne({email:req.body.email})
