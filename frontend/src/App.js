@@ -1,16 +1,38 @@
 import './App.scss';
 import React from 'react'
-import Homepage from './Pages/Homepage';
+import {Routes, Route, Navigate} from 'react-router-dom'
 
+import Homepage from './Pages/Homepage';
+import AdminPanel from './Pages/AdminPanel/AdminPanel'
+import UserDashboard from './Pages/UserDashboard/UserDashboard'
 
 function App() {
 
+  const isSignin = false
+  const isAdmin = false
+
   return (
-
     <div className="App">
-      <Homepage />
+      {isSignin
+        ?
+        isAdmin 
+          ?
+          <Routes>
+            <Route path='/AdminPanel/*' element={<AdminPanel/>}/>
+            <Route path="*" element={<Navigate to ="/AdminPanel" replace/>}/>
+          </Routes>
+          :
+          <Routes>
+            <Route path='/UserDashboard/*' element={<UserDashboard/>}/>
+            <Route path="*" element={<Navigate to ="/UserDashboard" replace/>}/>
+          </Routes>
+        :
+        <Routes>
+          <Route path='/' element={<Homepage />} />
+          <Route path="*" element={<Navigate to ="/" replace/>}/>
+        </Routes>
+      }
     </div>
-
   )
 }
 
