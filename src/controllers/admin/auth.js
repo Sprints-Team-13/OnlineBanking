@@ -49,6 +49,7 @@ exports.signin = (req, res) => {
             if(user.authenticate(req.body.hash_password) && user.role === 'admin') {
                 const token = jwt.sign({_id: user._id}, process.env.SHH, {expiresIn: '5d'});
                 const { firstName, lastName, email, role, fullName} = user;
+                //req.headers.authorization = token;
                 res.status(200).json({
                     token,
                     user: {
@@ -72,10 +73,22 @@ exports.signin = (req, res) => {
 
 exports.reqSignin = (req, res, next) => {
     const token = req.headers.authorization.split(" ")[1];
-    const user = jwt.verify(token, process.env.SHH);
+    if(token === "null") {
+        return res.status(401).json({
+            message: "unauthorized request"
+        });
+    }
+    //console.log(token);
+    const user = jwt.verify(token, process.env.SHH, (error, user) => {
+        if(error) return res.status(401).json({
+            message: "Auth Failed"
+            });
+   
     req.user = user;
+    //console.log(req.user);
     next();
     //jwt.decode()
+});
 }
 //accept or reject users to login
 exports.isAuthorized = (req, res, next) => {
