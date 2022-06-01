@@ -1,0 +1,125 @@
+// mixins
+@mixin flipBtn($width:100px) {
+  
+  position: relative;
+  right: 20px;
+  bottom: 20px;
+  border:none;
+  width: $width;
+  height: 40px;
+  line-height: 42px;
+  -webkit-perspective: 300px;
+  perspective: 130px;
+
+  span {
+    display: block;
+    position: absolute;
+    width: $width;
+    height: 40px;
+    box-shadow:inset 1px 1px 1px 0px rgba(255,255,255,.5),
+    7px 7px 20px 0px rgba(0,0,0,.1),
+    4px 4px 5px 0px rgba(0,0,0,.1);
+    border-radius: 5px;
+    margin:0;
+    text-align: center;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-transition: all .3s;
+    transition: all .3s;
+
+    &:nth-child(1) {
+      -webkit-transform: rotateX(90deg);
+      -moz-transform: rotateX(90deg);
+      transform: rotateX(90deg);
+      -webkit-transform-origin: 50% 50% -20px;
+      -moz-transform-origin: 50% 50% -20px;
+      transform-origin: 50% 50% -20px;
+    }
+
+    &:nth-child(2) {
+      -webkit-transform: rotateX(0deg);
+      -moz-transform: rotateX(0deg);
+      transform: rotateX(0deg);
+      -webkit-transform-origin: 50% 50% -20px;
+      -moz-transform-origin: 50% 50% -20px;
+      transform-origin: 50% 50% -20px;
+    }
+  }
+
+  &:hover span:nth-child(1) {
+    -webkit-transform: rotateX(0deg);
+    -moz-transform: rotateX(0deg);
+    transform: rotateX(0deg);
+  }
+
+  &:hover span:nth-child(2) {
+    color: transparent;
+    -webkit-transform: rotateX(-90deg);
+    -moz-transform: rotateX(-90deg);
+    transform: rotateX(-90deg);
+  }
+
+}
+
+@mixin slideClrBtn($primeClr:$clr-high, $secClr:rgb(78, 6, 12)) {
+  position: relative;
+  cursor: pointer;
+  background: $primeClr;
+  border: none;
+  z-index: 1;
+  border-radius: 5px;
+  padding: 5px 12.5px;
+
+  display: inline-block;
+   box-shadow:inset 1.5px 1.5px 2px 0px rgba(255,255,255,.5),
+   7px 7px 20px 0px rgba(0,0,0,.1),
+   4px 4px 5px 0px rgba(0,0,0,.1);
+
+  &:after {
+    position: absolute;
+    content: "";
+    width: 0;
+    height: 100%;
+    top: 0;
+    right: 0;
+    z-index: -1;
+    background-color: $secClr;
+    border-radius: 5px;
+    box-shadow:inset 1.5px 1.5px 2px 0px rgba(255,255,255,.5),
+    7px 7px 20px 0px rgba(0,0,0,.1),
+    4px 4px 5px 0px rgba(0,0,0,.1);
+    transition: all 0.3s ease;
+  }
+
+  &:hover {
+    color: #fff;
+    &:after {
+      left: 0;
+      width: 100%;
+    }
+  }
+}
+
+@mixin slideSolidBtn($primeClr:$clr-light) {
+  // position: relative;
+  cursor: pointer;
+  color: $primeClr;
+  border: none;
+  z-index: 1;
+  border-radius: 5px;
+  padding: 5px 12.5px;
+  background: linear-gradient(0deg, rgba(78, 6, 12,1) 0%, rgba(252, 46, 32,1) 100%);
+  display: inline-block;
+
+  &:hover {
+    color: $primeClr;
+    background: linear-gradient(0deg, rgba(252, 46, 32,1) 0%, rgb(255, 17, 0) 100%);
+
+    &:after {
+      left: auto;
+      right: 0;
+      width: 100%;
+    }
+  }
+}
