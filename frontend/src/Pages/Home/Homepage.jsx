@@ -1,4 +1,7 @@
 import React from 'react'
+import CustomizedDialogs from '../../components/Dialog'
+import Login from './Login'
+import Register from './Register'
 
 function Homepage() {
   return (
@@ -10,11 +13,22 @@ function Homepage() {
       </header>
 
       <main>
-        <div>
+        <section>
+
           <h1>The bank you trust</h1>
           <p>Spend, save, invest, and control your financial life</p>
-          <button>Login</button>
-        </div>
+
+          <div className='homepage-sign-btns'>
+            <CustomizedDialogs title='Sign in' btn='Sign in'>
+              <Login/>          
+            </CustomizedDialogs>
+
+            <CustomizedDialogs title='Sign up' btn='Sign up' style={{color: "#007bff"}}>
+              <Register />
+            </CustomizedDialogs>
+          </div>
+
+        </section>
       </main>
     </div>
   )

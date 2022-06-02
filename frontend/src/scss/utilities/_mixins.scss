@@ -102,19 +102,18 @@
 }
 
 @mixin slideSolidBtn($primeClr:$clr-light) {
-  // position: relative;
   cursor: pointer;
   color: $primeClr;
   border: none;
   z-index: 1;
   border-radius: 5px;
   padding: 5px 12.5px;
-  background: linear-gradient(0deg, rgba(78, 6, 12,1) 0%, rgba(252, 46, 32,1) 100%);
+  background: linear-gradient(0deg, $clr-sub 0%, $clr-main 100%);
   display: inline-block;
 
   &:hover {
     color: $primeClr;
-    background: linear-gradient(0deg, rgba(252, 46, 32,1) 0%, rgb(255, 17, 0) 100%);
+    background: linear-gradient(0deg, $clr-sub 0%, $clr-main 50%);
 
     &:after {
       left: auto;

@@ -1,3 +1,6 @@
+@import './login';
+@import './register';
+
 .homepage {
   padding: 2em;
   height: 100vh;
@@ -31,6 +34,10 @@
       @include slideSolidBtn;
       margin-top: 1em;
       font-size: 1rem;
+    }
+    .homepage-sign-btns {
+      display: flex;
+      gap: 1em;
     }
   }
 }
