@@ -1,0 +1,91 @@
+.register {
+	form {
+		border-radius: 2px;
+		padding: 2rem;
+	}
+
+	form label {
+		float: left;
+		font-size: .9rem;
+		margin: 0;
+		padding: 0;
+		color: black;
+	}
+
+	.right-label {
+		float: right;
+		cursor: pointer
+	}
+
+	input {
+		width: 15rem;
+		padding: .3rem;
+		border-radius: 5px;
+		outline: none;
+		border: none;
+		background: whitesmoke;
+		color: black;
+	}
+
+	#checkbox {
+		width: 1rem
+	}
+
+	form span {
+		font-size: .8rem;
+		color: black;
+	}
+
+	#reset_pass_lbl {
+		float: left
+	}
+
+	.primary-button {
+		margin-top: 5rem;
+		margin-right: 1rem;
+		padding: .6rem;
+		width: 10rem;
+		background: #222;
+		border: none;
+		color: #fff;
+		font-size: 1.2rem;
+		transition: all .5s;
+		cursor: pointer;
+		text-transform: capitalize
+	}
+
+	a {
+		font-weight: 400;
+		line-height: 1.5;
+		text-align: center !important;
+		font-size: .8rem;
+		box-sizing: border-box;
+		color: #007bff;
+		text-decoration: none;
+		background-color: transparent;
+	}
+
+	.input-holder {
+		font-size: 1.2rem;
+		font-weight: 300;
+		line-height: 1.5;
+		margin-bottom: 1rem;
+		margin-top: 0;
+	}
+
+	#sub_btn {
+		display: block;
+		width: 100%;
+		padding: .3rem;
+		border: none;
+		background: $grd-main;
+		color: #fff;
+		border-radius: 10px;
+		cursor: pointer;
+	}
+
+	#sub_btn:hover {
+		background: $grd-sec;
+	}
+
+}

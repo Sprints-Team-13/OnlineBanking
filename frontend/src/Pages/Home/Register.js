@@ -1,8 +1,8 @@
 import React from "react";
-import { Link ,useNavigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import axios from 'axios'
 
-import popAlert from "../Helpers/popAlert";
+import popAlert from "../../helpers/popAlert";
 
 export default function Register(){
 
@@ -11,8 +11,10 @@ export default function Register(){
 	// used for storing user input
 	const [newUser, setNewUser] = React.useState({
 		name: '',
+		phone: '',
 		email: '',
-		password: ''
+		password: '',
+		confirmPassword: '',
 	});
 
 
@@ -33,15 +35,16 @@ export default function Register(){
 		// prevent default form submit
 		login.preventDefault();
 
-		await axios.post('api/users/',{
+		await axios.post('api/signup/',{
 			name: newUser.name,
 			email: newUser.email.toLowerCase().trim(),
-			password: newUser.password.trim()
+			password: newUser.password.trim(),
+			phone: newUser.phone.trim(),
 		})
 		.then((res) => {
 			console.log(res.data)
 			popAlert('Completed')
-			return navigate("/login")
+			return navigate("/")
 		})
 		.catch(
 			(Error) => {
@@ -60,23 +63,37 @@ export default function Register(){
 	const registerForm =(
 		<main className='App-main'>
 			<div className='register'>
-				<div className="text-center m-5-auto">
-				<h2>Join us</h2>
-				<h5>Create your E-Shop Account</h5>
 				<form action="/home" onSubmit={handleSubmit}>
-					<p>
-						<label>Username</label><br/>
+
+					<div className="input-holder">
+						<label>Full name</label><br/>
 						<input 
 						type="text" 
 						name="name"
 						required 
-						placeholder={'Enter your username'} 
+						placeholder={'Enter your full name'} 
 						onChange={handleChange}
 						value={newUser.name}
 						autoFocus
 						/>
-					</p>
-					<p>
+					</div>
+
+					<div className="input-holder">
+						<label htmlFor="phone">Phone Number</label><br/>
+						<input 
+						type="tel" 
+						name="phone"
+						id="phone"
+						required 
+						placeholder={'0000-1234567'}
+						pattern="[0-9]{4}-[0-9]{7}"
+						onChange={handleChange}
+						value={newUser.phone}
+						autoFocus
+						/>
+					</div>
+
+					<div className="input-holder">
 						<label>Email address</label><br/>
 						<input 
 						type="email" 
@@ -86,8 +103,9 @@ export default function Register(){
 						placeholder={'Enter your Email'} 
 						value={newUser.email}
 						/>
-					</p>
-					<p>
+					</div>
+
+					<div className="input-holder">
 						<label>Password</label><br/>
 						<input 
 						type="password" 
@@ -97,18 +115,26 @@ export default function Register(){
 						placeholder={'Enter your Password'} 
 						value={newUser.password}
 						/>							
-					</p>
-					<p>
+					</div>
+
+					<div className="input-holder">
+						<label>Confirm Password</label><br/>
+						<input 
+						type="password" 
+						name="confirmPassword" 
+						required
+						onChange={handleChange}
+						placeholder={'Enter your Password'} 
+						value={newUser.confirmPassword}
+						/>							
+					</div>
+
+					<div className="input-holder">
 						<input type="checkbox" name="checkbox" id="checkbox" required /> <span>I agree all statements in <a href="https://google.com" target="_blank" rel="noopener noreferrer">terms of service</a></span>.
-					</p>
-					<p>
-						<button id="sub_btn" type="submit">Register</button>
-					</p>
+					</div>
+
+					<button id="sub_btn" type="submit">Register</button>
 				</form>
-				<footer>
-					<p><Link to="/">Back to Homepage</Link>.</p>
-				</footer>
-			</div>
 			</div>
 		</main>
 	)

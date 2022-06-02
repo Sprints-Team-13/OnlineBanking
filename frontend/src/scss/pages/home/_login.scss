@@ -60,7 +60,9 @@
     padding: .3rem;
     border-radius: 5px;
     outline: none;
-    border: none
+    border: none;
+    background: whitesmoke;
+		color: black;
   }
 
   #sub_btn {
@@ -68,26 +70,18 @@
     width: 100%;
     padding: .3rem;
     border: none;
-    background: $clr-main;
+    background: $grd-main;
     color: #fff;
-    border-radius: 3px;
+    border-radius: 10px;
     cursor: pointer;
   }
 
   #sub_btn:hover {
-    background: #333;
-    transition: all .5s
+    background: $grd-sec;
   }
 
-  footer p {
-    -webkit-text-size-adjust: 100%;
-    font-size: 1rem;
-    font-weight: 400;
-    line-height: 1.5;
-    color: #212529;
+  footer {
     text-align: center !important;
-    box-sizing: border-box;
-    display: block;
   }
 
   .error {
@@ -95,13 +89,4 @@
     font-size: 15px;
   }
 
-}
-
-
-@media (max-width: 600px) {
-  .login {
-    .m-5-auto {
-      margin-top: -10rem
-    }
-  }
 }
