@@ -1,4 +1,6 @@
 import React from 'react'
+import CustomizedDialogs from '../../components/Dialog'
+import Login from './Login'
 
 function Homepage() {
   return (
@@ -10,11 +12,14 @@ function Homepage() {
       </header>
 
       <main>
-        <div>
+        <section>
           <h1>The bank you trust</h1>
           <p>Spend, save, invest, and control your financial life</p>
-          <button>Login</button>
-        </div>
+          {/* <button>Login</button> */}
+          <CustomizedDialogs title='Sign in'>
+            <div><Login/></div>            
+          </CustomizedDialogs>
+        </section>
       </main>
     </div>
   )

@@ -2,7 +2,7 @@ import './App.scss';
 import React from 'react'
 import {Routes, Route, Navigate} from 'react-router-dom'
 
-import Homepage from './Pages/Homepage';
+import Homepage from './Pages/Home/Homepage';
 import AdminPanel from './Pages/AdminPanel/AdminPanel'
 import UserDashboard from './Pages/UserDashboard/UserDashboard'
 
