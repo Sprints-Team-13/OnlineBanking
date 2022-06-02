@@ -1,7 +1,6 @@
 import axios from 'axios';
 import React, { useContext } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import CustomizedDialogs from '../../components/Dialog';
 import { AuthContext } from '../../context/Auth-context';
 import popAlert from '../../helpers/popAlert';
 
