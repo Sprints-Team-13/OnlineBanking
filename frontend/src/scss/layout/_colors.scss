@@ -1,5 +1,4 @@
 // global colors
-// $clr-main: #25c967;
 $clr-main: #00B11D;
 $clr-sec: #ff9d22;
 $clr-sub: #18191d;
@@ -7,9 +6,19 @@ $clr-high: #ff5c5c;
 $clr-light: #ffffff;
 $clr-dark: #111111;
 
-$grd-main: linear-gradient(220.55deg, #18191d 0%, #00B11D 100%);
+$grd-main: linear-gradient(0deg, #12201c 0%, #0e7c5a 100%);
 
-$grd-sec: linear-gradient(220.55deg, #18191d 30%, #00B11D 100%);
+$grd-sec: linear-gradient(0deg, #12201c 0%, #0e7c5a 50%);
+
+// Dark theme
+$clr-dk-main: #254138;
+$clr-dk-sec: #2e3a3d;
+$clr-dk-light: #354043;
+
+$grd-dk-main: linear-gradient(220deg, #12201c 0%, #254138 100%);
+
+// horizontal gradient
+$grd-dk-hr: linear-gradient(90deg, #12201c 0%, #254138 100%);
 
 // fonts
 $mf: "Poppins", sans-serif;

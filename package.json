@@ -4,7 +4,8 @@
   "description": "backend for sprints ecommerce project",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon ./src/index.js"
+    "start": "nodemon ./src/index.js",
+    "client": "npm start --prefix frontend"
   },
   "author": "Ahmed Basem",
   "license": "ISC",

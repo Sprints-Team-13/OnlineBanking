@@ -108,12 +108,12 @@
   z-index: 1;
   border-radius: 5px;
   padding: 5px 12.5px;
-  background: linear-gradient(0deg, $clr-sub 0%, $clr-main 100%);
+  background: linear-gradient(0deg, #12201c 0%, #0e7c5a 100%);
   display: inline-block;
 
   &:hover {
     color: $primeClr;
-    background: linear-gradient(0deg, $clr-sub 0%, $clr-main 50%);
+    background: linear-gradient(0deg, #12201c 0%, #0e7c5a 50%);
 
     &:after {
       left: auto;
