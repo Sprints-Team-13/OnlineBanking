@@ -22,7 +22,7 @@
         height: 100%;
         
         .left-section-wrapper {
-          flex: 2;
+          flex: 1;
           border-right: $border;
           
           .left-section {
@@ -34,7 +34,12 @@
             gap: 1em;
 
             img {
-              width: 300px;
+              width: min(300px, 80%);
+            }
+
+            .balance {
+              white-space: nowrap;
+              padding: 10px;
             }
           }
         }
@@ -49,7 +54,7 @@
             margin-top: 2em;
 
             .chart-holder {
-              width: 80%;
+              width: 90%;
               & * {
                 color: black;
               }

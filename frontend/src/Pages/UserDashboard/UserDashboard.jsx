@@ -29,8 +29,8 @@ function UserDashboard() {
                 <img src={mastercard} alt='mastercard'></img>
 
                 <div className="balance">
-                  <h4>Total accounts balance</h4>
-                  <p>$500000</p>
+                  <p>Total accounts balance</p>
+                  <h3>$500,000</h3>
                 </div>
 
               </div>
@@ -39,7 +39,7 @@ function UserDashboard() {
 
             <div className="right-section-wrapper">
               <div className="right-section">
-                <h4>Deposits/Withdrawals summary</h4>
+                <h4>Transactions summary</h4>
                  <div className="chart-holder">
                   <Charts/>
 
