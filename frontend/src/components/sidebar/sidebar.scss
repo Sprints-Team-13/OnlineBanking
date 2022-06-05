@@ -3,8 +3,8 @@
 
 .sidebar {
   flex: 1.1;
-  border-right: $border;
   min-height: 100vh;
+  background: $grd-dk-main;
 
   .top {
     height: 50px;
@@ -21,19 +21,21 @@
       font-size: 1.2rem;
     }
   }
-
-  hr {
-    height: 0;
-    border: $border;
-  }
   
   .center {
-    padding-left: 10px;
     display: flex;
-    justify-content: center;
-
+    flex-direction: column;
+    align-items: center;
+    padding: 1em;
+    height: calc(100% - 100px);
+    
     ul {
+      height: 100%;
       margin-top: 1em;
+      display: flex;
+      flex-direction: column;
+      gap: 1em;
+      padding: 1em;
       li {
         display: flex;
         align-items: center;
@@ -45,8 +47,11 @@
           opacity: 0.5;
         }
 
+        &:last-child {
+          margin-top: auto;
+        }
+
         .icon {
-          // font-size: 1rem;
           color: #0000ff;
         }
 
@@ -56,28 +61,7 @@
           margin-left: 10px;
         }
       }
-    }    
+    }  
   }
 
-  .bottom {
-    display: flex;
-    align-items: center;
-    padding: 1em;
-    gap: 10px;
-
-    .colorOption {
-      width: 25px;
-      height: 25px;
-      border-radius: 40%;
-      border: $border;
-      cursor: pointer;
-
-      &:nth-child(1) {
-        background-color: whitesmoke;
-      }
-      &:nth-child(2) {
-        background-color: $clr-dark;
-      }
-    }
-  }
 }

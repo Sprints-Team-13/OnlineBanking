@@ -3,10 +3,10 @@
 
 .navbar {
   height: 50px;
-  border-bottom: $border;
   display: flex;
   align-items: center;
   font-size: 14px;
+  background: $grd-dk-hr;
 
   .wrapper {
     width: 100%;

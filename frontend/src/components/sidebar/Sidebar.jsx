@@ -17,14 +17,12 @@ function Sidebar() {
         <img src='https://api.iconify.design/bxs/bank.svg?color=white' alt='LOGO'></img>
         <span className="logo">Sprints Bank</span>
       </div>
-
-      <hr />
-
+      
       <div className="center">
         <ul>
           <li>
             <DashboardIcon className='icon'/>
-            <span>Dashboard</span>
+            <span>Overview</span>
           </li>
           <li>
             <AccountBalanceWalletIcon className='icon'/>
@@ -39,24 +37,21 @@ function Sidebar() {
             <span>Transactions</span>
           </li>
           <li>
-            <SettingsIcon className='icon'/>
-            <span>Settings</span>
-          </li>
-          <li>
             <AccountCircleIcon className='icon'/>
             <span>Profile</span>
           </li>
           <li>
+            <SettingsIcon className='icon'/>
+            <span>Settings</span>
+          </li>
+          <li>
             <ExitToAppOutlinedIcon className='icon'/>
             <span>Signout</span>
-          </li>
+          </li>          
         </ul>
+
       </div>
 
-      <div className="bottom">
-        <div className="colorOption"></div>
-        <div className="colorOption"></div>
-      </div>
     </div>
   )
 }

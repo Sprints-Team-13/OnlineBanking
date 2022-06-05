@@ -9,7 +9,6 @@ function UserDashboard() {
       <Sidebar />
       <main className="userdashboard-container">
         <Navbar />
-        test
       </main>
     </div>
   )
