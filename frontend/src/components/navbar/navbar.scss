@@ -1,0 +1,45 @@
+@import '../../scss/layout/colors';
+@import '../../scss/utilities/variables';
+
+.navbar {
+  height: 50px;
+  border-bottom: $border;
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+
+  .wrapper {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1em;
+
+    .search {
+      display: flex;
+      align-items: center;
+      border: $border;
+      padding: 3px;
+      border-radius: 5px;
+      padding-left: 1em;
+
+      input {
+        border: none;
+        outline: none;
+        background-color: transparent;
+      }
+    }
+
+    .items {
+      display: flex;
+      align-items: center;
+      gap: 1em;
+      
+      .item {
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+      }
+    }
+  }
+}
