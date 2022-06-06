@@ -4,7 +4,7 @@ import {getLocalStorage, setLocalStorage} from '../helpers/localStorage';
 import popAlert from '../helpers/popAlert';
 
 export const AuthContext = createContext({
-  isAdmin: false, 
+  isAdmin: '', 
   userName: '',
   userEmail: '',
   jwt: '',
@@ -18,8 +18,10 @@ export function AuthProvider({children}) {
   const navigate = useNavigate()
   
   const [auth, setAuth] = useState(getLocalStorage('auth',{}))
+  console.log(auth);
   
-  const {isAdmin, name, email, token, _id} = auth
+  const {token} = auth
+  const {role, fullName, email, _id} = auth.user ? auth.user : ''
 
   function signIn(auth) {
     setAuth(auth)
@@ -36,8 +38,8 @@ export function AuthProvider({children}) {
 
   return (
     <AuthContext.Provider value={{
-      isAdmin, 
-      userName: name,
+      isAdmin: role, 
+      userName: fullName,
       userEmail: email,
       jwt: token,
       userId: _id,

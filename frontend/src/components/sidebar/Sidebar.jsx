@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import './sidebar.scss'
 
 import DashboardIcon from '@mui/icons-material/Dashboard';
@@ -8,8 +8,12 @@ import ViewListOutlinedIcon from '@mui/icons-material/ViewListOutlined';
 import SettingsIcon from '@mui/icons-material/Settings';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import ExitToAppOutlinedIcon from '@mui/icons-material/ExitToAppOutlined';
+import { AuthContext } from '../../context/Auth-context';
 
 function Sidebar() {
+
+  const { signOut } = useContext(AuthContext)
+
   return (
     <div className='sidebar'>
 
@@ -44,7 +48,7 @@ function Sidebar() {
             <SettingsIcon className='icon'/>
             <span>Settings</span>
           </li>
-          <li>
+          <li onClick={signOut}>
             <ExitToAppOutlinedIcon className='icon'/>
             <span>Signout</span>
           </li>          

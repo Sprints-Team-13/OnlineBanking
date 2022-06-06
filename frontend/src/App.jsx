@@ -1,21 +1,22 @@
 import './App.scss';
-import React from 'react'
+import React, { useContext } from 'react'
 import {Routes, Route, Navigate} from 'react-router-dom'
 
 import Homepage from './Pages/Home/Homepage';
 import AdminPanel from './Pages/AdminPanel/AdminPanel'
 import UserDashboard from './Pages/UserDashboard/UserDashboard'
+import { AuthContext } from './context/Auth-context';
 
 function App() {
 
-  const isSignin = false
-  const isAdmin = false
+  const {isAdmin, jwt} = useContext(AuthContext)
+  console.log(isAdmin)
 
   return (
     <div className="App">
-      {isSignin
+      {jwt
         ?
-        isAdmin 
+        isAdmin === 'admin'
           ?
           <Routes>
             <Route path='/AdminPanel/*' element={<AdminPanel/>}/>

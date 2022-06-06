@@ -54,7 +54,7 @@ export default function Login() {
       console.log('successfully logged in');
       console.log(res.data);
       localStorage.setItem('jwt', res.data.token);
-      signIn(res);
+      signIn(res.data);
       popAlert(`Welcome back`);
       navigate('/');
       return res.data;
