@@ -4,8 +4,10 @@
   "description": "backend for sprints ecommerce project",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon ./src/index.js",
-    "client": "npm start --prefix frontend"
+    "start": "node ./src/index.js",
+    "server": "nodemon ./src/index.js",
+    "client": "npm start --prefix frontend",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "author": "Ahmed Basem",
   "license": "ISC",
@@ -20,6 +22,7 @@
     "mongoose": "^6.3.2"
   },
   "devDependencies": {
+    "concurrently": "^7.2.1",
     "nodemon": "^2.0.16"
   }
 }

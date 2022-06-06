@@ -1,7 +1,9 @@
 @import '../../scss/utilities/variables';
+@import '../../scss/layout/colors';
 
 .userdashboard {
   display: flex;
+  color: $clr-light;
   .userdashboard-container {
     flex: 6;
 

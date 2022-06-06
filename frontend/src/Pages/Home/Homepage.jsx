@@ -2,8 +2,11 @@ import './homepage.scss'
 import React from 'react'
 import CustomizedDialogs from '../../components/Dialog'
 
-import Login from '../../components/login/Login'
-import Register from '../../components/register/Register'
+// import Login from '../../components/login/Login'
+// import Register from '../../components/register/Register'
+
+import AdminRegister from '../../components/register/AdminRegister'
+import AdminLogin from '../../components/login/AdminLogin'
 
 function Homepage() {
   return (
@@ -22,11 +25,11 @@ function Homepage() {
 
           <div className='homepage-sign-btns'>
             <CustomizedDialogs title='Sign in' btn='Sign in'>
-              <Login/>          
+              <AdminLogin/>          
             </CustomizedDialogs>
 
             <CustomizedDialogs title='Sign up' btn='Sign up' style={{color: "#007bff"}}>
-              <Register />
+              <AdminRegister />
             </CustomizedDialogs>
           </div>
 

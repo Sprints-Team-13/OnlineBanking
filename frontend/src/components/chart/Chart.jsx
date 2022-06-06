@@ -3,7 +3,7 @@ import Chart from "react-apexcharts"
 
 function Charts() {
 
-  const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun' , 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+  const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun']
 
   // chart
   const chartContent = {
@@ -41,12 +41,12 @@ function Charts() {
     series: [
       {
         name: "Deposits",
-        data: [440, 550, 570, 560, 610, 580, 630, 600, 660],
+        data: [440, 550, 570, 560, 610, 580],
         color: '#254138'
       },
       {
         name: "Withdrawals",
-        data: [350, 410, 360, 260, 450, 480, 520, 530, 410],
+        data: [350, 410, 360, 260, 450, 480],
         color: '#ff9d22'
       },
     ]

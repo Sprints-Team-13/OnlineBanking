@@ -62,9 +62,10 @@ export default function CustomizedDialogs({children, title, btn}) {
         {btn}
       </Button>
       <BootstrapDialog
-        onClose={handleClose}
+        // onClose={handleClose}
         aria-labelledby="customized-dialog-title"
         open={open}
+        style={{zIndex: 20}}
       >
         <BootstrapDialogTitle id="customized-dialog-title" onClose={handleClose}>
           {title}
