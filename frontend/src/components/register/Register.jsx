@@ -11,11 +11,11 @@ export default function Register(){
 
 	// used for storing user input
 	const [newUser, setNewUser] = React.useState({
-		name: '',
-		phone: '',
+		firstName: '',
+		lastName: '',
+		username: '',
 		email: '',
-		password: '',
-		confirmPassword: '',
+		hash_password: '',
 	});
 
 
@@ -36,11 +36,16 @@ export default function Register(){
 		// prevent default form submit
 		login.preventDefault();
 
-		await axios.post('api/signup/',{
-			name: newUser.name,
-			email: newUser.email.toLowerCase().trim(),
-			password: newUser.password.trim(),
-			phone: newUser.phone.trim(),
+		await axios({
+			url: 'api/signup',
+			method: 'POST',
+			data: {
+				firstName: newUser.firstName,
+				lastName: newUser.lastName,
+				username: newUser.username,
+				email: newUser.email.toLowerCase().trim(),
+				hash_password: newUser.hash_password.trim(),
+			}
 		})
 		.then((res) => {
 			console.log(res.data)
@@ -53,6 +58,7 @@ export default function Register(){
 				popAlert('Email already exists', 'error')
 				console.log('Error', Error.response)
 				} else {
+					popAlert('Something wrong', 'error')
 					console.log('Error', Error.response)
 				}
 			}
@@ -67,29 +73,40 @@ export default function Register(){
 				<form action="/home" onSubmit={handleSubmit}>
 
 					<div className="input-holder">
-						<label>Full name</label><br/>
+						<label>First name</label><br/>
 						<input 
 						type="text" 
-						name="name"
+						name="firstName"
 						required 
-						placeholder={'Enter your full name'} 
+						placeholder={'Enter your first name'} 
 						onChange={handleChange}
-						value={newUser.name}
+						value={newUser.firstName}
 						autoFocus
 						/>
 					</div>
 
 					<div className="input-holder">
-						<label htmlFor="phone">Phone Number</label><br/>
+						<label>Last name</label><br/>
 						<input 
-						type="tel" 
-						name="phone"
-						id="phone"
+						type="text" 
+						name="lastName"
 						required 
-						placeholder={'0000-1234567'}
-						pattern="[0-9]{4}-[0-9]{7}"
+						placeholder={'Enter your last name'} 
 						onChange={handleChange}
-						value={newUser.phone}
+						value={newUser.lastName}
+						autoFocus
+						/>
+					</div>
+
+					<div className="input-holder">
+						<label>User name</label><br/>
+						<input 
+						type="text" 
+						name="username"
+						required 
+						placeholder={'Enter your user name'} 
+						onChange={handleChange}
+						value={newUser.username}
 						autoFocus
 						/>
 					</div>
@@ -110,23 +127,11 @@ export default function Register(){
 						<label>Password</label><br/>
 						<input 
 						type="password" 
-						name="password" 
+						name="hash_password" 
 						required
 						onChange={handleChange}
 						placeholder={'Enter your Password'} 
-						value={newUser.password}
-						/>							
-					</div>
-
-					<div className="input-holder">
-						<label>Confirm Password</label><br/>
-						<input 
-						type="password" 
-						name="confirmPassword" 
-						required
-						onChange={handleChange}
-						placeholder={'Enter your Password'} 
-						value={newUser.confirmPassword}
+						value={newUser.hash_password}
 						/>							
 					</div>
 

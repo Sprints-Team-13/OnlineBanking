@@ -5,6 +5,9 @@ import { Link, useNavigate } from 'react-router-dom'
 import { AuthContext } from '../../context/Auth-context';
 import popAlert from '../../helpers/popAlert';
 
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Checkbox from '@mui/material/Checkbox';
+
 export default function Login() {
 
   const navigate = useNavigate()
@@ -14,45 +17,53 @@ export default function Login() {
   const [errorMessages, setErrorMessages] = React.useState('');
 
   // used for storing user input
-  const [loginUser, setLoginUser] = React.useState({
+  const [login, setLogin] = React.useState({
     email: '',
-    password: ''
+    hash_password: '',
+    isAdmin: false
   });
+
+  console.log(login)
 
 
   // handle input change
   function handleChange(event) {
-    const {name, value} = event.target
-    setLoginUser(prev => {
+    const {name, value, type, checked} = event.target
+    setLogin(prev => {
       return {
         ...prev,
-        [name]: value
+        [name]: type === 'checkbox' ? checked : value
       }
     })
   }
 
 
-  function handleSubmit(login) {
+  const handleSubmit = async (submit) => {
 
-    login.preventDefault();
+    submit.preventDefault();
 
-    axios.post('api/signin', {
-      email: loginUser.email.toLowerCase().trim(),
-      password: loginUser.password.trim()
+    await axios({
+      url:  `api/${login.isAdmin ? 'admin/' : ''}signin`,
+      method: 'POST',
+      data: {
+        email: login.email.toLowerCase().trim(),
+        hash_password: login.hash_password.trim()
+      }
     })
-      .then((res) => {
-        console.log('successfully logged in');
-        localStorage.setItem('jwt', res.data.token);
-        signIn(res.data);
-        popAlert(`Welcome back`);
-        navigate('/');
-        return res.data;
-      },
-        (error) => {
-          console.log(error);
-          setErrorMessages('invalid username or password');
-        }
-      );
+    .then((res) => {
+      console.log('successfully logged in');
+      console.log(res.data);
+      localStorage.setItem('jwt', res.data.token);
+      signIn(res);
+      popAlert(`Welcome back`);
+      navigate('/');
+      return res.data;
+    },
+      (error) => {
+        console.log(error);
+        setErrorMessages('invalid username or password');
+      }
+    );
   }
 
   // Generate JSX code for login form
@@ -61,10 +72,9 @@ export default function Login() {
     <main className='App-main'>
       <div className='login'>
         <div>
-          {/* <h2 >Log In</h2> */}
-
           <form action="/" onSubmit={handleSubmit}>
-            <p>
+
+            <div className='input-holder'>
               <label>Email address</label><br/>
               <input 
                 type="email"
@@ -73,27 +83,42 @@ export default function Login() {
                 required
                 autoFocus
                 onChange={handleChange}
-                value={loginUser.email}
+                value={login.email}
               />
-            </p>
-            <p>
+            </div>
+
+            <div className='input-holder'>
               <label>Password</label>
               <Link to="/forget-password"><label className="right-label "
               style={{color: "#007bff"}}>Forget password?</label></Link>
               <br/>
               <input 
                 type="password" 
-                name="password"   
+                name="hash_password"   
                 placeholder={'Enter your Password'} 
                 required
                 onChange={handleChange}
-                value={loginUser.password}
+                value={login.hash_password}
               />
-            </p>
-            <div className="error">{errorMessages}</div>
-            <p>
+            </div>
+
+            <div className="input-holder">
+              <FormControlLabel control={
+                <Checkbox 
+                  type="checkbox"
+                  name='isAdmin'
+                  checked={login.isAdmin}
+                  onChange={handleChange}
+                />
+              } label="Admin" />
+            </div>
+
+            <div className="input-holder">
             <button id="sub_btn" type="submit" >Login</button>
-            </p>
+            </div>
+
+            <div className="error">{errorMessages}</div>
+
           </form>
               
         </div>
@@ -104,7 +129,7 @@ export default function Login() {
 
   return (
     <div>
-    {loginForm}
+      {loginForm}
     </div>
   )
 }

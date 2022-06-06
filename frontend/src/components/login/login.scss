@@ -1,25 +1,10 @@
 @import '../../scss/layout/colors';
 
 .login {
-  .primary-button {
-    margin-top: 5rem;
-    margin-right: 1rem;
-    padding: .6rem;
-    width: 10rem;
-    background: #222;
-    border: none;
-    color: #fff;
-    font-size: 1.2rem;
-    transition: all .5s;
-    cursor: pointer;
-    text-transform: capitalize;
-  }
-
   h2 {
     -webkit-text-size-adjust: 100%;
     -webkit-tap-highlight-color: transparent;
 
-    font-family: "Segoe UI", Roboto, "Helvetica Neue";
     color: #212529;
     text-align: center !important;
     box-sizing: border-box;
@@ -54,7 +39,8 @@
 
   .right-label {
     float: right;
-    cursor: pointer
+    cursor: pointer;
+    font-size: 13px;
   }
 
   input {
@@ -66,6 +52,23 @@
     background: whitesmoke;
 		color: black;
   }
+
+  .input-holder {
+		font-size: 1.2rem;
+		font-weight: 300;
+		line-height: 1.5;
+		margin-bottom: 1rem;
+		margin-top: 0;
+	}
+
+  #checkbox {
+		width: 1rem
+	}
+
+  form span {
+		font-size: .8rem;
+		color: black;
+	}
 
   #sub_btn {
     display: block;
@@ -82,13 +85,10 @@
     background: $grd-sec;
   }
 
-  footer {
-    text-align: center !important;
-  }
-
   .error {
     color: red;
-    font-size: 15px;
+    font-size: 13px;
+    text-align: center;
   }
 
 }
