@@ -45,7 +45,7 @@ exports.signin = (req, res) => {
         if(error) return res.status(400).json({error});
         if(user) {
             console.log(user.authenticate(req.body.hash_password));
-            if(user.authenticate(req.body.hash_password) && user.role === 'admin') {
+            if(user.authenticate(req.body.hash_password) == "true" && user.role === 'admin') {
                 const token = jwt.sign({_id: user._id}, process.env.SHH, {expiresIn: '5d'});
                 const { fullName, phone, email, role} = user;
                 //req.headers.authorization = token;

@@ -50,7 +50,7 @@ exports.signin = (req, res) => {
                     message: 'User is not authorized'
                 });
             }
-            console.log(user.authenticate(req.body.hash_password));
+            //console.log(user.authenticate(req.body.hash_password));
             if(user.authenticate(req.body.hash_password) == "true") {
                 const token = jwt.sign({_id: user._id}, process.env.SHH, {expiresIn: '5d'});
                 const { fullName, phone, email, role} = user;
