@@ -9,17 +9,15 @@ exports.signup = (req, res) => {
         });
 
         
-let firstName = req.body.firstName;
-let lastName = req.body.lastName;
-let username = req.body.username;
+let fullName = req.body.fullName;
+let phone = req.body.phone;
 let email = req.body.email;
 let hash_password = req.body.hash_password;
 
 User
     .create({
-        firstName: firstName,
-        lastName: lastName,
-        username: username,
+        fullName: fullName,
+        phone: phone,
         email: email,
         hash_password: hash_password,
         role: 'admin'
@@ -49,12 +47,12 @@ exports.signin = (req, res) => {
             console.log(user.authenticate(req.body.hash_password));
             if(user.authenticate(req.body.hash_password) && user.role === 'admin') {
                 const token = jwt.sign({_id: user._id}, process.env.SHH, {expiresIn: '5d'});
-                const { firstName, lastName, email, role, fullName} = user;
+                const { fullName, phone, email, role} = user;
                 //req.headers.authorization = token;
                 res.status(200).json({
                     token,
                     user: {
-                        firstName, lastName, email, role, fullName
+                        fullName, phone, email, role
                     }
                 })
             }
@@ -97,7 +95,7 @@ exports.reqSignin = (req, res, next) => {
         next();
     });
     //console.log(req.user);
-
+    
     //jwt.decode()
 });
 }

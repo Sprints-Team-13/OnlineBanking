@@ -9,49 +9,17 @@ exports.signup = (req, res) => {
             message: 'User already registered.'
         });
 
-        // const {
-        //     firstName,
-        //     lastName,
-        //     username,
-        //     email,
-        //     hash_password
-        // } = req.body;
-        // const _user = new User({
-        //     firstName,
-        //     lastName,
-        //     username,
-        //     email,
-        //     hash_password
-        // });
+        
 
-        // await _user.save((error, data) => {
-        //     if(error)
-        //     {
-        //         console.log(error);
-        //         return res.status(400).json({
-        //             message: 'somthing went wrong'
-        //         });
-
-        //     }
-            
-        //     if(data) {
-        //         return res.status(201).json({
-        //             user: data
-        //         });
-        //     }
-        // });
-
-let firstName = req.body.firstName;
-let lastName = req.body.lastName;
-let username = req.body.username;
+let fullName = req.body.fullName;
+let phone = req.body.phone;
 let email = req.body.email;
 let hash_password = req.body.hash_password;
 
 User
     .create({
-        firstName: firstName,
-        lastName: lastName,
-        username: username,
+        fullName: fullName,
+        phone: phone,
         email: email,
         hash_password: hash_password
     }, function (err, user) {
@@ -83,13 +51,13 @@ exports.signin = (req, res) => {
                 });
             }
             console.log(user.authenticate(req.body.hash_password));
-            if(user.authenticate(req.body.hash_password)) {
+            if(user.authenticate(req.body.hash_password) == "true") {
                 const token = jwt.sign({_id: user._id}, process.env.SHH, {expiresIn: '5d'});
-                const { firstName, lastName, email, role, fullName} = user;
+                const { fullName, phone, email, role} = user;
                 res.status(200).json({
                     token,
                     user: {
-                        firstName, lastName, email, role, fullName
+                        fullName, phone, email, role
                     }
                 })
             }

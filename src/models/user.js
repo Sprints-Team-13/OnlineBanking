@@ -4,28 +4,20 @@ const e = require("express");
 
 const userSchema = new mongoose.Schema(
     {
-      firstName: {
+      fullName: {
         type: String,
         required: true,
-        trim: true,
         min: 3,
-        max: 20,
+        max: 30,
       },
-      lastName: {
+     
+      phone: {
         type: String,
         required: true,
-        trim: true,
-        min: 3,
-        max: 20,
+        min: 10,
+        max: 12,
       },
-      username: {
-        type: String,
-        required: true,
-        trim: true,
-        unique: true,
-        index: true,
-        lowercase: true,
-      },
+
       email: {
         type: String,
         required: true,
@@ -51,26 +43,34 @@ const userSchema = new mongoose.Schema(
         type: Date,
         default: Date.now,
       },
-      contactNumber: { type: String },
 
-      pofilePicture: { type: String },
     }
   );
 
-userSchema.virtual("fullName").get(function () {
-    return `${this.firstName} ${this.lastName}`;
-  });
-
-userSchema.methods = {
-    authenticate: function (password) {
+  // userSchema.pre("save", async function (next) {
+  //   const user = this;
+  //   if (user.isModified("hash_password")) {
+  //     user.hash_password = await bcrypt.hash(user.hash_password, 8);
+  //   }
+  //   next();
+  // });
+    
+    
+    userSchema.methods = {
+      authenticate: function (password) {
         if (password === this.hash_password)
         {
             return 'true';
         }
         else
         return 'false';
-      //return bcrypt.compareSync(password, this.hash_password);
-    },
-};
+        //return bcrypt.compareSync(password, this.hash_password);
+      },
+    };
 
-module.exports = mongoose.model("User", userSchema);
+    
+    const User = mongoose.model("User", userSchema);
+    module.exports = User;
+    
+    
+    //module.exports = mongoose.model("User", userSchema);
