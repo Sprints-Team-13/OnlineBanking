@@ -13,7 +13,7 @@ const bankAccountSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    balance: {
+    accountBalance: {
         type: Number,
         required: true,
         min: 0,
