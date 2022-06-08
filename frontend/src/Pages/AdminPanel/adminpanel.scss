@@ -1,0 +1,53 @@
+@import '../../scss/utilities/variables';
+@import '../../scss/layout/colors';
+
+.adminpanel {
+  display: flex;
+  color: $clr-light;
+  .adminpanel-container {
+    flex: 6;
+
+    .adminpanel-main {
+      padding: 2em;
+      height: calc(100% - 140px);
+
+      h2 {
+        margin-bottom: 0.5em;
+      }
+
+      hr {
+        border: $border;
+      }
+
+      .content-wrapper {
+        display: flex;
+        height: 100%;
+        
+        .left-section-wrapper {
+          flex: 1;
+          border-right: $border;
+          
+          .left-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin-top: 2em;
+            gap: 1em;
+          }
+        }
+        .right-section-wrapper {
+          flex: 3;
+
+          .right-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin-top: 2em;
+          }
+        }
+      }
+    }
+  }
+}
