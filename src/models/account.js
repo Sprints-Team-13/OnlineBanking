@@ -24,9 +24,10 @@ const bankAccountSchema = new mongoose.Schema({
         min: 3,
         max: 30,
     },
-    isActive: {
-        type: Boolean,
-        default: false,
+    accountStatus: {
+        type: String,
+        enum: ["active", "pending", "closed"],
+        default: "pending",
     },
     createdAt: {
         type: Date,

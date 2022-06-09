@@ -40,3 +40,23 @@ exports.createAccount = (req, res) => {
 
     });
 }
+
+exports.activateAccount = (req, res) => {
+    Account.findOne({accountNumber: req.body.accountNumber})
+    .exec( async (error, account) => {
+        if(error) return res.status(400).json({error});
+        if(account) {
+            account.accountStatus = req.body.accountStatus;
+            account.save();
+            return res.status(200).json({
+                message: 'Account status updated.'
+            });
+        }
+        else {
+            return res.status(400).json({
+                message: 'Account not found.'
+            });
+        }
+    });
+}
+

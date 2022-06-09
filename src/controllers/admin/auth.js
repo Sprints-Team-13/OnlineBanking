@@ -78,13 +78,18 @@ exports.reqSignin = (req, res, next) => {
         });
     }
     //console.log(token);
-    const user = jwt.verify(token, process.env.SHH, (error, user) => {
-        if(error) return res.status(401).json({
-            message: "Auth Failed"
-            });
+    let user
+    const visitor = jwt.verify(token, process.env.SHH, (error, visitor) => {
+        if(error) {
+            return res.status(401).json({
+                message: "unauthorized request"
+                });
+        }
+
+        user = visitor
+    });
            
-    req.user = user;
-    User.findOne({_id: req.user._id})
+    User.findOne({_id: user._id})
     .exec( async (error, user) => {
         if(error) return res.status(400).json({error});
         if(user.role === 'user') {
@@ -97,7 +102,6 @@ exports.reqSignin = (req, res, next) => {
     //console.log(req.user);
     
     //jwt.decode()
-});
 }
 
 //accept or reject users to login
