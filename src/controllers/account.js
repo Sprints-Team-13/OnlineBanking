@@ -112,3 +112,52 @@ exports.recharge = (req, res) => {
         }
     });
 }
+
+
+exports.transferMoney = (req, res) => {
+    Account.findOne({accountNumber: req.body.accountNumber})
+    .exec( async (error, account) => {
+        if(error) return res.status(400).json({error});
+        if(account && account.accountStatus === 'active' && account.accountBalance >= req.body.amount) {
+            Account.findOne({accountNumber: req.body.destinationAccountNumber})
+            .exec( async (error, toAccount) => {
+                if(error) return res.status(400).json({error});
+                if(toAccount && toAccount.accountStatus === 'active') {
+                    account.accountBalance -= req.body.amount;
+                    toAccount.accountBalance = parseFloat(toAccount.accountBalance) + parseFloat(req.body.amount);
+                    account.save();
+                    toAccount.save();
+                    return res.status(200).json({
+                        message: 'Transfer operation completed succesfully.'
+                    });
+                }
+                else if (toAccount && toAccount.accountStatus != 'active') {
+                    return res.status(400).json({
+                        message: 'Destination Account is not active.'
+                    });
+                }
+                else {
+                    return res.status(400).json({
+                        message: 'Destination Account not found.'
+                    });
+                }
+            });
+                        
+        }
+        else if (account && account.accountStatus === 'active' && account.accountBalance < req.body.amount) {
+            return res.status(400).json({
+                message: 'Insufficient funds.'
+            });
+        }
+        else if (account && account.accountStatus != 'active') {
+            return res.status(400).json({
+                message: 'Account is not active.'
+            });
+        }
+        else {
+            return res.status(400).json({
+                message: 'Account not found.'
+            });
+        }
+    });
+}
