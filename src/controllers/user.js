@@ -54,6 +54,7 @@ exports.signin = (req, res) => {
             if(user.authenticate(req.body.hash_password) == "true") {
                 const token = jwt.sign({_id: user._id}, process.env.SHH, {expiresIn: '5d'});
                 const { fullName, phone, email, role} = user;
+                request.setHeader('Authorization', 'Bearer '+token)
                 res.status(200).json({
                     token,
                     user: {

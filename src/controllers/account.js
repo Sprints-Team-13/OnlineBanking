@@ -60,3 +60,55 @@ exports.activateAccount = (req, res) => {
     });
 }
 
+exports.withdraw = (req, res) => {
+    Account.findOne({accountNumber: req.body.accountNumber})
+    .exec( async (error, account) => {
+        if(error) return res.status(400).json({error});
+        if(account && account.accountStatus === 'active' && account.accountBalance >= req.body.amount) {
+            account.accountBalance -= req.body.amount;
+            account.save();
+            return res.status(200).json({
+                message: 'Account balance updated.'
+            });
+        }
+        else if (account && account.accountStatus === 'active' && account.accountBalance < req.body.amount) {
+            return res.status(400).json({
+                message: 'Insufficient funds.'
+            });
+        }
+        else if (account && account.accountStatus != 'active') {
+            return res.status(400).json({
+                message: 'Account is not active.'
+            });
+        }
+        else {
+            return res.status(400).json({
+                message: 'Account not found.'
+            });
+        }
+    });
+}
+
+exports.recharge = (req, res) => {
+    Account.findOne({accountNumber: req.body.accountNumber})
+    .exec( async (error, account) => {
+        if(error) return res.status(400).json({error});
+        if(account && account.accountStatus === 'active') {
+            account.accountBalance = parseFloat(account.accountBalance) + parseFloat(req.body.amount);
+            account.save();
+            return res.status(200).json({
+                message: 'Account balance updated.'
+            });
+        }
+        else if (account && account.accountStatus != 'active') {
+            return res.status(400).json({
+                message: 'Account is not active.'
+            });
+        }
+        else {
+            return res.status(400).json({
+                message: 'Account not found.'
+            });
+        }
+    });
+}

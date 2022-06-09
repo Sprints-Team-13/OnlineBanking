@@ -1,6 +1,7 @@
 const User = require("../../models/user");
 const jwt = require('jsonwebtoken');
 const { findOne } = require("../../models/user");
+const { request } = require("express");
 exports.signup = (req, res) => {
     User.findOne({email: req.body.email})
     .exec( async (error, user) => {
@@ -49,6 +50,7 @@ exports.signin = (req, res) => {
                 const token = jwt.sign({_id: user._id}, process.env.SHH, {expiresIn: '5d'});
                 const { fullName, phone, email, role} = user;
                 //req.headers.authorization = token;
+                //res.setHeader('Authorization', 'Bearer '+token)
                 res.status(200).json({
                     token,
                     user: {
