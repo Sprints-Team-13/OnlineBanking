@@ -33,8 +33,8 @@ export default function Register(){
 			})
 			.then((res) => {
 				console.log(res.data)
-				popAlert('Completed, Your account is under review, we will get back to you soon')
-				return setTimeout(()=> window.location.reload(), 1500)
+				popAlert('Your account is under review')
+				return setTimeout(()=> window.location.reload(), 2000)
 			})
 			.catch(
 				(Error) => {
