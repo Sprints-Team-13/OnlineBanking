@@ -34,7 +34,7 @@
 	}
 
 	form span {
-		font-size: .8rem;
+		font-size: 13px;
 		color: black;
 	}
 
@@ -68,6 +68,8 @@
 	}
 
 	.input-holder {
+		position: relative;
+		width: 100%;
 		font-size: 1.2rem;
 		font-weight: 300;
 		line-height: 1.5;
@@ -88,6 +90,20 @@
 
 	#sub_btn:hover {
 		background: $grd-sec;
+	}
+
+	.error {
+		max-width: 235px;
+		white-space: wrap;
+    color: red;
+    font-size: 13px;
+		margin: 0 5px;
+  }
+
+	.icon {
+		position: absolute;
+		margin-top: 5px;
+		color: $clr-main-high;
 	}
 
 }
