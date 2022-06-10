@@ -1,7 +1,6 @@
 import './register.scss'
 import axios from 'axios'
 import React from "react";
-import {useNavigate} from "react-router-dom";
 import {useFormik} from 'formik'
 
 import { registerSchema } from '../../schemas/registerSchema';
@@ -10,8 +9,6 @@ import popAlert from "../../helpers/popAlert";
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 
 export default function Register(){
-
-	const navigate = useNavigate()
 
 	// handle user inputs
 	const { values, errors, touched, handleBlur, handleChange, handleSubmit} = useFormik({
@@ -36,8 +33,8 @@ export default function Register(){
 			})
 			.then((res) => {
 				console.log(res.data)
-				popAlert('Completed')
-				return navigate("/")
+				popAlert('Completed, Your account is under review, we will get back to you soon')
+				return setTimeout(()=> window.location.reload(), 1500)
 			})
 			.catch(
 				(Error) => {
