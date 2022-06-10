@@ -10,7 +10,7 @@ import { AuthContext } from './context/Auth-context';
 function App() {
 
   const {isAdmin, jwt} = useContext(AuthContext)
-  console.log(isAdmin)
+  // console.log(isAdmin)
 
   return (
     <div className="App">
@@ -19,13 +19,13 @@ function App() {
         isAdmin === 'admin'
           ?
           <Routes>
-            <Route path='/AdminPanel/*' element={<AdminPanel/>}/>
-            <Route path="*" element={<Navigate to ="/AdminPanel" replace/>}/>
+            <Route path='/adminpanel/*' element={<AdminPanel/>}/>
+            <Route path="*" element={<Navigate to ="/adminpanel" replace/>}/>
           </Routes>
           :
           <Routes>
-            <Route path='/UserDashboard/*' element={<UserDashboard/>}/>
-            <Route path="*" element={<Navigate to ="/UserDashboard" replace/>}/>
+            <Route path='/userdashboard/*' element={<UserDashboard/>}/>
+            <Route path="*" element={<Navigate to ="/userdashboard" replace/>}/>
           </Routes>
         :
         <Routes>

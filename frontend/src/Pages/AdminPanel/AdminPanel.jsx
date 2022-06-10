@@ -1,7 +1,11 @@
-import React from 'react'
 import "./adminpanel.scss"
+import React from 'react'
+import {Routes, Route} from 'react-router-dom'
+
 import Sidebar from '../../components/sidebar/admin/Sidebar'
 import Navbar from '../../components/navbar/Navbar'
+import Users from "./Users/Users"
+import Overview from "./Overview/Overview"
 
 function AdminPanel() {
   return (
@@ -13,27 +17,13 @@ function AdminPanel() {
           <Navbar />
         </header>
 
-        <main className="adminpanel-main">
+        <div>
+          <Routes>
+            <Route path='/' element={<Overview />}/>
+            <Route path='/users' element={<Users />}/>
+          </Routes>
+        </div>
 
-          <h2>Overview</h2>
-
-          <hr/>
-
-          <div className="content-wrapper">
-
-            <div className="left-section-wrapper">
-              <div className="left-section">
-              </div>
-            </div>
-
-            <div className="right-section-wrapper">
-              <div className="right-section">
-              </div>
-            </div>
-
-          </div>
-
-        </main>
       </div>
     </div>
   )

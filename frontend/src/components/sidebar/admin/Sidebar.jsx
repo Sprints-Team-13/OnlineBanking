@@ -1,5 +1,6 @@
-import React, { useContext } from 'react'
 import './sidebar.scss'
+import React, { useContext } from 'react'
+import {Link} from 'react-router-dom'
 
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
@@ -23,30 +24,47 @@ function Sidebar() {
       
       <div className="center">
         <ul>
-          <li>
-            <DashboardIcon className='icon'/>
-            <span>Overview</span>
-          </li>
-          <li>
-            <AccountCircleIcon className='icon'/>
-            <span>Users</span>
-          </li>
-          <li>
-            <AccountBalanceWalletIcon className='icon'/>
-            <span>Accounts</span>
-          </li>
-          <li>
-            <ViewListOutlinedIcon className='icon'/>
-            <span>Transactions</span>
-          </li>
-          <li>
-            <SettingsIcon className='icon'/>
-            <span>Settings</span>
-          </li>
+
+          <Link to={'/adminpanel'}>
+            <li>
+              <DashboardIcon className='icon'/>
+              <span>Overview</span>
+            </li>
+          </Link>
+
+          <Link to={'/adminpanel/users'}>
+            <li>
+              <AccountCircleIcon className='icon'/>
+              <span>Users</span>
+            </li>
+          </Link>
+
+          <Link to={'/adminpanel/accounts'}>
+            <li>
+              <AccountBalanceWalletIcon className='icon'/>
+              <span>Accounts</span>
+            </li>
+          </Link>
+
+          <Link to={'/adminpanel/transactions'}>
+            <li>
+              <ViewListOutlinedIcon className='icon'/>
+              <span>Transactions</span>
+            </li>
+          </Link>
+
+          <Link to={'/adminpanel/settings'}>
+            <li>
+              <SettingsIcon className='icon'/>
+              <span>Settings</span>
+            </li>
+          </Link>
+
           <li onClick={signOut}>
             <ExitToAppOutlinedIcon className='icon'/>
             <span>Signout</span>
-          </li>          
+          </li>
+
         </ul>
 
       </div>

@@ -23,9 +23,6 @@ export default function Login() {
     isAdmin: false
   });
 
-  console.log(login)
-
-
   // handle input change
   function handleChange(event) {
     const {name, value, type, checked} = event.target
@@ -52,7 +49,7 @@ export default function Login() {
     })
     .then((res) => {
       console.log('successfully logged in');
-      console.log(res.data);
+      // console.log(res.data);
       localStorage.setItem('jwt', res.data.token);
       signIn(res.data);
       popAlert(`Welcome back`);
