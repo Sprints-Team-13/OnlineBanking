@@ -1,0 +1,12 @@
+@import '../../scss/layout/colors';
+@import '../../scss/utilities/variables';
+
+.table {
+  padding: 1em;
+  background: $clr-dark-sec;
+  border-radius: 20px !important;
+  border: none !important;
+  * {
+    color: whitesmoke;
+  }
+}

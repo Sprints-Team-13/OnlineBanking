@@ -13,7 +13,7 @@ export const registerSchema = yup.object({
     .required('A valid email is required'),
   hash_password: yup.string()
     .min(8, 'Minimum  characters allowed are 8')
-    .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/, 'Must contain uppercase, lowercase, number and special character')
+    .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})/, 'Must contain uppercase, lowercase, number and special character')
     .required('Password is required'),
   passwordConfirm: yup.string()
     .oneOf([yup.ref('hash_password'), null], 'Passwords must match')

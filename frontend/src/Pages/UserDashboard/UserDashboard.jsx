@@ -1,7 +1,7 @@
 import React from 'react'
 import "./userdashboard.scss"
-import Sidebar from '../../components/sidebar/user/Sidebar'
-import Navbar from '../../components/navbar/Navbar'
+import Sidebar from '../../layout/sidebar/user/Sidebar'
+import Navbar from '../../layout/navbar/Navbar'
 import mastercard from '../../images/mastercard_icon.png'
 import Charts from '../../components/chart/Chart'
 
