@@ -3,8 +3,7 @@ import React from 'react'
 
 function Overview() {
   return (
-    <main className="adminpanel-main">
-
+    <>
       <h2>Overview</h2>
 
       <hr/>
@@ -22,8 +21,7 @@ function Overview() {
         </div>
 
       </div>
-
-    </main>
+    </>
   )
 }
 
