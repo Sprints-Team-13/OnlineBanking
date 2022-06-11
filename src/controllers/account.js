@@ -171,3 +171,20 @@ exports.transferMoney = (req, res) => {
         }
     });
 }
+
+//get all accounts of a user and the total balance of all accounts
+exports.getUserAccounts = (req, res) => {
+    let userId = getID(req);
+    Account.find({customerID: userId})
+    .exec( async (error, accounts) => {
+        if(error) return res.status(400).json({error});
+        let totalBalance = 0;
+            for(let i = 0; i < accounts.length; i++) {
+                totalBalance += accounts[i].accountBalance;
+            }
+        res.status(200).json({
+            accounts,
+            totalBalance: totalBalance
+        })
+    })
+}
