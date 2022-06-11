@@ -11,13 +11,13 @@ function Users() {
   console.log(users);
 
   const columns = [
-    { field: 'id', headerName: 'ID', width: 150 },
-    { field: 'fullName', headerName: 'Full name', width: 150 },
-    { field: 'email', headerName: 'Email', minWidth: 180 },
-    { field: 'phone', headerName: 'Phone', type: 'phone', width: 150 },
-    { field: 'role', headerName: 'Role', width: 70 },
-    { field: 'authorized', headerName: 'Authorized', type: 'boolean' , width: 100 },
-    { field: 'date', headerName: 'Date', type: 'date' , width: 130 },
+    { field: 'id', headerName: 'ID', minWidth: 150, flex: 3 },
+    { field: 'fullName', headerName: 'Full name', minWidth: 150, flex: 3 },
+    { field: 'email', headerName: 'Email', minWidth: 150, flex: 3 },
+    { field: 'phone', headerName: 'Phone', type: 'phone', minWidth: 150, flex: 3 },
+    { field: 'role', headerName: 'Role', minWidth: 70, flex: 1 },
+    { field: 'authorized', headerName: 'Authorized', type: 'boolean' , minWidth: 70, flex: 1 },
+    { field: 'date', headerName: 'Date', type: 'date' , minWidth: 150, flex: 3 },
   ];
   
   const rows = users && users.map(user => (
@@ -35,22 +35,29 @@ function Users() {
   console.log(rows);
 
   return (
-    <div style={{ height: 800, width: '100%' }}>
-      <div style={{ display: 'flex', height: '100%' }}>
-        <div style={{ flexGrow: 1 }}>
-          {users &&
-          <DataGrid
-            autoHeight
-            className='table'
-            rows={rows}
-            columns={columns}
-            pageSize={10}
-            rowsPerPageOptions={[5]}
-            checkboxSelection
-          />
-          }
+    <div className="users">
+
+      <h2>Users</h2>
+      
+      <div style={{ height: 700, width: '90%' }}>
+        <div style={{ display: 'flex', height: '100%' }}>
+          <div className="table-container">
+            {users &&
+            <DataGrid
+              autoHeight
+              className='table'
+              rows={rows}
+              columns={columns}
+              pageSize={10}
+              rowsPerPageOptions={[5]}
+              checkboxSelection
+              disableSelectionOnClick
+            />
+            }
+          </div>
         </div>
       </div>
+
     </div>
   )
 }

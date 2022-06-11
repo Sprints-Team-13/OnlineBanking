@@ -1,12 +1,27 @@
 @import '../../../scss/layout/colors';
 @import '../../../scss/utilities/variables';
 
-.table {
-  padding: 1em;
-  background: $clr-dark-sec;
-  border-radius: 20px !important;
-  border: none !important;
-  * {
-    color: whitesmoke;
+.users {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: $clr-main;
+  
+  h2 {
+    z-index: 10;
+  }
+  .table-container {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+
+    .table {
+      padding: 1em;
+      background: $clr-light;
+      border-radius: 20px !important;
+      border: none !important;
+    }
   }
 }
