@@ -3,6 +3,8 @@ import axios from "axios";
 
 const useGetUsers = async () => {
 
+  // fetch all users
+
   const { data } = await axios({
     url: '/api/admin/list',
     method: 'GET',
