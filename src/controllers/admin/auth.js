@@ -2,6 +2,8 @@ const User = require("../../models/user");
 const jwt = require('jsonwebtoken');
 const { findOne } = require("../../models/user");
 const { request } = require("express");
+const Account = require("../../models/account");
+const { getID } = require("../user");
 exports.signup = (req, res) => {
     User.findOne({email: req.body.email})
     .exec( async (error, user) => {
@@ -132,6 +134,17 @@ exports.getUsers = (req, res) => {
         if(error) return res.status(400).json({error});
         res.status(200).json({
             users
+        })
+    })
+}
+
+//get all accounts
+exports.getAccounts = (req, res) => {
+    Account.find({})
+    .exec( async (error, accounts) => {
+        if(error) return res.status(400).json({error});
+        res.status(200).json({
+            accounts
         })
     })
 }
