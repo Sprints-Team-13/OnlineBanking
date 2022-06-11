@@ -5,12 +5,22 @@ const { findOne } = require('../models/user');
 const {getID} = require('../controllers/user');
 
 exports.createAccount = (req, res) => {
+        let flag = true;
         let accountNumber = Math.floor(1000000000 + Math.random() * 9000000000);
         Account.findOne({accountNumber: accountNumber})
         .exec( async (error, account) => {
-            if(account) return res.status(400).json({
-                message: 'Please try again.'
-            });
+            if(account) {
+                //make sure account number is unique
+                while (flag) {
+                    accountNumber = Math.floor(1000000000 + Math.random() * 9000000000);
+                    Account.findOne({accountNumber: accountNumber})
+                    .exec( async (error, account) => {
+                        if(!account) {
+                            flag = false;
+                        }
+                    });
+                }
+            };
             if (error) return res.status(400).json({
                 message: error
             });
