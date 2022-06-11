@@ -55,8 +55,15 @@ function Users() {
               columns={columns}
               pageSize={10}
               rowsPerPageOptions={[10]}
-              checkboxSelection
               disableSelectionOnClick
+              onRowClick={(params) => {
+                console.log(params.row.id);
+              }}
+              sx={{
+                '& .MuiDataGrid-cell:hover': {
+                  cursor: 'pointer'
+                },
+              }}
             />
             }
           </div>
