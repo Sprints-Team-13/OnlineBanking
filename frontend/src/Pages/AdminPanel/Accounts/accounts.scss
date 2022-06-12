@@ -38,6 +38,8 @@
     @include slideSolidBtn;
     font-size: 13px;
     background: $grd-high;
+    border-radius: 20px;
+    width: 110px;
 
     &:hover {
       background: $grd-high-sec;
@@ -47,5 +49,7 @@
   .activate {
     @include slideSolidBtn;
     font-size: 13px;
+    border-radius: 20px;
+    width: 110px;
   }
 }

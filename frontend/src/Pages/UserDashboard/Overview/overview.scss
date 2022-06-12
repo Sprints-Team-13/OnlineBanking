@@ -1,0 +1,62 @@
+@import '../../../scss/layout/colors';
+@import '../../../scss/utilities/variables';
+
+.overview {
+  padding: 2em;
+  height: calc(100% - 140px);
+
+  h2 {
+    margin-bottom: 0.5em;
+  }
+
+  hr {
+    border: $border;
+  }
+
+  .content-wrapper {
+    display: flex;
+    height: 100%;
+    
+    .left-section-wrapper {
+      flex: 1;
+      border-right: $border;
+      
+      .left-section {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin-top: 2em;
+        gap: 1em;
+
+        img {
+          width: min(300px, 80%);
+        }
+
+        .balance {
+          white-space: nowrap;
+          padding: 10px;
+        }
+      }
+    }
+    .right-section-wrapper {
+      flex: 3;
+
+      .right-section {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin-top: 2em;
+        
+        .chart-holder {
+          background-color: $clr-light;
+          width: 90%;
+          & * {
+            color: $clr-dark;
+          }
+        }
+      }
+    }
+  }
+}
