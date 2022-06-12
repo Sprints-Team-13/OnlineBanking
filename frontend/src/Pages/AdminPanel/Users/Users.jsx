@@ -22,7 +22,7 @@ function Users() {
 
   // set available actions
   const usersActions = (params) => (
-    <AdminUsersDialog title='Actions'>
+    <AdminUsersDialog title={params.row.fullName}>
 
       <div className='actions'>
         {params.row.authorized

@@ -6,6 +6,7 @@ import Sidebar from '../../layout/sidebar/admin/Sidebar'
 import Navbar from '../../layout/navbar/Navbar'
 import Users from "./Users/Users"
 import Overview from "./Overview/Overview"
+import Accounts from "./Accounts/Accounts"
 
 function AdminPanel() {
   return (
@@ -23,6 +24,7 @@ function AdminPanel() {
           <Routes>
             <Route path='/' element={<Overview />}/>
             <Route path='/users' element={<Users />}/>
+            <Route path='/accounts' element={<Accounts />}/>
           </Routes>
         </main>
 
