@@ -19,5 +19,9 @@
     flex: 6;
     z-index: 10;
 
+    .userdashboard-main {
+      padding: 2em;
+      height: calc(100% - 140px);
+    }
   }
 }
