@@ -5,6 +5,7 @@ import {Routes, Route} from 'react-router-dom'
 import Sidebar from '../../layout/sidebar/user/Sidebar'
 import Navbar from '../../layout/navbar/Navbar'
 import Overview from './Overview/Overview'
+import Accounts from './Accounts/Accounts'
 
 function UserDashboard() {
   return (
@@ -21,6 +22,7 @@ function UserDashboard() {
         <main className="userdashboard-main">
           <Routes>
             <Route path='/' element={<Overview />}/>
+            <Route path='/accounts' element={<Accounts />}/>
           </Routes>
         </main>
 
