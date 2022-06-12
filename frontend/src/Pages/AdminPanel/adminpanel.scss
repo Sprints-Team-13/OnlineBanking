@@ -4,6 +4,7 @@
 .adminpanel {
   display: flex;
   color: $clr-light;
+
   .bg {
     position: absolute;
     width: 100vw;
@@ -13,6 +14,7 @@
     left: 0;
     object-fit: cover;
   }
+  
   .adminpanel-container {
     flex: 6;
 

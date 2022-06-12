@@ -76,7 +76,7 @@ function Accounts() {
     { 
       field: 'actions', 
       headerName: 'Actions', 
-      minWidth: 100, 
+      minWidth: 110,
       flex: 1,
       align: 'center',
       renderCell: (params) => usersActions(params)

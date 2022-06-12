@@ -15,14 +15,14 @@ function Charts() {
         categories: months,
         labels: {
           style: {
-            colors: '#ffffff',
+            // colors: '#ffffff',
           },
         },
       },
       yaxis: {
         labels: {
           style: {
-            colors: '#ffffff',
+            // colors: '#ffffff',
           },
           formatter: function (value) {
             return "$" + value;
@@ -31,7 +31,7 @@ function Charts() {
       },
       legend: {
         labels: {
-          colors: '#ffffff',
+          // colors: '#ffffff',
         },
       },
       grid: {

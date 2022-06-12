@@ -1,13 +1,16 @@
 import React from 'react'
 import "./userdashboard.scss"
+import {Routes, Route} from 'react-router-dom'
+
 import Sidebar from '../../layout/sidebar/user/Sidebar'
 import Navbar from '../../layout/navbar/Navbar'
-import mastercard from '../../images/mastercard_icon.png'
-import Charts from '../../components/chart/Chart'
+import Overview from './Overview/Overview'
 
 function UserDashboard() {
   return (
     <div className='userdashboard'>
+      <img src='https://img.freepik.com/free-photo/white-concrete-wall_53876-92803.jpg?w=1060&t=st=1654925214~exp=1654925814~hmac=a1af552ae8c89191873bfa8091490cf7f34e2deb6d58228fa761e10577ce6ade' alt='bg' className='bg'></img>
+      
       <Sidebar />
       <div className="userdashboard-container">
 
@@ -16,40 +19,11 @@ function UserDashboard() {
         </header>
 
         <main className="userdashboard-main">
-
-          <h2>Overview</h2>
-
-          <hr/>
-
-          <div className="content-wrapper">
-
-            <div className="left-section-wrapper">
-              <div className="left-section">
-
-                <img src={mastercard} alt='mastercard'></img>
-
-                <div className="balance">
-                  <p>Total accounts balance</p>
-                  <h3>$500,000</h3>
-                </div>
-
-              </div>
-
-            </div>
-
-            <div className="right-section-wrapper">
-              <div className="right-section">
-                <h4>Transactions summary</h4>
-                 <div className="chart-holder">
-                  <Charts/>
-
-                 </div>
-              </div>
-            </div>
-
-          </div>
-
+          <Routes>
+            <Route path='/' element={<Overview />}/>
+          </Routes>
         </main>
+
       </div>
     </div>
   )
