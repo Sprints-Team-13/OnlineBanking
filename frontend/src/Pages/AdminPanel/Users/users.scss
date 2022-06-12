@@ -27,4 +27,12 @@
       border: none !important;
     }
   }
+
+}
+
+.actions {
+  width: 130px;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
 }
