@@ -18,12 +18,30 @@
     justify-content: space-between;
     align-items: center;
 
-    button {
-      @include slideSolidBtn;
-      border-radius: 20px;
-      font-size: 1rem;
-      width: fit-content;
-      height: fit-content;
+    .account-actions {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 5px;
+      padding: 1em;
+      width: max-content;
+
+      .account-actions-bottom {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 2.5px;
+        width: max-content;
+      }
+
+      button {
+        @include slideSolidBtn;
+        border-radius: 20px;
+        font-size: 1rem;
+        width: fit-content;
+        height: fit-content;
+      }
     }
   }
   .table-container {
@@ -37,28 +55,7 @@
       background: $clr-light;
       border-radius: 20px !important;
       border: none !important;
+      overflow: visible;
     }
-  }
-}
-
-.actions {
-
-  .deactivate {
-    @include slideSolidBtn;
-    font-size: 13px;
-    background: $grd-high;
-    border-radius: 20px;
-    width: 110px;
-
-    &:hover {
-      background: $grd-high-sec;
-    }
-  }
-
-  .activate {
-    @include slideSolidBtn;
-    font-size: 13px;
-    border-radius: 20px;
-    width: 110px;
   }
 }

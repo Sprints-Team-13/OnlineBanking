@@ -1,11 +1,11 @@
 import "./accounts.scss"
 import React from 'react'
 import { DataGrid } from '@mui/x-data-grid';
-import Button from '@mui/material/Button';
 
-import popAction from "../../../helpers/popAction";
 import apiCrud from "../../../api/apiCrud";
+import popCrud from "../../../api/popCrud";
 import useApi from "../../../hooks/useApi";
+import popAction from '../../../helpers/popAction'
 
 function Accounts() {
 
@@ -20,14 +20,44 @@ function Accounts() {
     return display.toLocaleDateString('en-GB');
   }
 
+  // set available actions
+
   // create a new account
   function createNewAccount() {
-    apiCrud(`/api/createAccount`, 'POST', 'Account created', {
-      accountType: 'saving',
-      accountBalance: '0'
-    })
+    popAction(
+      'Are you sure?', 
+      "A new account will be created!",
+      'Proceed!',
+      ()=>apiCrud(`/api/createAccount`, 'POST', 'Account created', {
+        accountType: 'saving',
+        accountBalance: '0'
+      })()
+    )
   } 
 
+  // deposit
+  function deposit() {
+    popCrud(
+      'Deposit', 
+      'Deposit', 
+      ['accountNumber', 'amount'], 
+      `/api/recharge`,
+      'POST',
+      'Successful transaction'
+    )
+  }
+
+  // withdraw
+  function withdraw() {
+    popCrud(
+      'Withdraw', 
+      'Withdraw', 
+      ['accountNumber', 'amount'], 
+      `/api/withdraw`,
+      'POST',
+      'Successful transaction'
+    )
+  }
 
   const columns = [
     { 
@@ -66,9 +96,23 @@ function Accounts() {
 
       <div className="title">
         <h2>Accounts</h2>
-        <button onClick={createNewAccount}>
-          + Create new account
-        </button>
+
+        <div className="account-actions">
+
+          <button onClick={createNewAccount}>
+            + Create new account
+          </button>
+
+          <div className="account-actions-bottom">
+            <button onClick={deposit}>
+              Deposit
+            </button>
+            <button onClick={withdraw}>
+              Withdraw
+            </button>
+          </div>
+
+        </div>
       </div>
       
       <div style={{ height: 700, width: '90%' }}>
