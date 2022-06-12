@@ -1,12 +1,12 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
-import Button from '@mui/material/Button';
 import { styled } from '@mui/material/styles';
 import Dialog from '@mui/material/Dialog';
 import DialogTitle from '@mui/material/DialogTitle';
 import DialogContent from '@mui/material/DialogContent';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
+import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   '& .MuiDialogContent-root': {
@@ -46,7 +46,7 @@ BootstrapDialogTitle.propTypes = {
   onClose: PropTypes.func.isRequired,
 };
 
-export default function CustomizedDialogs({children, title, btn}) {
+export default function AdminUsersDialog({children, title, btn}) {
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -58,11 +58,11 @@ export default function CustomizedDialogs({children, title, btn}) {
 
   return (
     <div>
-      <Button variant="text" onClick={handleClickOpen}>
+      <ManageAccountsIcon variant="text" onClick={handleClickOpen}>
         {btn}
-      </Button>
+      </ManageAccountsIcon>
       <BootstrapDialog
-        // onClose={handleClose}
+        onClose={handleClose}
         aria-labelledby="customized-dialog-title"
         open={open}
         style={{zIndex: 20}}
