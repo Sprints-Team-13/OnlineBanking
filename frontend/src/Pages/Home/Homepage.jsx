@@ -23,7 +23,6 @@ function Homepage() {
           <div className='homepage-sign-btns'>
             <CustomizedDialogs title='Sign in' btn='Sign in'>
               <Login/>
-              {/* <UserLogin/> */}
             </CustomizedDialogs>
 
             <CustomizedDialogs title='Sign up' btn='Sign up' style={{color: "#007bff"}}>

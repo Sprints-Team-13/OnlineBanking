@@ -71,7 +71,7 @@ export default function CustomizedDialogs({children, title, btn}) {
           {title}
         </BootstrapDialogTitle>
         <DialogContent dividers>
-          {children[0]}
+          {children}
         </DialogContent>
       </BootstrapDialog>
     </div>
