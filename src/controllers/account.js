@@ -1,8 +1,7 @@
 const Account = require('../models/account');
-const User = require('../models/user');
-const jwt = require('jsonwebtoken');
 const { findOne } = require('../models/user');
 const {getID} = require('../controllers/user');
+const Transaction = require('../models/transactions');
 
 exports.createAccount = (req, res) => {
         let flag = true;
@@ -77,6 +76,14 @@ exports.withdraw = (req, res) => {
         if(account && account.accountStatus === 'active' && account.accountBalance >= req.body.amount) {
             account.accountBalance -= req.body.amount;
             account.save();
+            Transaction.create({
+                accountNumber: account.accountNumber,
+                transactionType: 'withdraw',
+                amount: req.body.amount,
+                transactionDate: new Date(),
+                description: 'withdraw',
+                customerID: account.customerID
+            });
             return res.status(200).json({
                 message: 'Account balance updated.'
             });
@@ -106,6 +113,14 @@ exports.recharge = (req, res) => {
         if(account && account.accountStatus === 'active') {
             account.accountBalance = parseFloat(account.accountBalance) + parseFloat(req.body.amount);
             account.save();
+            Transaction.create({
+                accountNumber: account.accountNumber,
+                transactionType: 'deposit',
+                amount: req.body.amount,
+                transactionDate: new Date(),
+                description: 'deposit',
+                customerID: account.customerID
+            });
             return res.status(200).json({
                 message: 'Account balance updated.'
             });
@@ -137,6 +152,26 @@ exports.transferMoney = (req, res) => {
                     toAccount.accountBalance = parseFloat(toAccount.accountBalance) + parseFloat(req.body.amount);
                     account.save();
                     toAccount.save();
+
+                    // create transaction for source account
+                    Transaction.create({
+                        accountNumber: account.accountNumber,
+                        transactionType: 'sent',
+                        amount: req.body.amount,
+                        transactionDate: new Date(),
+                        description: 'Transfer to ' + toAccount.accountNumber,
+                        customerID: account.customerID
+                    });
+
+                    // create transaction for destination account
+                    Transaction.create({
+                        accountNumber: toAccount.accountNumber,
+                        transactionType: 'received',
+                        amount: req.body.amount,
+                        transactionDate: new Date(),
+                        description: 'Transfer from ' + account.accountNumber,
+                        customerID: toAccount.customerID
+                    });
                     return res.status(200).json({
                         message: 'Transfer operation completed succesfully.'
                     });
