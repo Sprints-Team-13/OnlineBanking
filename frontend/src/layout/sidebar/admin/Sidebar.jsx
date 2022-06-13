@@ -19,7 +19,11 @@ function Sidebar() {
 
       <div className="top">
         <img src='https://api.iconify.design/bxs/bank.svg?color=white' alt='LOGO'></img>
-        <span className="logo">Sprints Bank</span>
+        <span className="logo">
+          <Link to={'/'}>
+            Sprints Bank
+          </Link>
+        </span>
       </div>
       
       <div className="center">

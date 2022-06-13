@@ -1,5 +1,6 @@
-import React, { useContext } from 'react'
 import './sidebar.scss'
+import React, { useContext } from 'react'
+import {Link} from 'react-router-dom'
 
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
@@ -19,39 +20,63 @@ function Sidebar() {
 
       <div className="top">
         <img src='https://api.iconify.design/bxs/bank.svg?color=white' alt='LOGO'></img>
-        <span className="logo">Sprints Bank</span>
+        <span className="logo">
+          <Link to={'/'}>
+            Sprints Bank
+          </Link>
+        </span>
       </div>
       
       <div className="center">
         <ul>
+
+        <Link to={'/userdashboard'}>
           <li>
             <DashboardIcon className='icon'/>
             <span>Overview</span>
           </li>
+        </Link>
+
+        <Link to={'/userdashboard/accounts'}>
           <li>
             <AccountBalanceWalletIcon className='icon'/>
             <span>Accounts</span>
           </li>
+        </Link>
+
+        <Link to={'/userdashboard/transfer'}>
           <li>
             <TransformOutlinedIcon className='icon'/>
             <span>Money Transfer</span>
           </li>
+        </Link>
+
+        <Link to={'/userdashboard/transactions'}>
           <li>
             <ViewListOutlinedIcon className='icon'/>
             <span>Transactions</span>
           </li>
+        </Link>
+
+        <Link to={'/userdashboard/profile'}>
           <li>
             <AccountCircleIcon className='icon'/>
             <span>Profile</span>
           </li>
+        </Link>
+
+        <Link to={'/userdashboard/settings'}>
           <li>
             <SettingsIcon className='icon'/>
             <span>Settings</span>
           </li>
+        </Link>
+        
           <li onClick={signOut}>
             <ExitToAppOutlinedIcon className='icon'/>
             <span>Signout</span>
-          </li>          
+          </li>   
+
         </ul>
 
       </div>

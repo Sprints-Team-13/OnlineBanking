@@ -1,7 +1,10 @@
 @import '../../../scss/layout/colors';
 @import '../../../scss/utilities/variables';
+@import '../../../scss/utilities/mixins';
 
-.users {
+.accounts {
+  z-index: 10;
+  color: $clr-dark;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -30,14 +33,23 @@
 }
 
 .actions {
-  width: 200px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 1em;
 
-  button {
-    width: 130px;
+  .deactivate {
+    @include slideSolidBtn;
+    font-size: 13px;
+    background: $grd-high;
+    border-radius: 20px;
+    width: 110px;
+
+    &:hover {
+      background: $grd-high-sec;
+    }
+  }
+
+  .activate {
+    @include slideSolidBtn;
+    font-size: 13px;
+    border-radius: 20px;
+    width: 110px;
   }
 }

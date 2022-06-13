@@ -1,6 +1,6 @@
 import './homepage.scss'
 import React from 'react'
-import CustomizedDialogs from '../../components/Dialog'
+import CustomizedDialogs from '../../components/dialog/Dialog'
 
 import Register from '../../components/register/Register'
 import Login from '../../components/login/Login'
@@ -23,7 +23,6 @@ function Homepage() {
           <div className='homepage-sign-btns'>
             <CustomizedDialogs title='Sign in' btn='Sign in'>
               <Login/>
-              {/* <UserLogin/> */}
             </CustomizedDialogs>
 
             <CustomizedDialogs title='Sign up' btn='Sign up' style={{color: "#007bff"}}>
