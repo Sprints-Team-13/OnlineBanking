@@ -1,0 +1,136 @@
+@import '../../../scss/layout/colors';
+@import '../../../scss/utilities/variables';
+@import '../../../scss/utilities/mixins';
+
+.transfer {
+  z-index: 10;
+  color: $clr-dark;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: $clr-main;
+
+  .title {
+    width: 100%;
+    z-index: 10;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .transfer-form {
+    background: $clr-light;
+    
+    form {
+      border-radius: 2px;
+      padding: 2rem;
+      width: fit-content;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+  
+    form label {
+      float: left;
+      font-size: 1rem;
+      font-weight: 600;
+      margin: 0;
+      padding: 0;
+      color: $clr-dark;
+    }
+  
+    .right-label {
+      float: right;
+      cursor: pointer
+    }
+  
+    input {
+      width: 300px;
+      line-height: 50px;
+      padding-left: 1rem;
+      border-radius: 20px;
+      outline: none;
+      border: none;
+      color: black;
+    }
+  
+    #checkbox {
+      width: 1rem
+    }
+  
+    form span {
+      font-size: 13px;
+      color: black;
+    }
+  
+    #reset_pass_lbl {
+      float: left
+    }
+  
+    .primary-button {
+      margin-top: 5rem;
+      margin-right: 1rem;
+      padding: .6rem;
+      width: 10rem;
+      background: #222;
+      border: none;
+      color: #fff;
+      font-size: 1.2rem;
+      transition: all .5s;
+      cursor: pointer;
+      text-transform: capitalize
+    }
+  
+    a {
+      font-weight: 400;
+      line-height: 1.5;
+      text-align: center !important;
+      font-size: .8rem;
+      box-sizing: border-box;
+      color: #007bff;
+      text-decoration: none;
+      background-color: transparent;
+    }
+  
+    .input-holder {
+      position: relative;
+      width: 100%;
+      font-size: 1.2rem;
+      font-weight: 300;
+      line-height: 1.5;
+      margin-bottom: 1rem;
+      margin-top: 0;
+    }
+  
+    #sub_btn {
+      display: block;
+      width: 150px;
+      padding: .3rem;
+      border: none;
+      background: $grd-main;
+      color: #fff;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+  
+    #sub_btn:hover {
+      background: $grd-sec;
+    }
+  
+    .error {
+      max-width: 235px;
+      white-space: wrap;
+      color: red;
+      font-size: 13px;
+      margin: 0 5px;
+    }
+  
+    .icon {
+      position: absolute;
+      margin-top: 5px;
+      color: $clr-main-high;
+    }  
+  }
+}

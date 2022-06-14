@@ -1,5 +1,5 @@
 import "./transactions.scss"
-import { DataGrid } from '@mui/x-data-grid';
+// import { DataGrid } from '@mui/x-data-grid';
 
 import useApi from "../../../hooks/useApi";
 
