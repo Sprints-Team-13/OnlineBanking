@@ -140,7 +140,8 @@ exports.getUsers = (req, res) => {
 
 //get all accounts
 exports.getAccounts = (req, res) => {
-    Account.find({})
+    console.log(req.params.id);
+    Account.find({customerID: req.params.id})
     .exec( async (error, accounts) => {
         if(error) return res.status(400).json({error});
         res.status(200).json({

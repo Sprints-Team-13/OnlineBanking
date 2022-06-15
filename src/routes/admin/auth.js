@@ -10,7 +10,8 @@ router.post('/admin/signin', signin);
 router.post('/admin/verify', reqSignin, isAuthorized);
 router.get('/admin/list', reqSignin, getUsers);
 router.post('/admin/approval', reqSignin, activateAccount);
-router.get('/admin/listAccounts', reqSignin, getAccounts);
+router.get('/admin/listAccounts/:id', reqSignin, getAccounts);
+
 
 
 module.exports = router;
