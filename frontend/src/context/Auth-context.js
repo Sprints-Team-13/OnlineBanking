@@ -34,6 +34,7 @@ export function AuthProvider({children}) {
     setAuth({})
     popAlert(`See you soon`)
     navigate('/')
+    setTimeout(()=> window.location.reload(), 1200)
   }
 
   return (
