@@ -7,4 +7,24 @@
   .icon {
     font-size: 100px;
   }
+
+  .right-section {
+    height: fit-content;
+    
+    .table-container {
+      flex-grow: 1;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 2em;
+  
+      .table {
+        padding: 1em;
+        background: $clr-light;
+        border-radius: 20px !important;
+        border: none !important;
+        overflow: visible;
+      }
+    }
+  }
 }
