@@ -1,0 +1,15 @@
+@import '../../../scss/layout/colors';
+@import '../../../scss/utilities/variables';
+@import '../../../scss/utilities/mixins';
+
+.transactions {
+  z-index: 10;
+  color: $clr-dark;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: $clr-main;
+
+  
+}

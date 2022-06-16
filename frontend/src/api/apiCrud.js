@@ -20,8 +20,18 @@ async function apiCrud(url, method, message, data, action) {
   })
   .catch(
     (error) => {
-      console.log('error', error.response)
-      popAlert('Somthing went wrong', 'error')
+      if (error.response) {
+        // Request made and server responded
+        popAlert(error.response.data.message, 'error')
+      } else if (error.request) {
+        // The request was made but no response was received
+        console.log(error.request)
+        popAlert('No response!', 'error')
+      } else {
+        // Something happened in setting up the request that triggered an Error
+        console.log('Error', error.message)
+        popAlert('Somthing wrong!', 'error')
+      }
     }
   )
 }

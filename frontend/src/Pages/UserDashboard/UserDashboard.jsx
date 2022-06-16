@@ -6,6 +6,8 @@ import Sidebar from '../../layout/sidebar/user/Sidebar'
 import Navbar from '../../layout/navbar/Navbar'
 import Overview from './Overview/Overview'
 import Accounts from './Accounts/Accounts'
+import Transactions from './Transactions/Transactions'
+import Transfer from './Transfer/Transfer'
 
 function UserDashboard() {
   return (
@@ -23,6 +25,8 @@ function UserDashboard() {
           <Routes>
             <Route path='/' element={<Overview />}/>
             <Route path='/accounts' element={<Accounts />}/>
+            <Route path='/transfer' element={<Transfer />}/>
+            <Route path='/transactions' element={<Transactions />}/>
           </Routes>
         </main>
 
