@@ -20,16 +20,15 @@ export default function Login() {
   const [login, setLogin] = React.useState({
     email: '',
     hash_password: '',
-    isAdmin: false
   });
 
   // handle input change
   function handleChange(event) {
-    const {name, value, type, checked} = event.target
+    const { name, value } = event.target
     setLogin(prev => {
       return {
         ...prev,
-        [name]: type === 'checkbox' ? checked : value
+        [name]: value
       }
     })
   }
@@ -40,7 +39,7 @@ export default function Login() {
     submit.preventDefault();
 
     await axios({
-      url:  `api/${login.isAdmin ? 'admin/' : ''}signin`,
+      url:  `/api/signin`,
       method: 'POST',
       data: {
         email: login.email.toLowerCase().trim(),
@@ -108,17 +107,6 @@ export default function Login() {
                 onChange={handleChange}
                 value={login.hash_password}
               />
-            </div>
-
-            <div className="input-holder">
-              <FormControlLabel control={
-                <Checkbox 
-                  type="checkbox"
-                  name='isAdmin'
-                  checked={login.isAdmin}
-                  onChange={handleChange}
-                />
-              } label="Admin" />
             </div>
 
             <div className="input-holder">

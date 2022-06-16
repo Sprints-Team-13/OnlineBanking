@@ -6,7 +6,7 @@ const useGetAccounts = async () => {
   // fetch all accounts
 
   const { data } = await axios({
-    url: '/api/admin/listAccounts',
+    url: '/api/listAccounts/',
     method: 'GET',
     headers: {
       Authorization: `Bearer ${localStorage.jwt}`
