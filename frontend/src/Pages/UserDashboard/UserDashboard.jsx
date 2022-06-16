@@ -8,6 +8,7 @@ import Overview from './Overview/Overview'
 import Accounts from './Accounts/Accounts'
 import Transactions from './Transactions/Transactions'
 import Transfer from './Transfer/Transfer'
+import Profile from './Profile/Profile'
 
 function UserDashboard() {
   return (
@@ -27,6 +28,7 @@ function UserDashboard() {
             <Route path='/accounts' element={<Accounts />}/>
             <Route path='/transfer' element={<Transfer />}/>
             <Route path='/transactions' element={<Transactions />}/>
+            <Route path='/profile' element={<Profile />}/>
           </Routes>
         </main>
 

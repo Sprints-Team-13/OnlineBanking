@@ -8,7 +8,7 @@ export const AuthContext = createContext({
   userName: '',
   userEmail: '',
   jwt: '',
-  userId: '',
+  userPhone: '',
   signIn: (auth)=>{},
   signOut: ()=>{}
 });
@@ -18,10 +18,10 @@ export function AuthProvider({children}) {
   const navigate = useNavigate()
   
   const [auth, setAuth] = useState(getLocalStorage('auth',{}))
-  // console.log(auth);
+  console.log(auth);
   
   const {token} = auth
-  const {role, fullName, email, _id} = auth.user ? auth.user : ''
+  const {role, fullName, email, phone} = auth.user ? auth.user : ''
 
   function signIn(auth) {
     setAuth(auth)
@@ -42,7 +42,7 @@ export function AuthProvider({children}) {
       userName: fullName,
       userEmail: email,
       jwt: token,
-      userId: _id,
+      userPhone: phone,
       signIn: signIn,
       signOut: signOut
     }}>

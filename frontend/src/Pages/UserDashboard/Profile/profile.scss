@@ -1,0 +1,36 @@
+@import '../../../scss/layout/colors';
+@import '../../../scss/utilities/variables';
+@import '../../../scss/utilities/mixins';
+
+.profile {
+  z-index: 10;
+  color: $clr-dark;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: $clr-main;
+
+  .title {
+    width: 100%;
+    z-index: 10;
+  }
+
+  .profile-contanier{
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 2em;
+    padding: 2em;
+
+    .icon {
+      font-size: 250px;
+    }
+
+    .profile-details {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+}
