@@ -52,7 +52,8 @@ exports.signin = (req, res) => {
             }
             //console.log(user.authenticate(req.body.hash_password));
             if(user.authenticate(req.body.hash_password) == "true") {
-                const token = jwt.sign({_id: user._id}, process.env.SHH, {expiresIn: '5d'});
+                let roll = user.role
+                const token = jwt.sign({_id: user._id, role: roll}, process.env.SHH, {expiresIn: '5d'});
                 const { fullName, phone, email, role} = user;
                 //request.setHeader('Authorization', 'Bearer '+token)
 
@@ -90,4 +91,15 @@ exports.getID = (req, res) => {
     const user = jwt.verify(token, process.env.SHH);
     console.log(user);
     return user._id;
+}
+
+exports.isAdmin = (req, res, next) => {
+    const token = req.headers.authorization.split(" ")[1];
+    const user = jwt.verify(token, process.env.SHH);
+    if (user.role != 'admin') {
+        res.status(401).json({
+            message: "Unauthorized request"
+        })
+    }
+    next();
 }
