@@ -33,7 +33,7 @@ function Users() {
                 'Are you sure?', 
                 "The user will be deactivated!",
                 'Deactivate!',
-                ()=>apiCrud(`/api/admin/verify`, 'POST', 'User deactivated', {
+                ()=>apiCrud(`/api/verify`, 'POST', 'User deactivated', {
                   email: params.row.email,
                   authorized: 'false'
                 })()
@@ -48,7 +48,7 @@ function Users() {
                 'Are you sure?', 
                 "The user will be activated!",
                 'Activate!',
-                ()=>apiCrud(`/api/admin/verify`, 'POST', 'User activated', {
+                ()=>apiCrud(`/api/verify`, 'POST', 'User activated', {
                   email: params.row.email,
                   authorized: 'true'
                 })()

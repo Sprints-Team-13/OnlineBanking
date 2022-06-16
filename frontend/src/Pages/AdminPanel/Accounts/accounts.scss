@@ -15,7 +15,8 @@
     width: 100%;
     z-index: 10;
     display: flex;
-    justify-content: flex-start;
+    justify-content: space-between;
+
   }
   .table-container {
     flex-grow: 1;
@@ -51,5 +52,19 @@
     font-size: 13px;
     border-radius: 20px;
     width: 110px;
+  }
+
+}
+
+.suspend {
+  @include slideSolidBtn;
+  background: $grd-high;
+  border-radius: 50%;
+  width: fit-content;
+  height: fit-content;
+  font-size: 13px;
+
+  &:hover {
+    background: $grd-high-sec;
   }
 }

@@ -18,7 +18,7 @@ export function AuthProvider({children}) {
   const navigate = useNavigate()
   
   const [auth, setAuth] = useState(getLocalStorage('auth',{}))
-  console.log(auth);
+  // console.log(auth);
   
   const {token} = auth
   const {role, fullName, email, phone} = auth.user ? auth.user : ''

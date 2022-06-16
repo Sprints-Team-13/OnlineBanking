@@ -2,6 +2,7 @@ import "./accounts.scss"
 import React from 'react'
 import { DataGrid } from '@mui/x-data-grid';
 import Button from '@mui/material/Button';
+import BlockIcon from '@mui/icons-material/Block';
 
 import useGetAccounts from '../../../hooks/queries/admin/useGetAccounts'
 import popAction from "../../../helpers/popAction";
@@ -20,7 +21,27 @@ function Accounts() {
   }
 
   // set available actions
+  const suspendAccount = (params) => (
+
+    params.row.accountStatus !== 'closed' &&
+    
+    <Button variant="contained" className="suspend"
+      onClick={() => popAction(
+        'Are you sure?', 
+        "The account will be permanently deactivated!",
+        'Suspend!',
+        ()=>apiCrud(`/api/approval`, 'POST', 'Account Suspended', {
+          accountNumber: params.row.id,
+          accountStatus: 'closed'
+        })()
+        )}>
+      <BlockIcon />
+    </Button> 
+  )
+
   const usersActions = (params) => (
+
+    params.row.accountStatus !== 'closed' &&
     
     <div className='actions'>
       {params.row.accountStatus === 'active'
@@ -30,7 +51,7 @@ function Accounts() {
             'Are you sure?', 
             "The account will be deactivated!",
             'Deactivate!',
-            ()=>apiCrud(`/api/admin/approval`, 'POST', 'Account deactivated', {
+            ()=>apiCrud(`/api/approval`, 'POST', 'Account deactivated', {
               accountNumber: params.row.id,
               accountStatus: 'pending'
             })()
@@ -43,7 +64,7 @@ function Accounts() {
             'Are you sure?', 
             "The account will be activated!",
             'Activate!',
-            ()=>apiCrud(`/api/admin/approval`, 'POST', 'Account activated', {
+            ()=>apiCrud(`/api/approval`, 'POST', 'Account activated', {
               accountNumber: params.row.id,
               accountStatus: 'active'
             })()
@@ -80,7 +101,15 @@ function Accounts() {
       flex: 1,
       align: 'center',
       renderCell: (params) => usersActions(params)
-    }
+    },
+    { 
+      field: 'suspend', 
+      headerName: 'Suspend', 
+      minWidth: 110,
+      flex: 1,
+      align: 'center',
+      renderCell: (params) => suspendAccount(params)
+    },
   ];
   
   const rows = accounts && accounts.map(account => (
