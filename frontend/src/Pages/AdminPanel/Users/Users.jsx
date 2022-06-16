@@ -3,7 +3,7 @@ import React from 'react'
 import { DataGrid } from '@mui/x-data-grid';
 import Button from '@mui/material/Button';
 
-import useGetUsers from '../../../hooks/queries/useGetUsers'
+import useGetUsers from '../../../hooks/queries/admin/useGetUsers'
 import AdminUsersDialog from "../../../components/dialog/adminUsersDialog";
 import popAction from "../../../helpers/popAction";
 import apiCrud from "../../../api/apiCrud";

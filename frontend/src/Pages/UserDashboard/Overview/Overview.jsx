@@ -2,8 +2,16 @@ import "./overview.scss"
 import React from 'react'
 import mastercard from '../../../images/mastercard_icon.png'
 import Charts from '../../../components/chart/Chart'
+import useGetUsersAccounts from "../../../hooks/queries/users/useGetUserAccounts";
 
 function Overview() {
+
+  const {data: accounts} = useGetUsersAccounts()
+  
+  const totalAccountsBalance = accounts && accounts.map(account => account.accountBalance).reduce((x, y) => x + y)
+  
+  console.log(totalAccountsBalance);
+
   return (
     <div className='overview'>
 
@@ -20,7 +28,7 @@ function Overview() {
 
             <div className="balance">
               <p>Total accounts balance</p>
-              <h3>$500,000</h3>
+              <h3>${totalAccountsBalance}</h3>
             </div>
 
           </div>
