@@ -12,7 +12,7 @@ function Users() {
 
   // fetch and cache all users
   const {data: users} = useGetUsers()
-  console.log(users);
+  // console.log(users);
 
   // convert date to string
   function date(date) {
@@ -63,9 +63,9 @@ function Users() {
             'Are you sure?', 
             "The user will be permanently suspended!",
             'Suspend!',
-            ()=>apiCrud(`/api/admin/verify`, 'POST', 'User suspended', {
-              // email: params.row.email,
-              // authorized: 'true'
+            ()=>apiCrud(`/api/verify`, 'POST', 'User suspended', {
+              email: params.row.email,
+              authorized: 'false'
             })()
           )}>
           Suspend
