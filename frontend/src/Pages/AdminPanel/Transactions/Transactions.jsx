@@ -1,14 +1,13 @@
 import "./transactions.scss"
 import { DataGrid } from '@mui/x-data-grid';
 
-import useApi from "../../../hooks/useApi";
+import useGetTransactions from "../../../hooks/queries/admin/useGetTransactions";
 
 function Transactions() {
 
   // fetch and cache all transactions
-  const {data} = useApi('/api/listTransactions', 'GET')
-  const transactions = data && data.transactions.slice(0).reverse()
-  console.log(transactions)
+  const {data: transactions} = useGetTransactions()
+  // console.log(transactions)
 
     // convert date to string
     function date(date) {
