@@ -143,9 +143,18 @@ exports.getAccounts = (req, res) => {
     console.log(req.params.id);
     Account.find({customerID: req.params.id})
     .exec( async (error, accounts) => {
+        console.log(req.params.id)
         if(error) return res.status(400).json({error});
         res.status(200).json({
             accounts
         })
+    })
+}
+
+exports.allAccounts =(req, res) => {
+    Account.find({}).
+    exec( async (error, accounts) =>{
+        if (error) return res.status(400).json({error});
+        res.status(200).json({accounts});
     })
 }

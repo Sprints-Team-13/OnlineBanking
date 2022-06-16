@@ -20,3 +20,11 @@ exports.listTransactions = (req, res) => {
         res.status(200).json({transactions})
     })
 }
+//send all transactions
+exports.allTransactions = (req, res) => {
+    Transaction.find({}).
+    exec (async(error, transactions) => {
+        if (error) return res.status(400).json({error});
+        res.status(200).json({transactions});
+    })
+}
