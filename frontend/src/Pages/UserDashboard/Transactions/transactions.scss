@@ -11,5 +11,27 @@
   align-items: center;
   color: $clr-main;
 
-  
+  .title {
+    width: 100%;
+    z-index: 10;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1em;
+  }
+
+  .table-container {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+
+    .table {
+      padding: 1em;
+      background: $clr-light;
+      border-radius: 20px !important;
+      border: none !important;
+      overflow: visible;
+    }
+  }
 }

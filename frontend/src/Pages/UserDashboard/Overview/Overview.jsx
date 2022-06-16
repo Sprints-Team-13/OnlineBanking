@@ -10,8 +10,6 @@ function Overview() {
   
   const totalAccountsBalance = accounts && accounts.map(account => account.accountBalance).reduce((x, y) => x + y)
   
-  console.log(totalAccountsBalance);
-
   return (
     <div className='overview'>
 

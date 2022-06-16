@@ -11,7 +11,7 @@ const callApi = async (url, method, noAuth, body) => {
     },
     data: body
   });
-  return data;
+  return data.slice(0).reverse();
 };
 
 export default function useApi(url, method, headers, body) {
