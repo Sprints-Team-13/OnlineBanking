@@ -7,6 +7,7 @@ import Navbar from '../../layout/navbar/Navbar'
 import Users from "./Users/Users"
 import Overview from "./Overview/Overview"
 import Accounts from "./Accounts/Accounts"
+import Transactions from "./Transactions/Transactions"
 
 function AdminPanel() {
   return (
@@ -25,6 +26,7 @@ function AdminPanel() {
             <Route path='/' element={<Overview />}/>
             <Route path='/users' element={<Users />}/>
             <Route path='/accounts' element={<Accounts />}/>
+            <Route path='/transactions' element={<Transactions />}/>
           </Routes>
         </main>
 
