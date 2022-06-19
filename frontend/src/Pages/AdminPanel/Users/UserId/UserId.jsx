@@ -20,7 +20,11 @@ function UserId() {
   const { data } = useApi(`/api/listAccounts/${params.userId}`)
   const userAccounts = data && data.accounts.slice(0).reverse()
 
-  console.log(userAccounts);
+  // fetch user transactions
+  const { data: transactionsData } = useApi(`/api/listTransactions/${params.userId}`)
+  const userTransactions = transactionsData && transactionsData.transactions.slice(0).reverse()
+
+  console.log(userTransactions);
 
   // convert date to string
   function date(date) {
@@ -28,10 +32,12 @@ function UserId() {
     return display.toLocaleDateString('en-GB');
   }
 
-  // set available actions
-    const usersActions = (params) => (
 
-      <div className='actions'>
+  // accounts table
+  // set available actions
+  const usersActions = (params) => (
+
+    <div className='actions'>
       {params.row.accountStatus === 'active'
       ?
         <Button variant="contained" className="deactivate"
@@ -63,7 +69,7 @@ function UserId() {
     </div>
   )
 
-  const columns = [
+  const accountsColumns = [
     { 
       field: 'id', headerName: 'Account Number', minWidth: 100, flex: 1.2
     },
@@ -89,13 +95,47 @@ function UserId() {
     },
   ];
   
-  const rows = userAccounts && userAccounts.map(account => (
+  const accountsRows = userAccounts && userAccounts.map(account => (
     {
       id: account.accountNumber,
       accountBalance: `$${account.accountBalance}`,
       accountType: account.accountType,
       accountStatus: account.accountStatus,
       date: date(account.createdAt),
+    }
+  ))
+
+
+  // transactions table
+  const transactionsColumns = [
+    { 
+      field: 'date', headerName: 'Date', type: 'date' , minWidth: 100, flex: 1
+    },
+    { 
+      field: 'accountNumber', headerName: 'Account Number', minWidth: 130, flex: 1
+    },
+    { 
+      field: 'transactionType', headerName: 'Type', minWidth: 70, flex: 1
+    },
+    { 
+      field: 'amount', headerName: 'Amount', minWidth: 70, flex: 1
+    },
+    { 
+      field: 'description', headerName: 'Description', minWidth: 130, flex: 2
+    },
+    { 
+      field: 'id', headerName: 'Transaction ID', minWidth: 150, flex: 2.2
+    },
+  ];
+  
+  const transactionsRows = userTransactions && userTransactions.map(transaction => (
+    {
+      date: date(transaction.transactionDate),
+      id: transaction._id,
+      transactionType: transaction.transactionType,
+      accountNumber: transaction.accountNumber,
+      amount: `$${transaction.amount}`,
+      description: transaction.description,
     }
   ))
 
@@ -134,8 +174,8 @@ function UserId() {
             <DataGrid
               autoHeight
               className='table'
-              rows={rows}
-              columns={columns}
+              rows={accountsRows}
+              columns={accountsColumns}
               pageSize={10}
               rowsPerPageOptions={[10]}
               disableSelectionOnClick
@@ -145,6 +185,31 @@ function UserId() {
                 },
               }}
             />
+            }
+          </div>
+        </div>
+      </div>
+
+      <h3>Transactions</h3>
+
+      <div  className="table-holder">
+        <div style={{ display: 'flex', height: '100%' }}>
+          <div className="table-container">
+            {userTransactions &&
+              <DataGrid
+                autoHeight
+                className='table'
+                rows={transactionsRows}
+                columns={transactionsColumns}
+                pageSize={10}
+                rowsPerPageOptions={[10]}
+                disableSelectionOnClick
+                sx={{
+                  '& .MuiDataGrid-cell:hover': {
+                    cursor: 'pointer'
+                  },
+                }}
+              />
             }
           </div>
         </div>
