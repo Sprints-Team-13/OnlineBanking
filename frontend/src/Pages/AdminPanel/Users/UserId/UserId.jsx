@@ -14,7 +14,7 @@ function UserId() {
   const params = useParams()
   const { state: userData } = useLocation()
 
-  console.log(userData)
+  // console.log(userData)
 
   // fetch user detials
   const { data } = useApi(`/api/listAccounts/${params.userId}`)
@@ -24,7 +24,7 @@ function UserId() {
   const { data: transactionsData } = useApi(`/api/listTransactions/${params.userId}`)
   const userTransactions = transactionsData && transactionsData.transactions.slice(0).reverse()
 
-  console.log(userTransactions);
+  // console.log(userTransactions);
 
   // convert date to string
   function date(date) {

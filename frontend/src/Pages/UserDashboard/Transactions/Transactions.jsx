@@ -7,7 +7,7 @@ function Transactions() {
 
   // fetch and cache all transactions
   const {data: transactions} = useApi('/api/transactions', 'GET')
-  console.log(transactions)
+  // console.log(transactions)
 
     // convert date to string
     function date(date) {
