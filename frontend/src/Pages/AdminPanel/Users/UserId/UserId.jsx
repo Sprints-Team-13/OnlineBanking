@@ -32,6 +32,56 @@ function UserId() {
     return display.toLocaleDateString('en-GB');
   }
 
+  // set user profile actions
+  const userProfileActions = (
+    <div className="userProfileActions">
+      {userData && userData.authorized
+        ?
+          <>
+            <Button variant="contained" 
+              onClick={() => popAction(
+                'Are you sure?', 
+                "The user will be deactivated!",
+                'Deactivate!',
+                ()=>apiCrud(`/api/verify`, 'POST', 'User deactivated', {
+                  email: userData.userEmail,
+                  authorized: 'false'
+                })()
+              )}>
+              Deactivate
+            </Button> 
+          </>
+        :
+          <>
+            <Button variant="contained" 
+              onClick={() => popAction(
+                'Are you sure?', 
+                "The user will be activated!",
+                'Activate!',
+                ()=>apiCrud(`/api/verify`, 'POST', 'User activated', {
+                  email: userData.userEmail,
+                  authorized: 'true'
+                })()
+              )}>
+              Activate
+            </Button>            
+          </>
+      }
+
+      <Button variant="contained" 
+        onClick={() => popAction(
+          'Are you sure?', 
+          "The user will be permanently suspended!",
+          'Suspend!',
+          ()=>apiCrud(`/api/verify`, 'POST', 'User suspended', {
+            email: userData.userEmail,
+            authorized: 'false'
+          })()
+        )}>
+        Suspend
+      </Button>
+    </div>
+  )
 
   // accounts table
   // set available actions
@@ -146,20 +196,37 @@ function UserId() {
         <h2>{userData.userName}</h2>
       </div>
 
-      <div className="profile-contanier">
+      <div className="user-profile-contanier">
 
         <AccountBoxIcon className="icon"/>
 
-        <div className="profile-details">
+        <div className="user-profile-details">
 
-          <p>Full Name:</p>
-          <h3>{userData.userName}</h3>
+          <div className="left-user-profile-details">
 
-          <p>Phone Number:</p>
-          <h3>{userData.userPhone}</h3>
+            <p>Full Name:</p>
+            <h3>{userData.userName}</h3>
 
-          <p>Email:</p>
-          <h3>{userData.userEmail}</h3>   
+            <p>Phone Number:</p>
+            <h3>{userData.userPhone}</h3>
+            
+            <p>Status:</p>
+            <h3>{userData.authorized ? 'Active' : 'Not Active'}</h3>
+
+          </div>
+
+          <div className="right-user-profile-details">
+
+            <p>Email:</p>
+            <h3>{userData.userEmail}</h3>
+
+
+            <p>User ID:</p>
+            <h3>{params.userId}</h3>
+            
+            {userProfileActions}            
+
+          </div>
                  
         </div>
 

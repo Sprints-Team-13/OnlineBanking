@@ -2,12 +2,8 @@ import "./users.scss"
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import { DataGrid } from '@mui/x-data-grid';
-import Button from '@mui/material/Button';
 
 import useGetUsers from '../../../hooks/queries/admin/useGetUsers'
-import AdminUsersDialog from "../../../components/dialog/adminUsersDialog";
-import popAction from "../../../helpers/popAction";
-import apiCrud from "../../../api/apiCrud";
 
 function Users() {
 
@@ -22,62 +18,6 @@ function Users() {
     const display = new Date(date)
     return display.toLocaleDateString('en-GB');
   }
-
-  // set available actions
-  function usersActions(params) {
-    return (
-    <AdminUsersDialog title={params.row.fullName}>
-
-      <div className='actions'>
-        {params.row.authorized
-        ?
-          <>
-            <Button variant="contained" 
-              onClick={() => popAction(
-                'Are you sure?', 
-                "The user will be deactivated!",
-                'Deactivate!',
-                ()=>apiCrud(`/api/verify`, 'POST', 'User deactivated', {
-                  email: params.row.email,
-                  authorized: 'false'
-                })()
-              )}>
-              Deactivate
-            </Button> 
-          </>
-        :
-          <>
-            <Button variant="contained" 
-              onClick={() => popAction(
-                'Are you sure?', 
-                "The user will be activated!",
-                'Activate!',
-                ()=>apiCrud(`/api/verify`, 'POST', 'User activated', {
-                  email: params.row.email,
-                  authorized: 'true'
-                })()
-              )}>
-              Activate
-            </Button>            
-          </>
-        }
-
-        <Button variant="contained" 
-          onClick={() => popAction(
-            'Are you sure?', 
-            "The user will be permanently suspended!",
-            'Suspend!',
-            ()=>apiCrud(`/api/verify`, 'POST', 'User suspended', {
-              email: params.row.email,
-              authorized: 'false'
-            })()
-          )}>
-          Suspend
-        </Button> 
-      </div>
-
-    </AdminUsersDialog>
-  )}
 
   const columns = [
     { 
@@ -101,14 +41,6 @@ function Users() {
     { 
       field: 'date', headerName: 'Date', type: 'date' , minWidth: 100, flex: 1 
     },
-    { 
-      field: 'actions', 
-      headerName: 'Actions', 
-      minWidth: 100, 
-      flex: 1,
-      align: 'center',
-      renderCell: (params) => usersActions(params)
-    }
   ];
   
   const rows = users && users.map(user => (
@@ -134,30 +66,31 @@ function Users() {
         <div style={{ display: 'flex', height: '100%' }}>
           <div className="table-container">
             {users &&
-            <DataGrid
-              autoHeight
-              className='table'
-              rows={rows}
-              columns={columns}
-              pageSize={10}
-              rowsPerPageOptions={[10]}
-              disableSelectionOnClick
-              sx={{
-                '& .MuiDataGrid-cell:hover': {
-                  cursor: 'pointer'
-                },
-              }}
-              onRowClick={params => (
-                navigate(`/adminpanel/users/${params.row.id}`, {
-                  state: {
-                    userName: params.row.fullName,
-                    userEmail: params.row.email,
-                    userPhone: params.row.phone,
-                    date: params.row.date,
-                  }
-                })
-              )}
-            />
+              <DataGrid
+                autoHeight
+                className='table'
+                rows={rows}
+                columns={columns}
+                pageSize={10}
+                rowsPerPageOptions={[10]}
+                disableSelectionOnClick
+                sx={{
+                  '& .MuiDataGrid-cell:hover': {
+                    cursor: 'pointer'
+                  },
+                }}
+                onRowClick={params => (
+                  navigate(`/adminpanel/users/${params.row.id}`, {
+                    state: {
+                      userName: params.row.fullName,
+                      userEmail: params.row.email,
+                      userPhone: params.row.phone,
+                      date: params.row.date,
+                      authorized: params.row.authorized,
+                    }
+                  })
+                )}
+              />
             }
           </div>
         </div>
