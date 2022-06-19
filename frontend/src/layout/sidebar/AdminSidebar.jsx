@@ -8,7 +8,7 @@ import ViewListOutlinedIcon from '@mui/icons-material/ViewListOutlined';
 import SettingsIcon from '@mui/icons-material/Settings';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import ExitToAppOutlinedIcon from '@mui/icons-material/ExitToAppOutlined';
-import { AuthContext } from '../../../context/Auth-context';
+import { AuthContext } from '../../context/Auth-context';
 
 function Sidebar() {
 

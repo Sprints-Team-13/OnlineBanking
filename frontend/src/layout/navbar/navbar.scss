@@ -2,11 +2,14 @@
 @import '../../scss/utilities/variables';
 
 .navbar {
+  position: fixed;
+  width: calc(100% - 215px);
   height: 70px;
   display: flex;
   align-items: center;
   font-size: 14px;
   background: $grd-dk-hr;
+  z-index: 20;
 
   .wrapper {
     width: 100%;

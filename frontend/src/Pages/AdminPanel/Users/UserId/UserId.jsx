@@ -6,7 +6,6 @@ import Button from '@mui/material/Button';
 
 import useApi from '../../../../hooks/useApi'
 import AccountBoxIcon from '@mui/icons-material/AccountBox';
-import AdminUsersDialog from "../../../../components/dialog/adminUsersDialog";
 import popAction from "../../../../helpers/popAction";
 import apiCrud from "../../../../api/apiCrud";
 
@@ -32,9 +31,7 @@ function UserId() {
   // set available actions
     const usersActions = (params) => (
 
-    params.row.accountStatus !== 'closed' &&
-    
-    <div className='actions'>
+      <div className='actions'>
       {params.row.accountStatus === 'active'
       ?
         <Button variant="contained" className="deactivate"
@@ -68,7 +65,7 @@ function UserId() {
 
   const columns = [
     { 
-      field: 'id', headerName: 'Account Number', minWidth: 130, flex: 2
+      field: 'id', headerName: 'Account Number', minWidth: 100, flex: 1.2
     },
     { 
       field: 'accountBalance', headerName: 'Balance', minWidth: 80, flex: 1
@@ -94,7 +91,7 @@ function UserId() {
   
   const rows = userAccounts && userAccounts.map(account => (
     {
-      id: account._id,
+      id: account.accountNumber,
       accountBalance: `$${account.accountBalance}`,
       accountType: account.accountType,
       accountStatus: account.accountStatus,
@@ -128,7 +125,9 @@ function UserId() {
 
       </div>
 
-      <div style={{ height: 700, width: '90%' }}>
+      <h3>Accounts</h3>
+
+      <div  className="table-holder">
         <div style={{ display: 'flex', height: '100%' }}>
           <div className="table-container">
             {userAccounts &&

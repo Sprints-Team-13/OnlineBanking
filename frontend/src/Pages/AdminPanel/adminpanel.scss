@@ -6,7 +6,7 @@
   color: $clr-light;
 
   .bg {
-    position: absolute;
+    position: fixed;
     width: 100vw;
     height: 100vh;
     mix-blend-mode: multiply;
@@ -17,8 +17,10 @@
   
   .adminpanel-container {
     flex: 6;
-
+    margin-left: 215px;
+    
     .adminpanel-main {
+      margin-top: 70px;
       padding: 2em;
       height: calc(100% - 140px);
 

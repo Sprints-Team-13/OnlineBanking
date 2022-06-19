@@ -2,7 +2,6 @@ import "./accounts.scss"
 import React from 'react'
 import { DataGrid } from '@mui/x-data-grid';
 import Button from '@mui/material/Button';
-import BlockIcon from '@mui/icons-material/Block';
 
 import useGetAccounts from '../../../hooks/queries/admin/useGetAccounts'
 import popAction from "../../../helpers/popAction";

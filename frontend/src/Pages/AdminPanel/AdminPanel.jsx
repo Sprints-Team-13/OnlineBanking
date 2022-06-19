@@ -2,7 +2,7 @@ import "./adminpanel.scss"
 import React from 'react'
 import {Routes, Route} from 'react-router-dom'
 
-import Sidebar from '../../layout/sidebar/admin/Sidebar'
+import Sidebar from '../../layout/sidebar/AdminSidebar'
 import Navbar from '../../layout/navbar/Navbar'
 import Users from "./Users/Users"
 import Overview from "./Overview/Overview"

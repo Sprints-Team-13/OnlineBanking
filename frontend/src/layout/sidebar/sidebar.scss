@@ -1,10 +1,12 @@
-@import '../../../scss/layout/colors';
-@import '../../../scss/utilities/variables';
+@import '../../scss/layout/colors';
+@import '../../scss/utilities/variables';
 
 .sidebar {
+  width: 215px;
   flex: 1.1;
-  min-height: 100vh;
   background: $grd-dk-main;
+  position: fixed;
+  height: 100vh;
 
   .top {
     height: 70px;

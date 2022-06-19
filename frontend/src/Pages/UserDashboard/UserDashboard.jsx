@@ -2,7 +2,7 @@ import React from 'react'
 import "./userdashboard.scss"
 import {Routes, Route} from 'react-router-dom'
 
-import Sidebar from '../../layout/sidebar/user/Sidebar'
+import Sidebar from '../../layout/sidebar/UserSidebar'
 import Navbar from '../../layout/navbar/Navbar'
 import Overview from './Overview/Overview'
 import Accounts from './Accounts/Accounts'

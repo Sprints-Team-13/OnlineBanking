@@ -20,7 +20,7 @@
     z-index: 10;
     width: 100%;
     display: flex;
-    justify-content: flex-start;
+    justify-content: center;
     align-items: center;
     gap: 1em;
     padding: 1em;
@@ -39,17 +39,21 @@
     }
   }
   
-  .table-container {
-    flex-grow: 1;
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
+  .table-holder {
+    width: min(80%, 800px);
 
-    .table {
-      padding: 1em;
-      background: $clr-light;
-      border-radius: 20px !important;
-      border: none !important;
+    .table-container {
+      flex-grow: 1;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+  
+      .table {
+        padding: 1em;
+        background: $clr-light;
+        border-radius: 20px !important;
+        border: none !important;
+      }
     }
   }
 }
