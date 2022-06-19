@@ -1,5 +1,6 @@
 import "./users.scss"
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 import { DataGrid } from '@mui/x-data-grid';
 import Button from '@mui/material/Button';
 
@@ -9,6 +10,8 @@ import popAction from "../../../helpers/popAction";
 import apiCrud from "../../../api/apiCrud";
 
 function Users() {
+
+  const navigate = useNavigate()
 
   // fetch and cache all users
   const {data: users} = useGetUsers()
@@ -21,7 +24,8 @@ function Users() {
   }
 
   // set available actions
-  const usersActions = (params) => (
+  function usersActions(params) {
+    return (
     <AdminUsersDialog title={params.row.fullName}>
 
       <div className='actions'>
@@ -73,7 +77,7 @@ function Users() {
       </div>
 
     </AdminUsersDialog>
-  )
+  )}
 
   const columns = [
     { 
@@ -109,7 +113,7 @@ function Users() {
   
   const rows = users && users.map(user => (
     {
-      id: `#${user._id}`,
+      id: user._id,
       fullName: user.fullName, 
       email: user.email, 
       phone: user.phone, 
@@ -143,6 +147,16 @@ function Users() {
                   cursor: 'pointer'
                 },
               }}
+              onRowClick={params => (
+                navigate(`/adminpanel/users/${params.row.id}`, {
+                  state: {
+                    userName: params.row.fullName,
+                    userEmail: params.row.email,
+                    userPhone: params.row.phone,
+                    date: params.row.date,
+                  }
+                })
+              )}
             />
             }
           </div>

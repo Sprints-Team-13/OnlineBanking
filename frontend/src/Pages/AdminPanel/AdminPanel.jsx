@@ -8,6 +8,7 @@ import Users from "./Users/Users"
 import Overview from "./Overview/Overview"
 import Accounts from "./Accounts/Accounts"
 import Transactions from "./Transactions/Transactions"
+import UserId from "./Users/UserId/UserId"
 
 function AdminPanel() {
   return (
@@ -25,6 +26,7 @@ function AdminPanel() {
           <Routes>
             <Route path='/' element={<Overview />}/>
             <Route path='/users' element={<Users />}/>
+            <Route path='/users/:userId' element={<UserId />}/>
             <Route path='/accounts' element={<Accounts />}/>
             <Route path='/transactions' element={<Transactions />}/>
           </Routes>

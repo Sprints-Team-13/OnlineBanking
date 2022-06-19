@@ -1,18 +1,27 @@
-import "./accounts.scss"
+import "./userId.scss"
 import React from 'react'
+import { useParams, useLocation } from 'react-router-dom'
 import { DataGrid } from '@mui/x-data-grid';
 import Button from '@mui/material/Button';
-import BlockIcon from '@mui/icons-material/Block';
 
-import useGetAccounts from '../../../hooks/queries/admin/useGetAccounts'
-import popAction from "../../../helpers/popAction";
-import apiCrud from "../../../api/apiCrud";
+import useApi from '../../../../hooks/useApi'
+import AccountBoxIcon from '@mui/icons-material/AccountBox';
+import AdminUsersDialog from "../../../../components/dialog/adminUsersDialog";
+import popAction from "../../../../helpers/popAction";
+import apiCrud from "../../../../api/apiCrud";
 
-function Accounts() {
+function UserId() {
 
-  // fetch and cache all accounts
-  const {data: accounts} = useGetAccounts()
-  console.log(accounts);
+  const params = useParams()
+  const { state: userData } = useLocation()
+
+  console.log(userData)
+
+  // fetch user detials
+  const { data } = useApi(`/api/listAccounts/${params.userId}`)
+  const userAccounts = data && data.accounts.slice(0).reverse()
+
+  console.log(userAccounts);
 
   // convert date to string
   function date(date) {
@@ -20,7 +29,8 @@ function Accounts() {
     return display.toLocaleDateString('en-GB');
   }
 
-  const usersActions = (params) => (
+  // set available actions
+    const usersActions = (params) => (
 
     params.row.accountStatus !== 'closed' &&
     
@@ -66,10 +76,7 @@ function Accounts() {
     { 
       field: 'accountType', headerName: 'Type', minWidth: 70, flex: 1
     },
-    { 
-      field: 'customerID', headerName: 'User ID', minWidth: 130, flex: 3
-    },
-    { 
+    {
       field: 'accountStatus', headerName: 'Status', minWidth: 80, flex: 1
     },
     { 
@@ -85,28 +92,46 @@ function Accounts() {
     },
   ];
   
-  const rows = accounts && accounts.map(account => (
+  const rows = userAccounts && userAccounts.map(account => (
     {
-      id: account.accountNumber,
+      id: account._id,
       accountBalance: `$${account.accountBalance}`,
       accountType: account.accountType,
-      customerID: `#${account.customerID}`,
       accountStatus: account.accountStatus,
       date: date(account.createdAt),
     }
   ))
 
   return (
-    <div className="accounts">
+    <div className="userId">
 
       <div className="title">
-        <h2>Accounts</h2>
+        <h2>{userData.userName}</h2>
       </div>
-      
+
+      <div className="profile-contanier">
+
+        <AccountBoxIcon className="icon"/>
+
+        <div className="profile-details">
+
+          <p>Full Name:</p>
+          <h3>{userData.userName}</h3>
+
+          <p>Phone Number:</p>
+          <h3>{userData.userPhone}</h3>
+
+          <p>Email:</p>
+          <h3>{userData.userEmail}</h3>   
+                 
+        </div>
+
+      </div>
+
       <div style={{ height: 700, width: '90%' }}>
         <div style={{ display: 'flex', height: '100%' }}>
           <div className="table-container">
-            {accounts &&
+            {userAccounts &&
             <DataGrid
               autoHeight
               className='table'
@@ -130,4 +155,4 @@ function Accounts() {
   )
 }
 
-export default Accounts
+export default UserId
