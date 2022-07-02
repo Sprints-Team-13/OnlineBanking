@@ -7,6 +7,7 @@
   background: $grd-dk-main;
   position: fixed;
   height: 100vh;
+  transition: 0.7s ease;
 
   .top {
     height: 70px;
@@ -14,14 +15,14 @@
     align-items: center;
     justify-content: center;
     gap: 10px;
+    cursor: pointer;
 
     img {
       width: 25px;
     }
 
-    .logo {
-      font-size: 1.2rem;
-      z-index: 10;
+    p {
+      white-space: nowrap;
     }
   }
   
@@ -59,7 +60,7 @@
           // color: $clr-light;
         }
 
-        span {
+        p {
           font-style: 13px;
           font-weight: 500;
           margin-left: 10px;
@@ -68,4 +69,9 @@
     }  
   }
 
+}
+
+.sidebar.collapse {
+  width: 50px;
+  transition: 0.7s ease;
 }

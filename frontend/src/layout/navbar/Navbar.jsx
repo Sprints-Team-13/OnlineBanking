@@ -7,9 +7,12 @@ import DarkModeOutlinedIcon from '@mui/icons-material/DarkModeOutlined';
 import FullscreenExitOutlinedIcon from '@mui/icons-material/FullscreenExitOutlined';
 import ListOutlinedIcon from '@mui/icons-material/ListOutlined';
 
-function Navbar() {
+function Navbar(props) {
+
+  const {isSidebarActive} = props
+
   return (
-    <div className="navbar">
+    <div className={isSidebarActive ? "navbar collapse" : "navbar"}>
 
       <div className="wrapper">
 

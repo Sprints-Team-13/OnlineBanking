@@ -1,5 +1,5 @@
 import './sidebar.scss'
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import {Link} from 'react-router-dom'
 
 import DashboardIcon from '@mui/icons-material/Dashboard';
@@ -10,20 +10,26 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import ExitToAppOutlinedIcon from '@mui/icons-material/ExitToAppOutlined';
 import { AuthContext } from '../../context/Auth-context';
 
-function Sidebar() {
+function Sidebar(props) {
 
+  // import signout fnc form auth context
   const { signOut } = useContext(AuthContext)
 
-  return (
-    <div className='sidebar'>
+  const {isSidebarActive, toggleSidebar} = props
 
-      <div className="top">
-        <img src='https://api.iconify.design/bxs/bank.svg?color=white' alt='LOGO'></img>
-        <span className="logo">
-          <Link to={'/'}>
+  return (
+    <div className={isSidebarActive ? 'sidebar collapse' : 'sidebar'}>
+
+      <div className="top" onClick={toggleSidebar}>
+        
+        <img src='https://api.iconify.design/bxs/bank.svg?color=white' alt='LOGO'/>
+
+        {!isSidebarActive &&
+          <p className="logo">
             Sprints Bank
-          </Link>
-        </span>
+          </p>
+        }
+
       </div>
       
       <div className="center">
@@ -32,41 +38,41 @@ function Sidebar() {
           <Link to={'/adminpanel'}>
             <li>
               <DashboardIcon className='icon'/>
-              <span>Overview</span>
+              {!isSidebarActive && <p>Overview</p>}            
             </li>
           </Link>
 
           <Link to={'/adminpanel/users'}>
             <li>
               <AccountCircleIcon className='icon'/>
-              <span>Users</span>
+              {!isSidebarActive && <p>Users</p>}              
             </li>
           </Link>
 
           <Link to={'/adminpanel/accounts'}>
             <li>
               <AccountBalanceWalletIcon className='icon'/>
-              <span>Accounts</span>
+              {!isSidebarActive && <p>Accounts</p>}              
             </li>
           </Link>
 
           <Link to={'/adminpanel/transactions'}>
             <li>
               <ViewListOutlinedIcon className='icon'/>
-              <span>Transactions</span>
+              {!isSidebarActive && <p>Transactions</p>}
             </li>
           </Link>
 
           <Link to={'/adminpanel/settings'}>
             <li>
               <SettingsIcon className='icon'/>
-              <span>Settings</span>
+              {!isSidebarActive && <p>Settings</p>}            
             </li>
           </Link>
 
           <li onClick={signOut}>
             <ExitToAppOutlinedIcon className='icon'/>
-            <span>Signout</span>
+            {!isSidebarActive && <p>Signout</p>}          
           </li>
 
         </ul>

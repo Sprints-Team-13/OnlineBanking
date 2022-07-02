@@ -10,6 +10,7 @@
   font-size: 14px;
   background: $grd-dk-hr;
   z-index: 20;
+  transition: 0.7s ease;
 
   .wrapper {
     width: 100%;
@@ -47,4 +48,9 @@
       }
     }
   }
+}
+
+.navbar.collapse {
+  width: calc(100% - 50px);
+  transition: 0.7s ease;
 }
