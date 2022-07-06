@@ -34,3 +34,14 @@
     }
   }
 }
+
+@media(max-width: 600px) {
+  .profile {
+    width: 90%;
+
+    .profile-contanier{
+      flex-direction: column;
+      padding: 1em 0;
+    }
+  }
+}

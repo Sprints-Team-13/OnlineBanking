@@ -64,3 +64,12 @@
     }
   }
 }
+
+@media(max-width: 600px) {
+  .overview {
+    padding: 0;
+  }
+  .overview .content-wrapper{
+    flex-direction: column;
+  }
+}

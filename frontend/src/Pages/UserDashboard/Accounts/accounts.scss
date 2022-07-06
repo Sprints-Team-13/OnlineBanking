@@ -59,3 +59,13 @@
     }
   }
 }
+
+
+@media(max-width: 600px) {
+  .accounts {
+
+    .title {
+      flex-direction: column;
+    }
+  }
+}

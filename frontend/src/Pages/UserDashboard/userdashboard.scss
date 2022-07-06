@@ -6,7 +6,7 @@
   color: $clr-light;
 
   .bg {
-    position: absolute;
+    position: fixed;
     width: 100vw;
     height: 100vh;
     mix-blend-mode: multiply;
@@ -19,11 +19,29 @@
     flex: 6;
     z-index: 10;
     margin-left: 215px;
+    transition: 0.7s ease;
 
     .userdashboard-main {
       padding: 2em;
       height: calc(100% - 140px);
       margin-top: 70px;
+    }
+  }
+}
+
+.userdashboard-container.collapse {
+  margin-left: 50px;
+  transition: 0.7s ease;
+}
+
+@media(max-width: 600px) {
+  .userdashboard{
+
+    .userdashboard-container {
+      
+      .userdashboard-main {
+        padding: 2em 1em;
+      }
     }
   }
 }

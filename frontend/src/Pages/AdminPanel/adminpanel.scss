@@ -70,3 +70,16 @@
     transition: 0.7s ease;
   }
 }
+
+@media(max-width: 600px) {
+  .adminpanel{
+
+    .adminpanel-container {
+      
+      .adminpanel-main {
+        padding: 2em 1em;
+      }
+    }
+  }
+}
+
