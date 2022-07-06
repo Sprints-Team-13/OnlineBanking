@@ -56,10 +56,6 @@
           margin-top: auto;
         }
 
-        .icon {
-          // color: $clr-light;
-        }
-
         p {
           font-style: 13px;
           font-weight: 500;
@@ -74,4 +70,15 @@
 .sidebar.collapse {
   width: 50px;
   transition: 0.7s ease;
+}
+
+@media(max-width: 600px) {
+  .sidebar {
+    .center {
+      
+      ul {
+        height: 90%;
+      }
+    }
+  }
 }

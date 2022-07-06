@@ -54,3 +54,15 @@
   width: calc(100% - 50px);
   transition: 0.7s ease;
 }
+
+@media(max-width: 600px) {
+  .navbar {
+    height: 90px;
+    width: auto;
+    
+    .wrapper {
+      flex-direction: column-reverse;
+      gap: 0.5em;
+    }
+  }
+}
