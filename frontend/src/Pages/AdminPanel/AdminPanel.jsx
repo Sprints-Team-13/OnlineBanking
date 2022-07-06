@@ -1,6 +1,7 @@
 import "./adminpanel.scss"
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import {Routes, Route} from 'react-router-dom'
+import { useMediaQuery } from 'react-responsive'
 
 import Sidebar from '../../layout/sidebar/AdminSidebar'
 import Navbar from '../../layout/navbar/Navbar'
@@ -19,6 +20,16 @@ function AdminPanel() {
   function toggleSidebar() {
     setIsSidebarActive(prev => !prev)
   }
+
+  // declare media queries
+  const isSmallScreen = useMediaQuery({query: '(max-width: 600px)'})
+
+  // auto detect media queries
+  useEffect(()=> {
+    if(isSmallScreen) {
+      setIsSidebarActive(true)
+    }
+  },[])
 
   return (
     <div className='adminpanel'>

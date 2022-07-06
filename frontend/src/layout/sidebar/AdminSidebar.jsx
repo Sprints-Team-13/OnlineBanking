@@ -1,5 +1,5 @@
 import './sidebar.scss'
-import React, { useContext, useState } from 'react'
+import React, { useContext } from 'react'
 import {Link} from 'react-router-dom'
 
 import DashboardIcon from '@mui/icons-material/Dashboard';
@@ -15,6 +15,7 @@ function Sidebar(props) {
   // import signout fnc form auth context
   const { signOut } = useContext(AuthContext)
 
+  // destracture props
   const {isSidebarActive, toggleSidebar} = props
 
   return (

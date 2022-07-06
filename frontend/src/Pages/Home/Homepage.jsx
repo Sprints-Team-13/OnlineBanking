@@ -6,6 +6,7 @@ import Register from '../../components/register/Register'
 import Login from '../../components/login/Login'
 
 function Homepage() {
+
   return (
     <div className='homepage'>
       <img src='https://images.rawpixel.com/image_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIyLTA1L3JtMjA4YmF0Y2g0LWt3YW4tMDEtZy5qcGc.jpg' alt='bg'  className='homepage-bg'></img>
