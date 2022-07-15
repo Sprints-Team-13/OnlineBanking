@@ -36,7 +36,7 @@ function Transactions() {
       },
     ];
     
-    const rows = transactions && transactions.map(transaction => (
+    const rows = transactions?.map(transaction => (
       {
         date: date(transaction.transactionDate),
         id: transaction._id,

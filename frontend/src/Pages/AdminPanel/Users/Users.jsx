@@ -43,7 +43,7 @@ function Users() {
     },
   ];
   
-  const rows = users && users.map(user => (
+  const rows = users?.map(user => (
     {
       id: user._id,
       fullName: user.fullName, 

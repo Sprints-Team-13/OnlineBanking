@@ -8,7 +8,7 @@ function Overview() {
 
   const {data: accounts} = useGetUsersAccounts()
   
-  const totalAccountsBalance = accounts && accounts.length > 1 && accounts.map(account => account.accountBalance).reduce((x, y) => x + y)
+  const totalAccountsBalance = accounts?.length > 1 && accounts.map(account => account.accountBalance).reduce((x, y) => x + y)
   
   return (
     <div className='overview'>

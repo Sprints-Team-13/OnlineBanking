@@ -41,7 +41,7 @@ function Overview() {
     },
   ];
 
-  const rows = transactions && transactions.slice(0, 5).map(transaction => (
+  const rows = transactions?.slice(0, 5).map(transaction => (
     {
       date: date(transaction.transactionDate),
       id: transaction._id,
@@ -64,11 +64,11 @@ function Overview() {
           <div className="left-section">
             <AdminPanelSettingsIcon className="icon"/>
             <p>Total users</p>
-            <h3>{users && users.length}</h3>
+            <h3>{users?.length}</h3>
             <p>Total accounts</p>
-            <h3>{accounts && accounts.length}</h3>
+            <h3>{accounts?.length}</h3>
             <p>Total transactions</p>
-            <h3>{transactions && transactions.length}</h3>
+            <h3>{transactions?.length}</h3>
           </div>
         </div>
 

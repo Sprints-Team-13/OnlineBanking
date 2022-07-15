@@ -79,7 +79,7 @@ function Accounts() {
     },
   ];
   
-  const rows = accounts && accounts.map(account => (
+  const rows = accounts?.map(account => (
     {
       id: account.accountNumber,
       accountBalance: `$${account.accountBalance}`,

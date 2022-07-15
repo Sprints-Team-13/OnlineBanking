@@ -18,11 +18,11 @@ function UserId() {
 
   // fetch user detials
   const { data } = useApi(`/api/listAccounts/${params.userId}`)
-  const userAccounts = data && data.accounts.slice(0).reverse()
+  const userAccounts = data?.accounts.slice(0).reverse()
 
   // fetch user transactions
   const { data: transactionsData } = useApi(`/api/listTransactions/${params.userId}`)
-  const userTransactions = transactionsData && transactionsData.transactions.slice(0).reverse()
+  const userTransactions = transactionsData?.transactions.slice(0).reverse()
 
   // console.log(userTransactions);
 
@@ -35,7 +35,7 @@ function UserId() {
   // set user profile actions
   const userProfileActions = (
     <div className="userProfileActions">
-      {userData && userData.authorized
+      {userData?.authorized
         ?
           <>
             <Button variant="contained" 
@@ -145,7 +145,7 @@ function UserId() {
     },
   ];
   
-  const accountsRows = userAccounts && userAccounts.map(account => (
+  const accountsRows = userAccounts?.map(account => (
     {
       id: account.accountNumber,
       accountBalance: `$${account.accountBalance}`,
@@ -178,7 +178,7 @@ function UserId() {
     },
   ];
   
-  const transactionsRows = userTransactions && userTransactions.map(transaction => (
+  const transactionsRows = userTransactions?.map(transaction => (
     {
       date: date(transaction.transactionDate),
       id: transaction._id,
