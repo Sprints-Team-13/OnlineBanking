@@ -26,7 +26,7 @@ function Overview() {
 
             <div className="balance">
               <p>Total accounts balance</p>
-              <h3>${totalAccountsBalance}</h3>
+              <h3>AED{totalAccountsBalance}</h3>
             </div>
 
           </div>

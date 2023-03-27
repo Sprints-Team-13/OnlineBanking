@@ -148,7 +148,7 @@ function UserId() {
   const accountsRows = userAccounts?.map(account => (
     {
       id: account.accountNumber,
-      accountBalance: `$${account.accountBalance}`,
+      accountBalance: `AED ${account.accountBalance}`,
       accountType: account.accountType,
       accountStatus: account.accountStatus,
       date: date(account.createdAt),
@@ -184,7 +184,7 @@ function UserId() {
       id: transaction._id,
       transactionType: transaction.transactionType,
       accountNumber: transaction.accountNumber,
-      amount: `$${transaction.amount}`,
+      amount: `AED ${transaction.amount}`,
       description: transaction.description,
     }
   ))

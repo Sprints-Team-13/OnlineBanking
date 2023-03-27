@@ -82,7 +82,7 @@ function Accounts() {
   const rows = accounts?.map(account => (
     {
       id: account.accountNumber,
-      accountBalance: `$${account.accountBalance}`,
+      accountBalance: `AED ${account.accountBalance}`,
       accountType: account.accountType,
       customerID: `#${account.customerID}`,
       accountStatus: account.accountStatus,
