@@ -22,17 +22,29 @@ function Accounts() {
   // set available actions
 
   // create a new account
+  // function createNewAccount() {
+  //   popAction(
+  //     'Are you sure?', 
+  //     "A new account will be created!",
+  //     'Proceed!',
+  //     ()=>apiCrud(`/api/createAccount`, 'POST', 'Account created', {
+  //       accountType: 'saving',
+  //       accountBalance: '0'
+  //     })()
+  //   )
+  // } 
+
   function createNewAccount() {
-    popAction(
-      'Are you sure?', 
-      "A new account will be created!",
-      'Proceed!',
-      ()=>apiCrud(`/api/createAccount`, 'POST', 'Account created', {
-        accountType: 'saving',
-        accountBalance: '0'
-      })()
+    popCrud(
+      'Create An Account', 
+      'Proceed', 
+      ['accountType', 'accountBalance'], 
+      `/api/createAccount`,
+      'POST',
+      'Account Creation Under Process',
+      ['Current or Saving', 'Initial Deposit'],
     )
-  } 
+  }
 
   // deposit
   function deposit() {
@@ -68,9 +80,9 @@ function Accounts() {
     { 
       field: 'accountType', headerName: 'Type', minWidth: 70, flex: 1
     },
-    { 
-      field: 'customerID', headerName: 'User ID', minWidth: 130, flex: 3
-    },
+    // { 
+    //   field: 'customerID', headerName: 'User ID', minWidth: 130, flex: 3
+    // },
     { 
       field: 'accountStatus', headerName: 'Status', minWidth: 80, flex: 1
     },
@@ -84,7 +96,7 @@ function Accounts() {
       id: account.accountNumber,
       accountBalance: `AED ${account.accountBalance}`,
       accountType: account.accountType,
-      customerID: `#${account.customerID}`,
+      // customerID: `#${account.customerID}`,
       accountStatus: account.accountStatus,
       date: date(account.createdAt),
     }
