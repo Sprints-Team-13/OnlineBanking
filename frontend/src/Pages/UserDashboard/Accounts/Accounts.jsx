@@ -54,7 +54,8 @@ function Accounts() {
       ['accountNumber', 'amount'], 
       `/api/recharge`,
       'POST',
-      'Successful transaction'
+      'Successful transaction',
+      ['Account Number', 'Amount'], 
     )
   }
 
@@ -66,7 +67,8 @@ function Accounts() {
       ['accountNumber', 'amount'], 
       `/api/withdraw`,
       'POST',
-      'Successful transaction'
+      'Successful transaction',
+      ['Account Number', 'Amount'],
     )
   }
 

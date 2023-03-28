@@ -1,13 +1,11 @@
-import './login.scss'
+import './forgot.scss'
 import axios from 'axios';
 import React, { useContext } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { AuthContext } from '../../context/Auth-context';
 import popAlert from '../../helpers/popAlert';
-import CustomizedDialogs from '../../components/dialog/Dialog'
-import SecurityQuestions from '../forgot/SecurityQuestions';
 
-export default function Login() {
+export default function ForgotPassword() {
 
   const navigate = useNavigate()
   const {signIn} = useContext(AuthContext)
@@ -38,7 +36,7 @@ export default function Login() {
     submit.preventDefault();
 
     await axios({
-      url:  `/api/signin`,
+      url:  `/api/changePassword`,
       method: 'POST',
       data: {
         email: login.email.toLowerCase().trim(),
@@ -73,7 +71,7 @@ export default function Login() {
   }
 
   // Generate JSX code for login form
-  const loginForm = (
+  const forgotForm = (
 
     <main className='App-main'>
       <div className='login'>
@@ -95,7 +93,8 @@ export default function Login() {
 
             <div className='input-holder'>
               <label>Password</label>
-              <br/> 
+              
+              <br/>
               <input 
                 type="password" 
                 name="hash_password"   
@@ -105,15 +104,29 @@ export default function Login() {
                 value={login.hash_password}
               />
             </div>
-            
-            <div className="input-holder">
-            <button id="sub_btn" type="submit" >Login</button>
+
+            <div className='input-holder'>
+              <label>Confirm Password</label>
+              
+              <br/>
+              <input 
+                type="password" 
+                name="hash_password"   
+                placeholder={'Confirm Password'} 
+                required
+                onChange={handleChange}
+                value={login.hash_password}
+              />
             </div>
-        
+
+
+
+            <div className="input-holder">
+            <button id="sub_btn" type="submit" >Change Password</button>
+            </div>
+
             <div className="error">{errorMessages}</div>
-            <CustomizedDialogs title='Security Question' btn='Forgot Password?' style={{color: "#3c3c3c"}}>
-              <SecurityQuestions />
-            </CustomizedDialogs>
+
           </form>
               
         </div>
@@ -124,7 +137,7 @@ export default function Login() {
 
   return (
     <div>
-      {loginForm}
+      {forgotForm}
     </div>
   )
 }

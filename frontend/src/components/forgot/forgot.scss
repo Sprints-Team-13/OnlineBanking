@@ -1,0 +1,94 @@
+@import '../../scss/layout/colors';
+
+.login {
+  h2 {
+    -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: transparent;
+
+    color: #212529;
+    text-align: center !important;
+    box-sizing: border-box;
+    margin-top: 0;
+    margin-bottom: .5rem;
+    line-height: 1.2;
+    font-size: 2rem;
+    font-weight: 700;
+  }
+
+  p {
+    font-size: 1.2rem;
+    font-weight: 300;
+    line-height: 1.5;
+    margin-bottom: 1rem;
+    margin-top: 0;
+  }
+
+  form {
+    display: inline-block;
+    border-radius: 2px;
+    padding: 2rem;
+  }
+
+  form label {
+    float: left;
+    font-size: .9rem;
+    margin: 0;
+    padding: 0;
+    color: black;
+  }
+
+  .right-label {
+    float: right;
+    cursor: pointer;
+    font-size: 13px;
+  }
+
+  input {
+    width: 15rem;
+    padding: .3rem;
+    border-radius: 5px;
+    outline: none;
+    border: none;
+    background: whitesmoke;
+		color: black;
+  }
+
+  .input-holder {
+		font-size: 1.2rem;
+		font-weight: 300;
+		line-height: 1.5;
+		margin-bottom: 1rem;
+		margin-top: 0;
+	}
+
+  #checkbox {
+		width: 1rem
+	}
+
+  form span {
+		font-size: .8rem;
+		color: black;
+	}
+
+  #sub_btn {
+    display: block;
+    width: 100%;
+    padding: .3rem;
+    border: none;
+    background: $grd-main;
+    color: #fff;
+    border-radius: 10px;
+    cursor: pointer;
+  }
+
+  #sub_btn:hover {
+    background: $grd-sec;
+  }
+
+  .error {
+    color: red;
+    font-size: 13px;
+    text-align: center;
+  }
+
+}

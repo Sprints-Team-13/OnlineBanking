@@ -1,13 +1,20 @@
-import './login.scss'
+import './forgot.scss'
 import axios from 'axios';
 import React, { useContext } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { AuthContext } from '../../context/Auth-context';
 import popAlert from '../../helpers/popAlert';
-import CustomizedDialogs from '../../components/dialog/Dialog'
-import SecurityQuestions from '../forgot/SecurityQuestions';
+import ForgotPassword from '../forgot/forgotPassword';
+import Select ,{ StylesConfig } from 'react-select'
 
-export default function Login() {
+const options = [
+  { value: 'Who is your fav actors?', label: 'Who is your fav actors?' },
+  { value: 'What was your first car?', label: 'What was your first car?' },
+  { value: 'What is your fav movie?', label: 'What is your fav movie?' }
+]
+
+
+export default function SecurityQuestions() {
 
   const navigate = useNavigate()
   const {signIn} = useContext(AuthContext)
@@ -38,7 +45,7 @@ export default function Login() {
     submit.preventDefault();
 
     await axios({
-      url:  `/api/signin`,
+      url:  `/api/changePassword`,
       method: 'POST',
       data: {
         email: login.email.toLowerCase().trim(),
@@ -72,8 +79,18 @@ export default function Login() {
     )
   }
 
+  const Countries = [
+    { label: "Albania", value: 355 },
+    { label: "Argentina", value: 54 },
+    { label: "Austria", value: 43 },
+    { label: "Cocos Islands", value: 61 },
+    { label: "Kuwait", value: 965 },
+    { label: "Sweden", value: 46 },
+    { label: "Venezuela", value: 58 }
+  ];
+   
   // Generate JSX code for login form
-  const loginForm = (
+  const SecurityQuestionsForm = (
 
     <main className='App-main'>
       <div className='login'>
@@ -81,11 +98,11 @@ export default function Login() {
           <form action="/" onSubmit={handleSubmit}>
 
             <div className='input-holder'>
-              <label>Email address</label><br/>
+              <label>Email address / User Name</label><br/>
               <input 
                 type="email"
                 name="email"
-                placeholder={'Enter your Email'}
+                
                 required
                 autoFocus
                 onChange={handleChange}
@@ -94,26 +111,44 @@ export default function Login() {
             </div>
 
             <div className='input-holder'>
-              <label>Password</label>
-              <br/> 
+              <label>Question</label>
+              
+              <br/>
+              <div
+        style={{
+          color: 'hsl(0, 0%, 40%)',
+          display: 'inline-block',
+          fontSize: 12,
+          marginTop: '1em',
+          width: '100%'
+        }}
+      >
+              <Select options={options}  className="basic-single"  classNamePrefix="select"/>
+
+      </div>
+              
+            </div>
+
+            <div className='input-holder'>
+              <label>Answer</label>
+              
+              <br/>
               <input 
-                type="password" 
-                name="hash_password"   
-                placeholder={'Enter your Password'} 
+                type="text" 
+                name="Answer"   
                 required
                 onChange={handleChange}
-                value={login.hash_password}
               />
             </div>
-            
+
+
+
             <div className="input-holder">
-            <button id="sub_btn" type="submit" >Login</button>
+            <button id="sub_btn" type="submit" >Get Details</button>
             </div>
-        
+
             <div className="error">{errorMessages}</div>
-            <CustomizedDialogs title='Security Question' btn='Forgot Password?' style={{color: "#3c3c3c"}}>
-              <SecurityQuestions />
-            </CustomizedDialogs>
+
           </form>
               
         </div>
@@ -124,7 +159,7 @@ export default function Login() {
 
   return (
     <div>
-      {loginForm}
+      {SecurityQuestionsForm}
     </div>
   )
 }
