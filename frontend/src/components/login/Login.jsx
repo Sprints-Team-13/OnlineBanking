@@ -94,7 +94,7 @@ export default function Login() {
             <div className='input-holder'>
               <label>Password</label>
               <Link to="/forget-password"><label className="right-label "
-              style={{color: "#007bff"}}>Forget password?</label></Link>
+              style={{color: "#007bff"}}>Forgot password?</label></Link>
               <br/>
               <input 
                 type="password" 

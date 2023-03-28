@@ -28,8 +28,8 @@ function Sidebar(props) {
 
         {!isSidebarActive &&
           <p className="logo">
-            Sprints Bank
-          </p>
+           ADI Bank
+                     </p>
         }
 
       </div>

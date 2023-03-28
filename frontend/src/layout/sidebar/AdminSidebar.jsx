@@ -27,7 +27,7 @@ function Sidebar(props) {
 
         {!isSidebarActive &&
           <p className="logo">
-            Sprints Bank
+            Abu Dhabi International
           </p>
         }
 

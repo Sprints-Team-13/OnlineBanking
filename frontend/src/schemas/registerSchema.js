@@ -5,8 +5,8 @@ export const registerSchema = yup.object({
     .max(30, 'Maximum characters allowed are 30')
     .required('Full name is required'),
   phone: yup.string()
-    .min(11, 'Minimum  characters allowed are 11')
-    .max(11, 'Maximum characters allowed are 11')
+    .min(10, 'Minimum  characters allowed are 10')
+    .max(10, 'Maximum characters allowed are 10')
     .required('A phone number is required'),
   email: yup.string()
     .email('Invalid email')
