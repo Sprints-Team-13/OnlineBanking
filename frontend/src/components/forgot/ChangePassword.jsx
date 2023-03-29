@@ -5,7 +5,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { AuthContext } from '../../context/Auth-context';
 import popAlert from '../../helpers/popAlert';
 
-export default function ForgotPassword() {
+export default function ChangePassword() {
 
   const navigate = useNavigate()
   const {signIn} = useContext(AuthContext)
@@ -44,12 +44,12 @@ export default function ForgotPassword() {
       }
     })
     .then((res) => {
-      console.log('successfully logged in');
-      // console.log(res.data);
-      localStorage.setItem('jwt', res.data.token);
-      signIn(res.data);
-      popAlert(`Welcome back`);
-      navigate('/');
+      // console.log('successfully logged in');
+      // // console.log(res.data);
+      // localStorage.setItem('jwt', res.data.token);
+      // signIn(res.data);
+      // popAlert(`Welcome back`);
+      // navigate('/');
       return res.data;
     })
     .catch(

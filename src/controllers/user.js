@@ -80,6 +80,39 @@ exports.signin = (req, res) => {
     });
 }
 
+exports.validateQuestion = (req, res) => {
+    User.findOne({email: req.body.email})
+    .exec( async (error, user) => {
+        if(error) return res.status(400).json({error});
+        if(user) {
+            if (user.authorized === false) {
+                return res.status(400).json({
+                    message: 'User is not authorized'
+                });
+            }
+            
+            //console.log(user.authenticate(req.body.hash_password));
+            if(true) {
+                
+                res.status(200).json({
+                    message: 'Correct Answer'
+                })
+            }
+            
+            else {
+                return res.status(400).json({
+                    message: 'Invalid Answer'
+                });
+            }
+        }
+        else {
+            return res.status(400).json({
+                message: 'Invalid Email'
+            })
+        }
+    });
+}
+
 exports.changePassword = (req, res) => {
     User.findOne({email: req.body.email})
     .exec( async (error, user) => {
@@ -90,24 +123,18 @@ exports.changePassword = (req, res) => {
                     message: 'User is not authorized'
                 });
             }
+            
             //console.log(user.authenticate(req.body.hash_password));
-            if(user.authenticate(req.body.hash_password) == "true") {
-                let roll = user.role
-                const token = jwt.sign({_id: user._id, role: roll}, process.env.SHH, {expiresIn: '5d'});
-                const { fullName, phone, email, role} = user;
-                //request.setHeader('Authorization', 'Bearer '+token)
-
+            if(true) {
+                
                 res.status(200).json({
-                    token,
-                    user: {
-                        fullName, phone, email, role
-                    }
+                    message: 'Correct Answer'
                 })
             }
             
             else {
                 return res.status(400).json({
-                    message: 'Invalid Password'
+                    message: 'Invalid Answer'
                 });
             }
         }

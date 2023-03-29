@@ -4,7 +4,7 @@ import React, { useContext } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { AuthContext } from '../../context/Auth-context';
 import popAlert from '../../helpers/popAlert';
-import ForgotPassword from '../forgot/forgotPassword';
+import ChangePassword from './ChangePassword';
 import Select ,{ StylesConfig } from 'react-select'
 
 const options = [
@@ -17,7 +17,6 @@ const options = [
 export default function SecurityQuestions() {
 
   const navigate = useNavigate()
-  const {signIn} = useContext(AuthContext)
 
   // Error Message State
   const [errorMessages, setErrorMessages] = React.useState('');
@@ -45,7 +44,7 @@ export default function SecurityQuestions() {
     submit.preventDefault();
 
     await axios({
-      url:  `/api/changePassword`,
+      url:  `/api/validateQuestion`,
       method: 'POST',
       data: {
         email: login.email.toLowerCase().trim(),
@@ -53,12 +52,9 @@ export default function SecurityQuestions() {
       }
     })
     .then((res) => {
-      console.log('successfully logged in');
-      // console.log(res.data);
-      localStorage.setItem('jwt', res.data.token);
-      signIn(res.data);
-      popAlert(`Welcome back`);
-      navigate('/');
+      popAlert(`Correct Answer`);
+      navigate('/change-password?email='+login.email);
+      
       return res.data;
     })
     .catch(
@@ -79,15 +75,6 @@ export default function SecurityQuestions() {
     )
   }
 
-  const Countries = [
-    { label: "Albania", value: 355 },
-    { label: "Argentina", value: 54 },
-    { label: "Austria", value: 43 },
-    { label: "Cocos Islands", value: 61 },
-    { label: "Kuwait", value: 965 },
-    { label: "Sweden", value: 46 },
-    { label: "Venezuela", value: 58 }
-  ];
    
   // Generate JSX code for login form
   const SecurityQuestionsForm = (
@@ -150,7 +137,7 @@ export default function SecurityQuestions() {
             <div className="error">{errorMessages}</div>
 
           </form>
-              
+          
         </div>
       </div>
     </main>

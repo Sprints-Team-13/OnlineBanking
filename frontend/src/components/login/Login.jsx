@@ -95,6 +95,8 @@ export default function Login() {
 
             <div className='input-holder'>
               <label>Password</label>
+              <Link to="/forget-password"><label className="right-label "
+              style={{color: "#007bff"}}>Forget password?</label></Link>
               <br/> 
               <input 
                 type="password" 
@@ -111,10 +113,8 @@ export default function Login() {
             </div>
         
             <div className="error">{errorMessages}</div>
-            <CustomizedDialogs title='Security Question' btn='Forgot Password?' style={{color: "#3c3c3c"}}>
-              <SecurityQuestions />
-            </CustomizedDialogs>
-          </form>
+            </form>
+        
               
         </div>
       </div>
