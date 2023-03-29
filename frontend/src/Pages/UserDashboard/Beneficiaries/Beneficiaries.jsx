@@ -23,9 +23,6 @@ function Beneficiaries() {
 
   const columns = [
     { 
-      field: '_id', headerName: 'Beneficiary Id', width: 120
-    },
-    { 
       field: 'name', headerName: 'Name', width: 200
     },
     { 
