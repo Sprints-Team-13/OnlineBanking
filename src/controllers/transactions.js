@@ -1,6 +1,7 @@
 const Transaction = require("../models/transactions")
 const Beneficiary = require("../models/beneficiary")
 const { getID } = require("./user")
+const Account = require("../models/account")
 
 //send transactions to user
 exports.getTransactions = (req, res) => {
@@ -38,23 +39,46 @@ exports.getBeneficiaries = (req, res) => {
         });
 }
 
-exports.addBeneficiary = (req, res) => {
-    Beneficiary.create({
-        customerID: getID(req),
-        name: req.body.name,
-        accountNumber: req.body.accountNumber,
-    }, function (err, data) {
-        if (err) {
-            console.log("Error creating data: ", err);
-            res
-                .status(400)
-                .json(err)
-        } else {
-            console.log("Created: ", data);
-            res
-                .status(201)
-                .json(data)
+exports.addBeneficiary = async (req, res) => {
+    try {
+        const data = await Account.findOne({
+            accountNumber: req.body.accountNumber,
+            accountStatus: 'active'
+        });
+
+        if (!data) {
+            res.status(404).json({
+                message: `account no ${req.body.accountNumber} not found/active`
+            });
+
+            return false;
         }
-    });
+
+        const exists = await Beneficiary.findOne({
+            customerID: getID(req),
+            accountNumber: req.body.accountNumber,
+        });
+
+        if (exists) {
+            res.status(404).json({
+                message: `account no ${req.body.accountNumber} already added`
+            });
+
+            return false;
+        }
+
+        const beneficiary = await Beneficiary.create({
+            customerID: getID(req),
+            name: req.body.name,
+            accountNumber: req.body.accountNumber,
+        });
+
+        res.status(201).json(beneficiary);
+    } catch (err) {
+        res.status(err.status).json({
+            message: err.message
+        })
+    }
+
 }
 
