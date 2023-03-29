@@ -3,8 +3,8 @@ const {signup, reqSignin, signin,changePassword,validateQuestion} = require('../
 const router = express.Router();
 //const User = require('../models/user');
 const { validateRequest, isRequestValidated } = require('../validators/auth');
-const {createAccount, withdraw, recharge, transferMoney, getUserAccounts} = require('../controllers/account');
-const {getTransactions} = require('../controllers/transactions');
+const { createAccount, withdraw, recharge, transferMoney, getUserAccounts } = require('../controllers/account');
+const { getTransactions, getBeneficiaries, addBeneficiary } = require('../controllers/transactions');
 
 router.post('/signup', validateRequest, isRequestValidated, signup);
 router.post('/signin', signin);
@@ -16,6 +16,8 @@ router.post('/recharge', reqSignin, recharge);
 router.post('/transfer', reqSignin, transferMoney);
 router.get('/userAccounts', reqSignin, getUserAccounts);
 router.get('/transactions', reqSignin, getTransactions);
+router.get('/beneficiaries', reqSignin, getBeneficiaries);
+router.post('/beneficiaries', reqSignin, addBeneficiary);
 
 
 module.exports = router;
