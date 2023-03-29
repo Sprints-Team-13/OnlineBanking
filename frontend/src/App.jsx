@@ -3,6 +3,9 @@ import React, { useContext } from 'react'
 import {Routes, Route, Navigate} from 'react-router-dom'
 
 import Homepage from './Pages/Home/Homepage';
+import ForgetPasswordPage from './Pages/Home/ForgetPasswordPage';
+import ChangePasswordPage from './Pages/Home/ChangePasswordPage';
+
 import AdminPanel from './Pages/AdminPanel/AdminPanel'
 import UserDashboard from './Pages/UserDashboard/UserDashboard'
 import { AuthContext } from './context/Auth-context';
@@ -30,8 +33,14 @@ function App() {
         :
         <Routes>
           <Route path='/' element={<Homepage />} />
+          <Route path='/Forget-Password' element={<ForgetPasswordPage />} />
+          <Route path='/Change-Password' element={<ChangePasswordPage />} />
           <Route path="*" element={<Navigate to ="/" replace/>}/>
+
+
         </Routes>
+
+        
       }
     </div>
   )
