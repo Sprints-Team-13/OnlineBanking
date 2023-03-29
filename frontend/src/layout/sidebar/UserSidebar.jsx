@@ -44,10 +44,10 @@ function Sidebar(props) {
             </li>
           </Link>
 
-          <Link to={'/userdashboard/openaccount'}>
+          <Link to={'/userdashboard/beneficieries'}>
             <li>
               <AccountBalanceWalletIcon className='icon' />
-              {!isSidebarActive && <p>Accounts</p>}
+              {!isSidebarActive && <p>Beneficieries</p>}
             </li>
           </Link>
 

@@ -10,7 +10,7 @@ import Accounts from './Accounts/Accounts'
 import Transactions from './Transactions/Transactions'
 import Transfer from './Transfer/Transfer'
 import Profile from './Profile/Profile'
-import { BeneficiariesPage } from './Beneficiaries/Beneficiaries'
+import { Beneficiaries } from './Beneficiaries/Beneficiaries'
 
 function UserDashboard() {
 
@@ -46,7 +46,7 @@ function UserDashboard() {
         <main className="userdashboard-main">
           <Routes>
             <Route path='/' element={<Overview />} />
-            <Route path='/beneficiaries' element={<BeneficiariesPage />} />
+            <Route path='/beneficieries' element={<Beneficiaries />} />
             <Route path='/accounts' element={<Accounts />} />
             <Route path='/transfer' element={<Transfer />} />
             <Route path='/transactions' element={<Transactions />} />

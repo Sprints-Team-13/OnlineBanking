@@ -2,10 +2,8 @@ import "./accounts.scss"
 import React from 'react'
 import { DataGrid } from '@mui/x-data-grid';
 
-import apiCrud from "../../../api/apiCrud";
 import popCrud from "../../../api/popCrud";
 import useGetUsersAccounts from "../../../hooks/queries/users/useGetUserAccounts";
-import popAction from '../../../helpers/popAction'
 
 function Accounts() {
 
