@@ -4,7 +4,8 @@ import { DataGrid } from '@mui/x-data-grid';
 import { useState } from "react";
 import useGetBeneficiaries from "../../../hooks/queries/users/useGetBeneficiaries"
 import apiCrud from "../../../api/apiCrud";
-
+import Button from '@mui/material/Button';
+import popAction from "../../../helpers/popAction";
 function Beneficiaries() {
 
   const [name, setName] = useState('');
@@ -20,13 +21,39 @@ function Beneficiaries() {
       name,
     })
   }
+  const usersActions = (params) => (
 
+    
+    <div className='actions'>
+    
+        <Button variant="contained" className="activate"
+          onClick={() => popAction(
+            'Are you sure?', 
+            "The benificiary will be deleted!",
+            'Delete!',
+            ()=>apiCrud(`/api/beneficiaries`, 'POST', 'Account activated', {
+              accountNumber: params.row.id
+                        })()
+          )}>
+          Delete
+        </Button>            
+   
+    </div>
+  )
   const columns = [
     { 
       field: 'name', headerName: 'Name', width: 200
     },
     { 
       field: 'accountNumber', headerName: 'Account Number', width: 150
+    },
+    { 
+      field: 'actions', 
+      headerName: 'Actions', 
+      minWidth: 110,
+      flex: 1,
+      align: 'center',
+      renderCell: (params) => usersActions(params)
     },
   ];
 
