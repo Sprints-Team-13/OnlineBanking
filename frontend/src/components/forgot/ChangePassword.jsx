@@ -4,74 +4,61 @@ import React, { useContext } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { AuthContext } from '../../context/Auth-context';
 import popAlert from '../../helpers/popAlert';
+import { useLocation } from "react-router-dom";
+import {decode as base64_decode, encode as base64_encode} from 'base-64';
+import {useFormik} from 'formik'
+import { changePasswordSchema } from '../../schemas/registerSchema';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 
 export default function ChangePassword() {
 
   const navigate = useNavigate()
-  const {signIn} = useContext(AuthContext)
 
+  const search = useLocation().search;
+  const email = new URLSearchParams(search).get('email');
   // Error Message State
   const [errorMessages, setErrorMessages] = React.useState('');
 
-  // used for storing user input
-  const [login, setLogin] = React.useState({
-    email: '',
-    hash_password: '',
-  });
-
-  // handle input change
-  function handleChange(event) {
-    const { name, value } = event.target
-    setLogin(prev => {
-      return {
-        ...prev,
-        [name]: value
-      }
-    })
-  }
-
-
-  const handleSubmit = async (submit) => {
-
-    submit.preventDefault();
-
-    await axios({
-      url:  `/api/changePassword`,
-      method: 'POST',
-      data: {
-        email: login.email.toLowerCase().trim(),
-        hash_password: login.hash_password.trim()
-      }
-    })
-    .then((res) => {
-      // console.log('successfully logged in');
-      // // console.log(res.data);
-      // localStorage.setItem('jwt', res.data.token);
-      // signIn(res.data);
-      // popAlert(`Welcome back`);
-      // navigate('/');
-      return res.data;
-    })
-    .catch(
-      (error) => {
-        if (error.response) {
-          // Request made and server responded
-          setErrorMessages(error.response.data.message)
-        } else if (error.request) {
-          // The request was made but no response was received
-          console.log(error.request)
-          setErrorMessages('No response!')
-        } else {
-          // Something happened in setting up the request that triggered an Error
-          console.log('Error', error.message)
-          setErrorMessages('Somthing wrong!')
+ 
+  const { values, errors, touched, handleBlur, handleChange, handleSubmit} = useFormik({
+		initialValues: {
+			
+      email: base64_decode(email),
+      hash_password: '',
+      passwordConfirm: '',
+		},
+		validationSchema: changePasswordSchema,
+		onSubmit: async (values) => {
+			await axios({
+        url:  `/api/changePassword`,
+        method: 'POST',
+        data: {
+          email: values.email.toLowerCase().trim(),
+          hash_password: values.hash_password.trim()
         }
-      }
-    )
-  }
+      })
+			.then((res) => {
+				console.log(res.data)
+				popAlert('You changed the password successfully')
+				return setTimeout(()=> navigate('/'), 2000)
+			})
+			.catch(
+				(Error) => {
+					if (Error.response.status === 400) {
+					popAlert('Email already exists', 'error')
+					console.log('Error', Error.response)
+					} else {
+						popAlert('Something wrong', 'error')
+						console.log('Error', Error.response)
+					}
+				}
+			)
+		}
+	})
+ 
 
   // Generate JSX code for login form
-  const forgotForm = (
+  const ChangePasswordForm = (
 
     <main className='App-main'>
       <div className='login'>
@@ -87,8 +74,8 @@ export default function ChangePassword() {
                 required
                 autoFocus
                 onChange={handleChange}
-                value={login.email}
-              />
+                value={values.email}
+                readOnly={true}          />
             </div>
 
             <div className='input-holder'>
@@ -98,11 +85,20 @@ export default function ChangePassword() {
               <input 
                 type="password" 
                 name="hash_password"   
-                placeholder={'Enter your Password'} 
+                placeholder={'Enter new Password'} 
                 required
                 onChange={handleChange}
-                value={login.hash_password}
+                onBlur={handleBlur}
+                value={values.hash_password}
               />
+              {touched.hash_password 
+							? 
+								errors.hash_password 
+								? <p className="error">{errors.hash_password}</p> 
+								: <CheckCircleIcon className='icon'/>
+							:
+							null
+						}
             </div>
 
             <div className='input-holder'>
@@ -111,12 +107,22 @@ export default function ChangePassword() {
               <br/>
               <input 
                 type="password" 
-                name="hash_password"   
-                placeholder={'Confirm Password'} 
+                name="passwordConfirm"   
+                placeholder={'Confirm new Password'} 
                 required
                 onChange={handleChange}
-                value={login.hash_password}
+                onBlur={handleBlur}
+                value={values.passwordConfirm}
+                
               />
+              {touched.passwordConfirm 
+							? 
+								errors.passwordConfirm 
+								? <p className="error">{errors.passwordConfirm}</p> 
+								: <CheckCircleIcon className='icon'/>
+							:
+							null
+						}
             </div>
 
 
@@ -137,7 +143,7 @@ export default function ChangePassword() {
 
   return (
     <div>
-      {forgotForm}
+      {ChangePasswordForm}
     </div>
   )
 }

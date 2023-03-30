@@ -6,6 +6,7 @@ import { AuthContext } from '../../context/Auth-context';
 import popAlert from '../../helpers/popAlert';
 import ChangePassword from './ChangePassword';
 import Select ,{ StylesConfig } from 'react-select'
+import {decode as base64_decode, encode as base64_encode} from 'base-64';
 
 const options = [
   { value: 'Who is your fav actors?', label: 'Who is your fav actors?' },
@@ -15,7 +16,7 @@ const options = [
 
 
 export default function SecurityQuestions() {
-
+  
   const navigate = useNavigate()
 
   // Error Message State
@@ -53,7 +54,9 @@ export default function SecurityQuestions() {
     })
     .then((res) => {
       popAlert(`Correct Answer`);
-      navigate('/change-password?email='+login.email);
+      
+
+      navigate('/change-password?email='+ base64_encode(login.email));
       
       return res.data;
     })

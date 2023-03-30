@@ -4,8 +4,7 @@ import React, { useContext } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { AuthContext } from '../../context/Auth-context';
 import popAlert from '../../helpers/popAlert';
-import CustomizedDialogs from '../../components/dialog/Dialog'
-import SecurityQuestions from '../forgot/SecurityQuestions';
+
 
 export default function Login() {
 

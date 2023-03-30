@@ -124,19 +124,22 @@ exports.changePassword = (req, res) => {
                 });
             }
             
-            //console.log(user.authenticate(req.body.hash_password));
-            if(true) {
-                
-                res.status(200).json({
-                    message: 'Correct Answer'
+           
+
+            console.log(req.body.hash_password);
+            console.log(req.body.email);
+                let email = req.body.email;
+                if(error) return res.status(400).json({error});
+                User
+                .updateOne( {email: email}, {$set: {hash_password: req.body.hash_password}})
+                .exec( (error, user) => {
+                    if(error) return res.status(400).json({error});
+                    res.status(200).json({
+                        message: 'Password updated'
+                    })
                 })
-            }
+
             
-            else {
-                return res.status(400).json({
-                    message: 'Invalid Answer'
-                });
-            }
         }
         else {
             return res.status(400).json({
