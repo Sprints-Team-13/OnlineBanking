@@ -103,10 +103,14 @@ function Accounts() {
   ))
 
   return (
+
+    
+
     <div className="accounts">
 
       <div className="title">
         <h2>Accounts</h2>
+
 
         <div className="account-actions">
 
@@ -124,6 +128,7 @@ function Accounts() {
           </div>
 
         </div>
+ 
       </div>
       
       <div style={{ height: 700, width: '90%' }}>

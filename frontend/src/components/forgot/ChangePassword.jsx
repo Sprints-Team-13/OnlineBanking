@@ -61,6 +61,11 @@ export default function ChangePassword() {
   const ChangePasswordForm = (
 
     <main className='App-main'>
+      
+      <div className="transfer">
+ 
+ <div className="transfer-form">
+
       <div className='login'>
         <div>
           <form action="/" onSubmit={handleSubmit}>
@@ -137,6 +142,9 @@ export default function ChangePassword() {
               
         </div>
       </div>
+      </div>
+      </div>
+      
     </main>
 
   )

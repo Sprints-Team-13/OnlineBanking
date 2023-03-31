@@ -12,7 +12,7 @@ import useGetBeneficiaries from "../../../hooks/queries/users/useGetBeneficiarie
 
 function Transfer() {
   const { data } = useGetBeneficiaries();
-  console.log('result : '+ data.list);
+  
 // Dynamically create select list
 let options = [];
 data.list.map(item =>

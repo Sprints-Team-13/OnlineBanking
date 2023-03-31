@@ -83,6 +83,12 @@ export default function SecurityQuestions() {
   const SecurityQuestionsForm = (
 
     <main className='App-main'>
+
+      
+<div className="transfer">
+ 
+ <div className="transfer-form">
+
       <div className='login'>
         <div>
           <form action="/" onSubmit={handleSubmit}>
@@ -92,7 +98,7 @@ export default function SecurityQuestions() {
               <input 
                 type="email"
                 name="email"
-                
+                placeholder={'Enter your Email'}
                 required
                 autoFocus
                 onChange={handleChange}
@@ -127,6 +133,7 @@ export default function SecurityQuestions() {
                 type="text" 
                 name="Answer"   
                 required
+                placeholder={'Enter Answer'}
                 onChange={handleChange}
               />
             </div>
@@ -143,6 +150,7 @@ export default function SecurityQuestions() {
           
         </div>
       </div>
+      </div> </div>
     </main>
 
   )
