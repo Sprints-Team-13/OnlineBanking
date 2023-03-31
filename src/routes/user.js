@@ -4,7 +4,7 @@ const router = express.Router();
 //const User = require('../models/user');
 const { validateRequest, isRequestValidated } = require('../validators/auth');
 const { createAccount, withdraw, recharge, transferMoney, getUserAccounts } = require('../controllers/account');
-const { getTransactions, getBeneficiaries, addBeneficiary } = require('../controllers/transactions');
+const { getTransactions, getBeneficiaries, addBeneficiary , deleteBeneficiary} = require('../controllers/transactions');
 
 router.post('/signup', validateRequest, isRequestValidated, signup);
 router.post('/signin', signin);
@@ -18,6 +18,7 @@ router.get('/userAccounts', reqSignin, getUserAccounts);
 router.get('/transactions', reqSignin, getTransactions);
 router.get('/beneficiaries', reqSignin, getBeneficiaries);
 router.post('/beneficiaries', reqSignin, addBeneficiary);
+router.delete('/beneficiaries:id', reqSignin, deleteBeneficiary);
 
 
 module.exports = router;

@@ -23,7 +23,6 @@ function Beneficiaries() {
   }
   const usersActions = (params) => (
 
-    
     <div className='actions'>
     
         <Button variant="contained" className="activate"
@@ -31,9 +30,9 @@ function Beneficiaries() {
             'Are you sure?', 
             "The benificiary will be deleted!",
             'Delete!',
-            ()=>apiCrud(`/api/beneficiaries`, 'POST', 'Account activated', {
-              accountNumber: params.row.id
-                        })()
+            ()=>apiCrud(`/api/beneficiaries`, 'DELETE', 'Beneficiary Deleted', {
+              id: params.row._id
+            })
           )}>
           Delete
         </Button>            
