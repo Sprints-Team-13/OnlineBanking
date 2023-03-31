@@ -1,4 +1,4 @@
-import './homepage.scss'
+
 import React from 'react'
 import SecurityQuestions from "../../components/forgot/SecurityQuestions";
 

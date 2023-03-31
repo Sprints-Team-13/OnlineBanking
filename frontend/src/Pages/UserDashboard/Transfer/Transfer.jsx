@@ -36,7 +36,11 @@ function Transfer() {
         })()
       )
 		}
+   
+
 })
+
+
 
   const transferForm =(
 		<main className='transfer-form'>
@@ -111,6 +115,8 @@ function Transfer() {
             :
             null
           }
+                        <Select options={options}  className="basic-single"  classNamePrefix="select"/>
+
         </div>
 
         <div className="input-holder">
