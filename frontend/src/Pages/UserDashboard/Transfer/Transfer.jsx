@@ -6,8 +6,20 @@ import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import { transferSchema } from "../../../schemas/transferSchema";
 import popAction from "../../../helpers/popAction";
 import apiCrud from "../../../api/apiCrud";
+import Select ,{ StylesConfig } from 'react-select'
+import useGetBeneficiaries from "../../../hooks/queries/users/useGetBeneficiaries"
+
 
 function Transfer() {
+  const { data } = useGetBeneficiaries();
+  console.log('result : '+ data.list);
+// Dynamically create select list
+let options = [];
+data.list.map(item =>
+  options.push({ label: item.accountNumber, value: item.accountNumber }),
+);
+
+
 
   // handle user inputs
 	const { values, errors, touched, handleBlur, handleChange, handleSubmit} = useFormik({
@@ -29,7 +41,11 @@ function Transfer() {
         })()
       )
 		}
+   
+
 })
+
+
 
   const transferForm =(
 		<main className='transfer-form'>
@@ -96,6 +112,8 @@ function Transfer() {
             :
             null
           }
+                        <Select options={options}  className="basic-single"  classNamePrefix="select"/>
+
         </div>
 
         <div className="input-holder">

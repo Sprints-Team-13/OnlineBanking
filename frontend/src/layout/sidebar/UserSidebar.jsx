@@ -10,6 +10,7 @@ import SettingsIcon from '@mui/icons-material/Settings';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import ExitToAppOutlinedIcon from '@mui/icons-material/ExitToAppOutlined';
 import { AuthContext } from '../../context/Auth-context';
+import { SpeedDialIcon } from '@mui/material';
 
 function Sidebar(props) {
 
@@ -44,12 +45,7 @@ function Sidebar(props) {
             </li>
           </Link>
 
-          <Link to={'/userdashboard/beneficieries'}>
-            <li>
-              <AccountBalanceWalletIcon className='icon' />
-              {!isSidebarActive && <p>Beneficieries</p>}
-            </li>
-          </Link>
+     
 
           <Link to={'/userdashboard/accounts'}>
             <li>
@@ -57,7 +53,12 @@ function Sidebar(props) {
               {!isSidebarActive && <p>Accounts</p>}
             </li>
           </Link>
-
+          <Link to={'/userdashboard/beneficieries'}>
+            <li>
+              <SpeedDialIcon className='icon' />
+              {!isSidebarActive && <p>Beneficieries</p>}
+            </li>
+          </Link>
           <Link to={'/userdashboard/transfer'}>
             <li>
               <TransformOutlinedIcon className='icon' />
