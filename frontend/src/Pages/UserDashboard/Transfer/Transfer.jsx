@@ -14,8 +14,6 @@ function Transfer() {
     // fetch and cache all accounts
   const { data: accounts} = useGetUsersAccounts()
 
-  console.log(accounts)
-
   // handle user inputs
 	const { values, errors, touched, handleBlur, handleChange, handleSubmit} = useFormik({
 		initialValues: {
@@ -36,8 +34,7 @@ function Transfer() {
         })()
       )
 		}
-   
-
+  
 })
 
 
@@ -115,7 +112,6 @@ function Transfer() {
             :
             null
           }
-                        <Select options={options}  className="basic-single"  classNamePrefix="select"/>
 
         </div>
 
