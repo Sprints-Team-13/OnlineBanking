@@ -18,7 +18,7 @@ router.get('/userAccounts', reqSignin, getUserAccounts);
 router.get('/transactions', reqSignin, getTransactions);
 router.get('/beneficiaries', reqSignin, getBeneficiaries);
 router.post('/beneficiaries', reqSignin, addBeneficiary);
-router.delete('/beneficiaries:id', reqSignin, deleteBeneficiary);
+router.delete('/beneficiaries', deleteBeneficiary);
 
 
 module.exports = router;
