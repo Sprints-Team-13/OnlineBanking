@@ -11,6 +11,7 @@ import Transactions from './Transactions/Transactions'
 import Transfer from './Transfer/Transfer'
 import Profile from './Profile/Profile'
 import { Beneficiaries } from './Beneficiaries/Beneficiaries'
+import OpenAccount from './Accounts/OpenAccount'
 
 function UserDashboard() {
 
@@ -47,6 +48,7 @@ function UserDashboard() {
           <Routes>
             <Route path='/' element={<Overview />} />
             <Route path='/beneficieries' element={<Beneficiaries />} />
+            <Route path='/accounts/create' element={<OpenAccount />} />
             <Route path='/accounts' element={<Accounts />} />
             <Route path='/transfer' element={<Transfer />} />
             <Route path='/transactions' element={<Transactions />} />

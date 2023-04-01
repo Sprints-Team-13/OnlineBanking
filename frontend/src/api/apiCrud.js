@@ -14,8 +14,11 @@ async function apiCrud(url, method, message, data, action) {
   .then((res) => {
     console.log(res.data)
     message && popAlert(message)
-    setTimeout(()=> window.location.reload(), 1500) 
-    action && action()
+    if (action) {
+      action && action()
+    } else {
+      setTimeout(()=> window.location.reload(), 1500) 
+    }
     return res.data
   })
   .catch(
