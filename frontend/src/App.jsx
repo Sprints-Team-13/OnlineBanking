@@ -7,6 +7,8 @@ import ForgetPasswordPage from './Pages/Home/ForgetPasswordPage';
 import ChangePasswordPage from './Pages/Home/ChangePasswordPage';
 
 import AdminPanel from './Pages/AdminPanel/AdminPanel'
+import SuperAdminPanel from './Pages/SuperAdminPanel/SuperAdminPanel'
+
 import UserDashboard from './Pages/UserDashboard/UserDashboard'
 import { AuthContext } from './context/Auth-context';
 
@@ -26,11 +28,19 @@ function App() {
             <Route path="*" element={<Navigate to ="/adminpanel" replace/>}/>
           </Routes>
           :
+          isAdmin === 'super-admin'
+          ?
           <Routes>
+            <Route path='/superadminpanel/*' element={<SuperAdminPanel/>}/>
+            <Route path="*" element={<Navigate to ="/superadminpanel" replace/>}/>
+          </Routes>
+        :
+        <Routes>
             <Route path='/userdashboard/*' element={<UserDashboard/>}/>
             <Route path="*" element={<Navigate to ="/userdashboard" replace/>}/>
           </Routes>
-        :
+          
+:
         <Routes>
           <Route path='/' element={<Homepage />} />
           <Route path='/Forget-Password' element={<ForgetPasswordPage />} />

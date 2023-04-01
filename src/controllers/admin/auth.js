@@ -138,6 +138,17 @@ exports.getUsers = (req, res) => {
     })
 }
 
+// get all users
+exports.getAdmins = (req, res) => {
+    User.find({})
+    .exec( async (error, users) => {
+        if(error) return res.status(400).json({error});
+        res.status(200).json({
+            users
+        })
+    })
+}
+
 //get all accounts
 exports.getAccounts = (req, res) => {
     console.log(req.params.id);

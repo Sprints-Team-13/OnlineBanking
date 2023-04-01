@@ -36,35 +36,21 @@ function Sidebar(props) {
       <div className="center">
         <ul>
 
-          <Link to={'/adminpanel'}>
+          <Link to={'/superadminpanel'}>
             <li>
               <DashboardIcon className='icon'/>
               {!isSidebarActive && <p>Overview</p>}            
             </li>
           </Link>
 
-          <Link to={'/adminpanel/users'}>
+          <Link to={'/superadminpanel/staff'}>
             <li>
               <AccountCircleIcon className='icon'/>
-              {!isSidebarActive && <p>Users</p>}              
+              {!isSidebarActive && <p>Staff</p>}              
             </li>
           </Link>
-
-          <Link to={'/adminpanel/accounts'}>
-            <li>
-              <AccountBalanceWalletIcon className='icon'/>
-              {!isSidebarActive && <p>Accounts</p>}              
-            </li>
-          </Link>
-
-          <Link to={'/adminpanel/transactions'}>
-            <li>
-              <ViewListOutlinedIcon className='icon'/>
-              {!isSidebarActive && <p>Transactions</p>}
-            </li>
-          </Link>
-
-          <Link to={'/adminpanel/settings'}>
+         
+          <Link to={'/superadminpanel/settings'}>
             <li>
               <SettingsIcon className='icon'/>
               {!isSidebarActive && <p>Settings</p>}            

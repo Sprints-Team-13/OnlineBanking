@@ -126,8 +126,7 @@ exports.changePassword = (req, res) => {
             
            
 
-            console.log(req.body.hash_password);
-            console.log(req.body.email);
+        
                 let email = req.body.email;
                 if(error) return res.status(400).json({error});
                 User
