@@ -3,17 +3,16 @@ import { useFormik } from "formik";
 import apiCrud from "../../../api/apiCrud";
 import popAction from "../../../helpers/popAction";
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
-import { useNavigate } from 'react-router-dom';
 import * as yup from 'yup'
 
 const schema = yup.object({
   initialBalance: yup.number()
     .positive('Enter a vaild amount')
+    .moreThan(-1)
     .required('Amount is required'),
 })
 
 const OpenAccount = () => {
-  const navigate = useNavigate();
 
   const {values, errors, touched, handleBlur, handleChange, handleSubmit} = useFormik({
     initialValues: {
@@ -29,7 +28,7 @@ const OpenAccount = () => {
         ()=> apiCrud(`/api/createAccount`, 'POST', 'Successful transaction', {
           accountBalance: values.initialBalance,
           accountType: values.accountType,
-        }, navigate('/userdashboard/accounts'))
+        })()
       );
 		},
   })
@@ -57,7 +56,7 @@ const OpenAccount = () => {
       </div>
 
       <div className="input-holder">
-          <label>Account Type<span style={{color: 'red'}}> (From)</span></label><br/>
+          <label>Account Type<span style={{color: 'red'}}></span></label><br/>
           <select placeholder={'Select source Account'}
             name="accountType"
             onChange={handleChange}
