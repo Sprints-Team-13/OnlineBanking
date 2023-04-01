@@ -47,6 +47,12 @@ function Sidebar(props) {
 
      
 
+          <Link to={'/userdashboard/accounts/create'}>
+            <li>
+              <AccountBalanceWalletIcon className='icon' />
+              {!isSidebarActive && <p>Open Account</p>}
+            </li>
+          </Link>
           <Link to={'/userdashboard/accounts'}>
             <li>
               <AccountBalanceWalletIcon className='icon' />
