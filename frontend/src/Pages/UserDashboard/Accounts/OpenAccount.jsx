@@ -4,6 +4,7 @@ import apiCrud from "../../../api/apiCrud";
 import popAction from "../../../helpers/popAction";
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import * as yup from 'yup'
+import { Link, useNavigate } from 'react-router-dom'
 
 const schema = yup.object({
   initialBalance: yup.number()
@@ -13,11 +14,12 @@ const schema = yup.object({
 })
 
 const OpenAccount = () => {
+  const navigate = useNavigate()
 
   const {values, errors, touched, handleBlur, handleChange, handleSubmit} = useFormik({
     initialValues: {
       initialBalance: 0,
-      accountType: 'checking',
+      accountType: 'Current',
     },
     validationSchema: schema,
     onSubmit: (values)=> { 
@@ -28,7 +30,10 @@ const OpenAccount = () => {
         ()=> apiCrud(`/api/createAccount`, 'POST', 'Successful transaction', {
           accountBalance: values.initialBalance,
           accountType: values.accountType,
-        })()
+        }).then((res) => {
+          navigate('/userdashboard/accounts');
+        })
+        ()
       );
 		},
   })
@@ -64,8 +69,8 @@ const OpenAccount = () => {
             value={values.accountType}
             style={{ borderRadius: 15, height: 45, display: 'inline-block', width: '300px', border: '0', padding: '0 10px', color: '#999' }}
             required >
-            <option value="checking" key="checking">Checking Account</option>
-            <option value="saving" key="saving">Saving Account</option>
+            <option value="Current" key="Current">Current Account</option>
+            <option value="Saving" key="Saving">Saving Account</option>
           </select>
           {touched.accountType 
             ? 

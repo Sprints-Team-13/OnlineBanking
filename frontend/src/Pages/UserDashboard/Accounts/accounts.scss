@@ -10,7 +10,17 @@
   justify-content: center;
   align-items: center;
   color: $clr-main;
-  
+
+  .right-label {
+    float: right;
+    cursor: pointer;
+    font-size: 13px;
+    @include slideSolidBtn;
+        border-radius: 20px;
+        width: fit-content;
+        height: fit-content;
+        color: white !important;
+  }
   .title {
     width: 100%;
     z-index: 10;

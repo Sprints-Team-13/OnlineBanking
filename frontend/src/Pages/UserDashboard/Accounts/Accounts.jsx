@@ -1,7 +1,7 @@
 import "./accounts.scss"
 import React from 'react'
 import { DataGrid } from '@mui/x-data-grid';
-
+import { Link, useNavigate } from 'react-router-dom'
 import popCrud from "../../../api/popCrud";
 import useGetUsersAccounts from "../../../hooks/queries/users/useGetUserAccounts";
 
@@ -32,17 +32,17 @@ function Accounts() {
   //   )
   // } 
 
-  function createNewAccount() {
-    popCrud(
-      'Create An Account', 
-      'Proceed', 
-      ['accountType', 'accountBalance'], 
-      `/api/createAccount`,
-      'POST',
-      'Account Creation Under Process',
-      ['Current or Saving', 'Initial Deposit'],
-    )
-  }
+  // function createNewAccount() {
+  //   popCrud(
+  //     'Create An Account', 
+  //     'Proceed', 
+  //     ['accountType', 'accountBalance'], 
+  //     `/api/createAccount`,
+  //     'POST',
+  //     'Account Creation Under Process',
+  //     ['Current or Saving', 'Initial Deposit'],
+  //   )
+  // }
 
   // deposit
   function deposit() {
@@ -114,9 +114,12 @@ function Accounts() {
 
         <div className="account-actions">
 
-          <button onClick={createNewAccount}>
+          {/* <button onClick={createNewAccount}>
             + Create new account
-          </button>
+          </button> */}
+          
+          <Link to="/userdashboard/accounts/create"><label className="right-label"
+              style={{color: "#007bff"}}>+ Create new account</label></Link>
 
           <div className="account-actions-bottom">
             <button onClick={deposit}>
