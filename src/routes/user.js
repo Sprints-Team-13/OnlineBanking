@@ -4,9 +4,11 @@ const router = express.Router();
 //const User = require('../models/user');
 const { validateRequest, isRequestValidated } = require('../validators/auth');
 const { createAccount, withdraw, recharge, transferMoney, getUserAccounts } = require('../controllers/account');
-const { getTransactions, getBeneficiaries, addBeneficiary , deleteBeneficiary} = require('../controllers/transactions');
+const { getTransactions} = require('../controllers/transactions');
+const { getBeneficiaries, getAllBeneficiaries, addBeneficiary , deleteBeneficiary} = require('../controllers/beneficiaries');
 
 router.post('/signup', validateRequest, isRequestValidated, signup);
+
 router.post('/signin', signin);
 router.post('/changePassword', changePassword);
 router.post('/validateQuestion', validateQuestion);
@@ -18,7 +20,8 @@ router.get('/userAccounts', reqSignin, getUserAccounts);
 router.get('/transactions', reqSignin, getTransactions);
 router.get('/beneficiaries', reqSignin, getBeneficiaries);
 router.post('/beneficiaries', reqSignin, addBeneficiary);
-router.delete('/beneficiaries', deleteBeneficiary);
+router.delete('/beneficiaries', reqSignin,deleteBeneficiary);
+router.get('/allBeneficiaries', reqSignin, getAllBeneficiaries);
 
 
 module.exports = router;

@@ -9,9 +9,9 @@ import Select ,{ StylesConfig } from 'react-select'
 import {decode as base64_decode, encode as base64_encode} from 'base-64';
 
 const options = [
-  { value: 'Who is your fav actors?', label: 'Who is your fav actors?' },
-  { value: 'What was your first car?', label: 'What was your first car?' },
-  { value: 'What is your fav movie?', label: 'What is your fav movie?' }
+  { value: '1', label: 'Who is your fav actors?' },
+  { value: '2', label: 'What was your first car?' },
+  { value: '3', label: 'What is your fav movie?' }
 ]
 
 

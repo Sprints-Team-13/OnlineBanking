@@ -15,6 +15,11 @@ const beneficiarySchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  beneficiaryStatus: {
+    type: String,
+    enum: ["active", "pending", "inactive"],
+    default: "pending",
+},
   createdAt: {
     type: Date,
     default: Date.now,

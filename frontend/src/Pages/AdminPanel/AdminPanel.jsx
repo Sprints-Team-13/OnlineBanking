@@ -10,7 +10,8 @@ import Overview from "./Overview/Overview"
 import Accounts from "./Accounts/Accounts"
 import Transactions from "./Transactions/Transactions"
 import UserId from "./Users/UserId/UserId"
-
+import Transfer from './Transfer/Transfer'
+ import { Beneficiaries } from './Beneficiaries/Beneficiaries'
 function AdminPanel() {
 
   // control the responsive sidebar
@@ -49,6 +50,9 @@ function AdminPanel() {
             <Route path='/users/:userId' element={<UserId />}/>
             <Route path='/accounts' element={<Accounts />}/>
             <Route path='/transactions' element={<Transactions />}/>
+            <Route path='/beneficieries' element={<Beneficiaries />} />
+            <Route path='/transfer' element={<Transfer />} />
+
           </Routes>
         </main>
 

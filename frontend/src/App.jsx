@@ -32,7 +32,7 @@ function App() {
           ?
           <Routes>
             <Route path='/superadminpanel/*' element={<SuperAdminPanel/>}/>
-            <Route path="*" element={<Navigate to ="/superadminpanel" replace/>}/>
+            <Route path="*" element={<Navigate to ="/superadminpanel/staff" replace/>}/>
           </Routes>
         :
         <Routes>

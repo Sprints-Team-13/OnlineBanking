@@ -1,14 +1,14 @@
-import './register.scss'
+import '../../../components/register/register.scss'
 import axios from 'axios'
 import React from "react";
 import {useFormik} from 'formik'
 
-import { registerSchema } from '../../schemas/registerSchema';
-import popAlert from "../../helpers/popAlert";
+import { registerSchema } from '../../../schemas/registerSchema';
+import popAlert from "../../../helpers/popAlert";
 
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 
-export default function Register(){
+export default function CreateStaff(){
 
 	// handle user inputs
 	const { values, errors, touched, handleBlur, handleChange, handleSubmit} = useFormik({
@@ -22,7 +22,7 @@ export default function Register(){
 		validationSchema: registerSchema,
 		onSubmit: async (values) => {
 			await axios({
-				url: '/api/signup',
+				url: '/api/createAdmin',
 				method: 'POST',
 				data: {
 					fullName: values.fullName,
@@ -50,7 +50,7 @@ export default function Register(){
 		}
 	})
 
-	const registerForm =(
+	const CreateStaffForm =(
 		<main className='App-main'>
 			<div className='register'>
 				<form action="/home" onSubmit={handleSubmit}>
@@ -160,12 +160,7 @@ export default function Register(){
 							null
 						}
 					</div>
-
-					<div className="input-holder">
-						<input type="checkbox" name="checkbox" id="checkbox" required /> <span>I agree to the <a href="https://google.com" target="_blank" rel="noopener noreferrer">terms of use</a></span>.
-					</div>
-
-					<button id="sub_btn" type="submit">Register</button>
+					<button id="sub_btn" type="submit">Create</button>
 
 				</form>
 			</div>
@@ -174,7 +169,7 @@ export default function Register(){
 		
 	return ( 
 		<div>
-			{registerForm}
+			{CreateStaffForm}
 		</div>        
 	 )
 }

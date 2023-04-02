@@ -16,6 +16,7 @@ let phone = req.body.phone;
 let email = req.body.email;
 let hash_password = req.body.hash_password;
 
+
 User
     .create({
         fullName: fullName,
@@ -161,14 +162,16 @@ exports.getID = (req, res) => {
     console.log(user);
     return user._id;
 }
-
 exports.isAdmin = (req, res, next) => {
     const token = req.headers.authorization.split(" ")[1];
     const user = jwt.verify(token, process.env.SHH);
-    if (user.role != 'admin') {
+
+   
+    if (user.role ==='user'  ) {
         res.status(401).json({
             message: "Unauthorized request"
         })
     }
+    //!== 'admin' || user.role !== 'super-admin'
     next();
 }

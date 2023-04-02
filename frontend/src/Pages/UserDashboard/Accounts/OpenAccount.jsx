@@ -19,7 +19,7 @@ const OpenAccount = () => {
   const {values, errors, touched, handleBlur, handleChange, handleSubmit} = useFormik({
     initialValues: {
       initialBalance: 0,
-      accountType: 'Current',
+      accountType: '',
     },
     validationSchema: schema,
     onSubmit: (values)=> { 
@@ -67,8 +67,10 @@ const OpenAccount = () => {
             onChange={handleChange}
             onBlur={handleBlur}
             value={values.accountType}
-            style={{ borderRadius: 15, height: 45, display: 'inline-block', width: '300px', border: '0', padding: '0 10px', color: '#999' }}
+            style={{ borderRadius: 15, height: 45, display: 'inline-block', width: '300px', border: '0', padding: '0 10px', color: '#000' }}
             required >
+                       <option disabled key="empty" value="">Select an account</option>
+
             <option value="Current" key="Current">Current Account</option>
             <option value="Saving" key="Saving">Saving Account</option>
           </select>
