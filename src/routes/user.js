@@ -23,7 +23,6 @@ router.post('/beneficiaries', reqSignin, addBeneficiary);
 router.put('/updateProfile', reqSignin, updateProfile);
 router.get('/allBeneficiaries', reqSignin, getAllBeneficiaries);
 router.delete('/beneficiaries', reqSignin, deleteBeneficiary);
-router.put('/updateProfile', reqSignin, updateProfile);
 
 
 module.exports = router;

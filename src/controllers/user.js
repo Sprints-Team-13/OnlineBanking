@@ -4,47 +4,84 @@ const jwt = require('jsonwebtoken');
 
 exports.signup = (req, res) => {
 
+
+
     User.findOne({ email: req.body.email })
+
         .exec(async (error, user) => {
+
             if (user) return res.status(400).json({
+
                 message: 'User already registered.'
+
             });
 
 
 
-            let fullName = req.body.fullName;
-            let phone = req.body.phone;
-            let email = req.body.email;
-            let hash_password = req.body.hash_password;
+
+
+
+
+
 
             let fullName = req.body.fullName;
+
             let phone = req.body.phone;
+
             let email = req.body.email;
+
             let hash_password = req.body.hash_password;
 
-            User.create({
-                fullName: fullName,
-                phone: phone,
-                email: email,
-                hash_password: hash_password,
-                authorized: 'true'
-            }, function (err, user) {
-                if (err) {
-                    console.log("Error creating User: ", err);
-                    res
-                        .status(400)
-                        .json(err)
-                } else {
-                    console.log("User Created: ", user);
-                    res
-                        .status(201)
-                        .json(user)
-                }
-            })
+
+
+
+
+            User
+
+                .create({
+
+                    fullName: fullName,
+
+                    phone: phone,
+
+                    email: email,
+
+                    hash_password: hash_password,
+
+                    authorized: 'true'
+
+                }, function (err, user) {
+
+                    if (err) {
+
+                        console.log("Error creating User: ", err);
+
+                        res
+
+                            .status(400)
+
+                            .json(err)
+
+                    } else {
+
+                        console.log("User Created: ", user);
+
+                        res
+
+                            .status(201)
+
+                            .json(user)
+
+                    }
+
+                })
+
+
+
 
         });
-};
 
+};
 
 exports.signin = (req, res) => {
     User.findOne({ email: req.body.email })
