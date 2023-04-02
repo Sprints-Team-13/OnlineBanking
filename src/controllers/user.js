@@ -124,7 +124,7 @@ exports.signin = (req, res) => {
 
 exports.validateQuestion = (req, res) => {
     User.findOne({ email: req.body.email })
-        .exec(async (error, user) => {
+        .exec((error, user) => {
             if (error) return res.status(400).json({ error });
             if (user) {
                 if (user.authorized === false) {
@@ -133,8 +133,9 @@ exports.validateQuestion = (req, res) => {
                     });
                 }
 
-                //console.log(user.authenticate(req.body.hash_password));
-                if (true) {
+                console.log(user.securityAnswer , req.body.securityAnswer);
+                console.log(user.securityQuestion , req.body.securityQuestion);
+                if (user.securityAnswer == req.body.securityAnswer && user.securityQuestion == req.body.securityQuestion) {
 
                     res.status(200).json({
                         message: 'Correct Answer'

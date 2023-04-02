@@ -5,7 +5,9 @@ import { useNavigate } from 'react-router-dom'
 import popAlert from '../../helpers/popAlert';
 //import ChangePassword from './ChangePassword';
 import {decode as base64_decode, encode as base64_encode} from 'base-64';
-import Select from 'react-select'
+ import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import { useFormik } from "formik";
+import * as yup from 'yup'
 
 const options = [
   { value: '1', label: 'Who is your fav actors?' },
@@ -15,65 +17,65 @@ const options = [
 
 export default function SecurityQuestions() {
   
+  const schema = yup.object({
+    
+      email: yup.string().required('email is required'),
+     securityQuestion: yup.string().required('Security Question is required'),
+    securityAnswer: yup.string().required('Security Answer is required'),
+  })
+
   const navigate = useNavigate()
+  const {values, errors, touched, handleBlur, handleChange, handleSubmit} = useFormik({
+    enableReinitialize: true,
+    initialValues: {
+      email: '',
+       securityQuestion:'',
+      securityAnswer:''
+    },
+    validationSchema: schema,
+    onSubmit: (values) => {
+     
 
-  // Error Message State
-  const [errorMessages, setErrorMessages] = React.useState('');
+        axios({
+          url:  `/api/validateQuestion`,
+          method: 'POST',
+          data: {
+            email: values.email.toLowerCase().trim(),
+            securityQuestion : values.securityQuestion,
+            securityAnswer : values.securityAnswer
+    
+          }
+        })
+        .then((res) => {
+          popAlert(`Correct Answer`);
+    
+          navigate('/change-password?email='+ base64_encode(values.email));
+          
+          return res.data;
+        })
+        .catch(
+          (error) => {
+            if (error.response) {
+              // Request made and server responded
+              popAlert(`Wronge Answer`,'error');
 
-  // used for storing user input
-  const [login, setLogin] = React.useState({
-    email: '',
-    hash_password: '',
-  });
-
-  // handle input change
-  function handleChange(event) {
-    const { name, value } = event.target
-    setLogin(prev => {
-      return {
-        ...prev,
-        [name]: value
+            } else if (error.request) {
+              // The request was made but no response was received
+              console.log(error.request)
+              
+            } else {
+              // Something happened in setting up the request that triggered an Error
+              console.log('Error', error.message)
+            
+            }
+          }
+        )
       }
-    })
-  }
+
+})
+ 
 
 
-  const handleSubmit = async (submit) => {
-
-    submit.preventDefault();
-
-    await axios({
-      url:  `/api/validateQuestion`,
-      method: 'POST',
-      data: {
-        email: login.email.toLowerCase().trim(),
-        hash_password: login.hash_password.trim()
-      }
-    })
-    .then((res) => {
-      popAlert(`Correct Answer`);
-
-      navigate('/change-password?email='+ base64_encode(login.email));
-      
-      return res.data;
-    })
-    .catch(
-      (error) => {
-        if (error.response) {
-          // Request made and server responded
-          setErrorMessages(error.response.data.message)
-        } else if (error.request) {
-          // The request was made but no response was received
-          console.log(error.request)
-          setErrorMessages('No response!')
-        } else {
-          // Something happened in setting up the request that triggered an Error
-          console.log('Error', error.message)
-          setErrorMessages('Somthing wrong!')
-        }
-      }
-    )
-  }
 
    
   // Generate JSX code for login form
@@ -99,28 +101,28 @@ export default function SecurityQuestions() {
                 required
                 autoFocus
                 onChange={handleChange}
-                value={login.email}
+                value={values.email}
               />
             </div>
 
-            <div className='input-holder'>
-              <label>Question</label>
-              
+      <div className="input-holder">
+              <label>Security Question</label>
               <br/>
-              <div
-        style={{
-          color: 'hsl(0, 0%, 40%)',
-          display: 'inline-block',
-          fontSize: 12,
-          marginTop: '1em',
-          width: '100%'
-        }}
-      >
-              <Select options={options}  className="basic-single"  classNamePrefix="select"/>
-
-      </div>
-              
+              <select name="securityQuestion" 
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={values.securityQuestion}
+              style={{ borderRadius: 15, height: 45, display: 'inline-block', width: '300px', border: '0', padding: '0 10px' }}>
+ <option disabled key="empty" value="">Select a question</option>
+                <option value="1">Who is your fav actor?</option>
+                <option value="2">What was your first car?</option>
+                <option value="3">What is your fav movie?</option>
+              </select>
+              {touched.securityQuestion ? errors.securityQuestion ? <p className="error">{errors.securityQuestion}</p> : <CheckCircleIcon className='icon'/> : null}
             </div>
+
+              
+
 
             <div className='input-holder'>
               <label>Answer</label>
@@ -128,10 +130,11 @@ export default function SecurityQuestions() {
               <br/>
               <input 
                 type="text" 
-                name="Answer"   
+                name="securityAnswer"   
                 required
                 placeholder={'Enter Answer'}
                 onChange={handleChange}
+                value={values.securityAnswer}
               />
             </div>
 
@@ -141,8 +144,7 @@ export default function SecurityQuestions() {
             <button id="sub_btn" type="submit" >Get Details</button>
             </div>
 
-            <div className="error">{errorMessages}</div>
-
+ 
           </form>
           
         </div>
