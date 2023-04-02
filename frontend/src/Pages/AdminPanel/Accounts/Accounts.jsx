@@ -11,7 +11,7 @@ function Accounts() {
 
   // fetch and cache all accounts
   const {data: accounts} = useGetAccounts()
-  // console.log(accounts);
+  console.log(accounts);
 
   // convert date to string
   function date(date) {
@@ -66,7 +66,7 @@ function Accounts() {
       field: 'accountType', headerName: 'Type', minWidth: 70, flex: 1
     },
     { 
-      field: 'customerID', headerName: 'User ID', minWidth: 130, flex: 3
+      field: 'customerName', headerName: 'Customer Name', minWidth: 130, flex: 3
     },
     { 
       field: 'accountStatus', headerName: 'Status', minWidth: 80, flex: 1
@@ -89,7 +89,7 @@ function Accounts() {
       id: account.accountNumber,
       accountBalance: `AED ${account.accountBalance}`,
       accountType: account.accountType,
-      customerID: `#${account.customerID}`,
+      customerName: `${account.customerName}`,
       accountStatus: account.accountStatus,
       date: date(account.createdAt),
     }
