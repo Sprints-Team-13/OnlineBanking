@@ -4,7 +4,8 @@ const router = express.Router();
 //const User = require('../models/user');
 const { validateRequest, isRequestValidated } = require('../validators/auth');
 const { createAccount, withdraw, recharge, transferMoney, getUserAccounts } = require('../controllers/account');
-const { getTransactions, getBeneficiaries, addBeneficiary, deleteBeneficiary } = require('../controllers/transactions');
+const { getBeneficiaries, addBeneficiary, deleteBeneficiary, getAllBeneficiaries } = require('../controllers/beneficiaries');
+const { getTransactions } = require('../controllers/transactions');
 
 router.post('/signup', validateRequest, isRequestValidated, signup);
 
