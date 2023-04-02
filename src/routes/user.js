@@ -7,6 +7,7 @@ const { createAccount, withdraw, recharge, transferMoney, getUserAccounts } = re
 const { getTransactions, getBeneficiaries, addBeneficiary, deleteBeneficiary } = require('../controllers/transactions');
 
 router.post('/signup', validateRequest, isRequestValidated, signup);
+
 router.post('/signin', signin);
 router.post('/changePassword', changePassword);
 router.post('/validateQuestion', validateQuestion);
@@ -19,7 +20,9 @@ router.get('/me', reqSignin, getCurrentUser);
 router.get('/transactions', reqSignin, getTransactions);
 router.get('/beneficiaries', reqSignin, getBeneficiaries);
 router.post('/beneficiaries', reqSignin, addBeneficiary);
-router.delete('/beneficiaries', deleteBeneficiary);
+router.put('/updateProfile', reqSignin, updateProfile);
+router.get('/allBeneficiaries', reqSignin, getAllBeneficiaries);
+router.delete('/beneficiaries', reqSignin, deleteBeneficiary);
 router.put('/updateProfile', reqSignin, updateProfile);
 
 

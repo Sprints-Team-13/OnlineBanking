@@ -11,7 +11,6 @@ function Accounts() {
 
   // fetch and cache all accounts
   const {data: accounts} = useGetAccounts()
-  console.log(accounts);
 
   // convert date to string
   function date(date) {

@@ -8,7 +8,9 @@ import ViewListOutlinedIcon from '@mui/icons-material/ViewListOutlined';
 import SettingsIcon from '@mui/icons-material/Settings';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import ExitToAppOutlinedIcon from '@mui/icons-material/ExitToAppOutlined';
+import TransformOutlinedIcon from '@mui/icons-material/TransformOutlined';
 import { AuthContext } from '../../context/Auth-context';
+ import { SpeedDialIcon } from '@mui/material';
 
 function Sidebar(props) {
 
@@ -56,7 +58,18 @@ function Sidebar(props) {
               {!isSidebarActive && <p>Accounts</p>}              
             </li>
           </Link>
-
+          <Link to={'/adminpanel/beneficieries'}>
+            <li>
+              <SpeedDialIcon className='icon' />
+              {!isSidebarActive && <p>Beneficieries</p>}
+            </li>
+          </Link>
+          <Link to={'/adminpanel/transfer'}>
+            <li>
+              <TransformOutlinedIcon className='icon' />
+              {!isSidebarActive && <p>Money Transfer</p>}
+            </li>
+          </Link>
           <Link to={'/adminpanel/transactions'}>
             <li>
               <ViewListOutlinedIcon className='icon'/>

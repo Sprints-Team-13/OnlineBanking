@@ -1,6 +1,7 @@
 const User = require("../models/user");
 const jwt = require('jsonwebtoken');
-const { validationResult } = require('express-validator');
+
+
 exports.signup = (req, res) => {
 
     User.findOne({ email: req.body.email })
@@ -16,26 +17,30 @@ exports.signup = (req, res) => {
             let email = req.body.email;
             let hash_password = req.body.hash_password;
 
-            User
-                .create({
-                    fullName: fullName,
-                    phone: phone,
-                    email: email,
-                    hash_password: hash_password,
-                    authorized: 'true'
-                }, function (err, user) {
-                    if (err) {
-                        console.log("Error creating User: ", err);
-                        res
-                            .status(400)
-                            .json(err)
-                    } else {
-                        console.log("User Created: ", user);
-                        res
-                            .status(201)
-                            .json(user)
-                    }
-                })
+            let fullName = req.body.fullName;
+            let phone = req.body.phone;
+            let email = req.body.email;
+            let hash_password = req.body.hash_password;
+
+            User.create({
+                fullName: fullName,
+                phone: phone,
+                email: email,
+                hash_password: hash_password,
+                authorized: 'true'
+            }, function (err, user) {
+                if (err) {
+                    console.log("Error creating User: ", err);
+                    res
+                        .status(400)
+                        .json(err)
+                } else {
+                    console.log("User Created: ", user);
+                    res
+                        .status(201)
+                        .json(user)
+                }
+            })
 
         });
 };
@@ -177,11 +182,14 @@ exports.getCurrentUser = async (req, res) => {
 exports.isAdmin = (req, res, next) => {
     const token = req.headers.authorization.split(" ")[1];
     const user = jwt.verify(token, process.env.SHH);
-    if (user.role != 'admin') {
+
+
+    if (user.role === 'user') {
         res.status(401).json({
             message: "Unauthorized request"
         })
     }
+    //!== 'admin' || user.role !== 'super-admin'
     next();
 }
 

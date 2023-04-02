@@ -1,17 +1,16 @@
 import './forgot.scss'
 import axios from 'axios';
-import React, { useContext } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
-import { AuthContext } from '../../context/Auth-context';
+import React from 'react'
+import { useNavigate } from 'react-router-dom'
 import popAlert from '../../helpers/popAlert';
-import ChangePassword from './ChangePassword';
-import Select ,{ StylesConfig } from 'react-select'
+//import ChangePassword from './ChangePassword';
 import {decode as base64_decode, encode as base64_encode} from 'base-64';
+import Select from 'react-select'
 
 const options = [
-  { value: 'Who is your fav actor?', label: 'Who is your fav actor?' },
-  { value: 'What was your first car?', label: 'What was your first car?' },
-  { value: 'What is your fav movie?', label: 'What is your fav movie?' }
+  { value: '1', label: 'Who is your fav actors?' },
+  { value: '2', label: 'What was your first car?' },
+  { value: '3', label: 'What is your fav movie?' }
 ]
 
 export default function SecurityQuestions() {

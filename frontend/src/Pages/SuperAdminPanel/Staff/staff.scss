@@ -1,0 +1,94 @@
+@import '../../../scss/layout/colors';
+@import '../../../scss/utilities/mixins';
+@import '../../../scss/utilities/variables';
+
+
+.accounts {
+  z-index: 10;
+  color: $clr-dark;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: $clr-main;
+
+  .right-label {
+    float: right;
+    cursor: pointer;
+    font-size: 13px;
+        border-radius: 10px;
+        width: fit-content;
+        height: fit-content;
+        margin-left: auto;
+margin-right: 0;
+        margin-bottom: 10px;
+        color: white !important;
+        button {
+          @include slideSolidBtn;
+          border-radius: 20px;
+          font-size: 1rem;
+          width: fit-content;
+          height: fit-content;
+          color: white !important;
+        }
+  }
+  .title {
+    width: 100%;
+    z-index: 10;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .account-actions {
+      display: flex;
+      flex-direction: column;
+      justify-content: right;
+      align-items: right;
+      gap: 5px;
+      padding: 1em;
+      width: max-content;
+
+      .account-actions-bottom {
+        display: flex;
+        justify-content: right;
+        align-items: right;
+        gap: 2.5px;
+        width: max-content;
+       
+      }
+
+      button {
+        @include slideSolidBtn;
+        border-radius: 20px;
+        font-size: 1rem;
+        width: fit-content;
+        height: fit-content;
+        color: white !important;
+      }
+    }
+  }
+  .table-container {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+
+    .table {
+      padding: 1em;
+      background: $clr-light;
+      border-radius: 20px !important;
+      border: none !important;
+      overflow: visible;
+    }
+  }
+}
+
+
+@media(max-width: 600px) {
+  .accounts {
+
+    .title {
+      flex-direction: column;
+    }
+  }
+}

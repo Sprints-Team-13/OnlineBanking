@@ -114,9 +114,7 @@ function Accounts() {
 
         <div className="account-actions">
 
-          {/* <button onClick={createNewAccount}>
-            + Create new account
-          </button> */}
+        
           
           <Link to="/userdashboard/accounts/create"><label className="right-label"
               style={{color: "#007bff"}}>+ Create new account</label></Link>

@@ -140,7 +140,7 @@ exports.getUsers = (req, res) => {
 
 // get all users
 exports.getAdmins = (req, res) => {
-    User.find({})
+    User.find({role:"admin"})
         .exec(async (error, users) => {
             if (error) return res.status(400).json({ error });
             res.status(200).json({
@@ -179,3 +179,43 @@ exports.allAccounts = async (req, res) => {
         return res.status(400).json({ error });
     }
 }
+exports.createAdmin = (req, res) => {
+    
+    User.findOne({email: req.body.email})
+    .exec( async (error, user) => {
+        if(user) return res.status(400).json({
+            message: 'User already registered.'
+        });
+
+        
+
+let fullName = req.body.fullName;
+let phone = req.body.phone;
+let email = req.body.email;
+let hash_password = req.body.hash_password;
+
+
+User
+    .create({
+        fullName: fullName,
+        phone: phone,
+        email: email,
+        hash_password: hash_password,
+        authorized:'true',
+        role:'admin'
+    }, function (err, user) {
+        if (err) {
+            console.log("Error creating User: ", err);
+            res
+                .status(400)
+                .json(err)
+        } else {
+            console.log("User Created: ", user);
+            res
+                .status(201)
+                .json(user)
+        }
+    })
+
+    });
+};

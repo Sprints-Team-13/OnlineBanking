@@ -1,18 +1,19 @@
 import { useFormik } from 'formik';
 import React from 'react';
-import "./transfer.scss";
+// import "./transfer.scss";
 
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import apiCrud from "../../../api/apiCrud";
 import popAction from "../../../helpers/popAction";
-import useGetBeneficiaries from "../../../hooks/queries/users/useGetBeneficiaries";
-import useGetUsersAccounts from "../../../hooks/queries/users/useGetUserAccounts";
+import useGetAllBeneficiaries from "../../../hooks/queries/users/useGetAllBeneficiaries";
+import useGetAccounts from '../../../hooks/queries/admin/useGetAccounts'
 import { transferSchema } from "../../../schemas/transferSchema";
-
 function Transfer() {
-  const { data: beneficiaryList } = useGetBeneficiaries();
+  const { data: beneficiaryList } = useGetAllBeneficiaries();
+  
     // fetch and cache all accounts
-  const { data: accounts} = useGetUsersAccounts()
+  const { data: accounts} = useGetAccounts()
+
 
   // handle user inputs
 	const { values, errors, touched, handleBlur, handleChange, handleSubmit} = useFormik({
@@ -46,19 +47,18 @@ function Transfer() {
 
         <div className="input-holder">
           <label>Account<span style={{color: 'red'}}> (From)</span></label><br/>
-          <select placeholder={'Select source Account'} classNamePrefix="select"
+          <select placeholder={'Select source Account'}  
           name="accountNumber"
           onChange={handleChange}
           onBlur={handleBlur}
           value={values.accountNumber}
           style={{ borderRadius: 15, height: 45, display: 'inline-block', width: '300px', border: '0', padding: '0 10px', color: '#000' }}
           required >
-                     <option disabled key="empty" value="">Select an account</option>
-
+             <option disabled key="empty" value="">Select an account</option>
             {
-              accounts && accounts.map((account) => {
-                return <option value={account.accountNumber} key={account._id}>{account.accountType} {account.accountNumber} {account.accountBalance}</option>
-              })
+              accounts && accounts.map((account) => 
+                <option value={account.accountNumber} key={account._id}>{account.accountType} {account.accountNumber} {account.accountBalance}</option>
+              )
             }
           </select>
           {touched.accountNumber 
@@ -101,13 +101,14 @@ function Transfer() {
           value={values.destinationAccountNumber}
           style={{ borderRadius: 15, height: 45, display: 'inline-block', width: '300px', border: '0', padding: '0 10px', color: '#000' }}
           required >
-                     <option disabled key="empty" value="">Select an account</option>
+         <option disabled key="empty" value="">Select an account</option>
 
             {
               beneficiaryList && beneficiaryList.list?.map((beneficiary) => 
                 <option value={beneficiary.accountNumber} key={beneficiary._id}>{beneficiary.name} - {beneficiary.accountNumber}</option>
               )
             }
+
           </select>
           {touched.destinationAccountNumber 
             ? 

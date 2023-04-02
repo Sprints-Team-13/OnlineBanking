@@ -36,12 +36,12 @@ function Sidebar(props) {
       <div className="center">
         <ul>
 
-          <Link to={'/superadminpanel'}>
+          {/* <Link to={'/superadminpanel'}>
             <li>
               <DashboardIcon className='icon'/>
               {!isSidebarActive && <p>Overview</p>}            
             </li>
-          </Link>
+          </Link> */}
 
           <Link to={'/superadminpanel/staff'}>
             <li>
