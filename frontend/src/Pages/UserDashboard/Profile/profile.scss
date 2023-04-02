@@ -16,21 +16,34 @@
     z-index: 10;
   }
 
-  .profile-contanier{
+  .profile-contanier {
     width: 100%;
     display: flex;
     justify-content: flex-start;
-    align-items: center;
+    align-items: flex-start;
     gap: 2em;
     padding: 2em;
 
-    .icon {
+    .icon-main {
       font-size: 250px;
+    }
+
+    .icon {
+      font-size: 30px;
     }
 
     .profile-details {
       display: flex;
       flex-direction: column;
+      flex: 1;
+    }
+
+    .transfer {
+      flex: 1;
+    }
+
+    h3 {
+      font-size: 1.8em;
     }
   }
 }
@@ -39,7 +52,7 @@
   .profile {
     width: 90%;
 
-    .profile-contanier{
+    .profile-contanier {
       flex-direction: column;
       padding: 1em 0;
     }

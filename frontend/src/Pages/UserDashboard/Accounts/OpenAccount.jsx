@@ -4,7 +4,7 @@ import apiCrud from "../../../api/apiCrud";
 import popAction from "../../../helpers/popAction";
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import * as yup from 'yup'
-import { Link, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 const schema = yup.object({
   initialBalance: yup.number()
@@ -32,8 +32,7 @@ const OpenAccount = () => {
           accountType: values.accountType,
         }).then((res) => {
           navigate('/userdashboard/accounts');
-        })
-        ()
+        })()
       );
 		},
   })

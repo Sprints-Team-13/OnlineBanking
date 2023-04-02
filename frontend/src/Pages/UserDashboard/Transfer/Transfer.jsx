@@ -52,11 +52,11 @@ function Transfer() {
           onBlur={handleBlur}
           value={values.accountNumber}
           style={{ borderRadius: 15, height: 45, display: 'inline-block', width: '300px', border: '0', padding: '0 10px', color: '#999' }}
-          required >
+          required>
             {
-              accounts && accounts.map((account) => 
-                <option value={account.accountNumber} key={account._id}>{account.accountType} {account.accountNumber} {account.accountBalance}</option>
-              )
+              accounts && accounts.map((account) => {
+                return <option value={account.accountNumber} key={account._id}>{account.accountType} {account.accountNumber} {account.accountBalance}</option>
+              })
             }
           </select>
           {touched.accountNumber 

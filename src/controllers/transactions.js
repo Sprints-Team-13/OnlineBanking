@@ -84,15 +84,15 @@ exports.addBeneficiary = async (req, res) => {
 
 exports.deleteBeneficiary = (req, res) => {
     try {
-         
-         
+
+
         Beneficiary.deleteOne(req.query.id)
-                .then(res.status(201).json({message:'Deleted Successfully'}))
-                .catch(() => { 
-                 res.status(400).json({message: 'Unable to delete!'})
- 
-                })
-       
+            .then(res.status(201).json({ message: 'Deleted Successfully' }))
+            .catch(() => {
+                res.status(400).json({ message: 'Unable to delete!' })
+
+            })
+
     } catch (err) {
         res.status(err.status).json({
             message: err.message
@@ -100,5 +100,3 @@ exports.deleteBeneficiary = (req, res) => {
     }
 
 }
-
-

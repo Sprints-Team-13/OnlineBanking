@@ -9,11 +9,10 @@ import Select ,{ StylesConfig } from 'react-select'
 import {decode as base64_decode, encode as base64_encode} from 'base-64';
 
 const options = [
-  { value: 'Who is your fav actors?', label: 'Who is your fav actors?' },
+  { value: 'Who is your fav actor?', label: 'Who is your fav actor?' },
   { value: 'What was your first car?', label: 'What was your first car?' },
   { value: 'What is your fav movie?', label: 'What is your fav movie?' }
 ]
-
 
 export default function SecurityQuestions() {
   
@@ -54,7 +53,6 @@ export default function SecurityQuestions() {
     })
     .then((res) => {
       popAlert(`Correct Answer`);
-      
 
       navigate('/change-password?email='+ base64_encode(login.email));
       
