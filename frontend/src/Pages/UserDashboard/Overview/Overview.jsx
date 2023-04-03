@@ -6,10 +6,15 @@ import useGetUsersAccounts from "../../../hooks/queries/users/useGetUserAccounts
 
 function Overview() {
 
-  const {data: accounts} = useGetUsersAccounts()
+  const {data:accounts} = useGetUsersAccounts();
   
-  const totalAccountsBalance = accounts?.length > 1 && accounts.map(account => account.accountBalance).reduce((x, y) => x + y)
-  
+  var totalAccountsBalance =0;
+if(accounts?.length > 0)
+{
+   totalAccountsBalance =  accounts.map(account => account.accountBalance).reduce((x, y) => x + y)
+}
+  console.log(totalAccountsBalance);
+
   return (
     <div className='overview'>
 
@@ -26,7 +31,7 @@ function Overview() {
 
             <div className="balance">
               <p>Total accounts balance</p>
-              <h3>${totalAccountsBalance}</h3>
+              <h3>AED {totalAccountsBalance}</h3>
             </div>
 
           </div>

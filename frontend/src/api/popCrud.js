@@ -4,7 +4,7 @@ import apiCrud from './apiCrud';
 
 const MySwal = withReactContent(Swal)
 
-export default async function popCrud(title, conText, inputs, url, method, message) {
+export default async function popCrud(title, conText, inputs, url, method, message,labels) {
   // inputs should be an array of body request
 
   const { value: formValues } = await MySwal.fire({
@@ -16,7 +16,7 @@ export default async function popCrud(title, conText, inputs, url, method, messa
           <input 
             id={`swal-input${index}`} 
             className="swal2-input" 
-            placeholder={input}
+            placeholder={labels[index]}
           />
         </div>
       ))}

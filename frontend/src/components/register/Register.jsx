@@ -22,7 +22,7 @@ export default function Register(){
 		validationSchema: registerSchema,
 		onSubmit: async (values) => {
 			await axios({
-				url: 'api/signup',
+				url: '/api/signup',
 				method: 'POST',
 				data: {
 					fullName: values.fullName,
@@ -33,7 +33,7 @@ export default function Register(){
 			})
 			.then((res) => {
 				console.log(res.data)
-				popAlert('Your account is under review')
+				popAlert('You Registered successfully')
 				return setTimeout(()=> window.location.reload(), 2000)
 			})
 			.catch(
@@ -79,11 +79,11 @@ export default function Register(){
 					<div className="input-holder">
 						<label>Phone Number</label><br/>
 						<input 
-						type="tel" 
+						type="text" 
 						name="phone" 
 						required
-						placeholder={'0000-1234567'}
-						pattern="[0-9]{11}"
+						placeholder={'0501234567'}
+						pattern="[0-9]{10}"
 						onChange={handleChange}
 						onBlur={handleBlur}
 						value={values.phone}

@@ -47,7 +47,7 @@ function Overview() {
       id: transaction._id,
       transactionType: transaction.transactionType,
       accountNumber: transaction.accountNumber,
-      amount: `$${transaction.amount}`,
+      amount: `AED ${transaction.amount}`,
       description: transaction.description,
     }
   ))
@@ -77,7 +77,7 @@ function Overview() {
 
             <h3>Recent Transactions</h3>
 
-            <div style={{ height: 400, width: '90%' }}>
+            <div style={{ height: 400, width: '100%' }}>
               <div style={{ display: 'flex', height: '100%' }}>
                 <div className="table-container">
                   {transactions &&

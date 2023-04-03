@@ -1,11 +1,9 @@
 import "./accounts.scss"
 import React from 'react'
 import { DataGrid } from '@mui/x-data-grid';
-
-import apiCrud from "../../../api/apiCrud";
+import { Link, useNavigate } from 'react-router-dom'
 import popCrud from "../../../api/popCrud";
 import useGetUsersAccounts from "../../../hooks/queries/users/useGetUserAccounts";
-import popAction from '../../../helpers/popAction'
 
 function Accounts() {
 
@@ -22,17 +20,29 @@ function Accounts() {
   // set available actions
 
   // create a new account
-  function createNewAccount() {
-    popAction(
-      'Are you sure?', 
-      "A new account will be created!",
-      'Proceed!',
-      ()=>apiCrud(`/api/createAccount`, 'POST', 'Account created', {
-        accountType: 'saving',
-        accountBalance: '0'
-      })()
-    )
-  } 
+  // function createNewAccount() {
+  //   popAction(
+  //     'Are you sure?', 
+  //     "A new account will be created!",
+  //     'Proceed!',
+  //     ()=>apiCrud(`/api/createAccount`, 'POST', 'Account created', {
+  //       accountType: 'saving',
+  //       accountBalance: '0'
+  //     })()
+  //   )
+  // } 
+
+  // function createNewAccount() {
+  //   popCrud(
+  //     'Create An Account', 
+  //     'Proceed', 
+  //     ['accountType', 'accountBalance'], 
+  //     `/api/createAccount`,
+  //     'POST',
+  //     'Account Creation Under Process',
+  //     ['Current or Saving', 'Initial Deposit'],
+  //   )
+  // }
 
   // deposit
   function deposit() {
@@ -42,7 +52,8 @@ function Accounts() {
       ['accountNumber', 'amount'], 
       `/api/recharge`,
       'POST',
-      'Successful transaction'
+      'Successful transaction',
+      ['Account Number', 'Amount'], 
     )
   }
 
@@ -54,7 +65,8 @@ function Accounts() {
       ['accountNumber', 'amount'], 
       `/api/withdraw`,
       'POST',
-      'Successful transaction'
+      'Successful transaction',
+      ['Account Number', 'Amount'],
     )
   }
 
@@ -68,9 +80,9 @@ function Accounts() {
     { 
       field: 'accountType', headerName: 'Type', minWidth: 70, flex: 1
     },
-    { 
-      field: 'customerID', headerName: 'User ID', minWidth: 130, flex: 3
-    },
+    // { 
+    //   field: 'customerID', headerName: 'User ID', minWidth: 130, flex: 3
+    // },
     { 
       field: 'accountStatus', headerName: 'Status', minWidth: 80, flex: 1
     },
@@ -82,25 +94,30 @@ function Accounts() {
   const rows = accounts?.map(account => (
     {
       id: account.accountNumber,
-      accountBalance: `$${account.accountBalance}`,
+      accountBalance: `AED ${account.accountBalance}`,
       accountType: account.accountType,
-      customerID: `#${account.customerID}`,
+      // customerID: `#${account.customerID}`,
       accountStatus: account.accountStatus,
       date: date(account.createdAt),
     }
   ))
 
   return (
+
+    
+
     <div className="accounts">
 
       <div className="title">
         <h2>Accounts</h2>
 
+
         <div className="account-actions">
 
-          <button onClick={createNewAccount}>
-            + Create new account
-          </button>
+        
+          
+          <Link to="/userdashboard/accounts/create"><label className="right-label"
+              style={{color: "#007bff"}}>+ Create new account</label></Link>
 
           <div className="account-actions-bottom">
             <button onClick={deposit}>
@@ -112,6 +129,7 @@ function Accounts() {
           </div>
 
         </div>
+ 
       </div>
       
       <div style={{ height: 700, width: '90%' }}>

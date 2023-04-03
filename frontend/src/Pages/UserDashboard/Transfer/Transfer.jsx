@@ -1,13 +1,18 @@
-import "./transfer.scss"
-import React from 'react'
-import {useFormik} from 'formik'
+import { useFormik } from 'formik';
+import React from 'react';
+import "./transfer.scss";
 
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
-import { transferSchema } from "../../../schemas/transferSchema";
-import popAction from "../../../helpers/popAction";
 import apiCrud from "../../../api/apiCrud";
+import popAction from "../../../helpers/popAction";
+import useGetBeneficiaries from "../../../hooks/queries/users/useGetBeneficiaries";
+import useGetUsersAccounts from "../../../hooks/queries/users/useGetUserAccounts";
+import { transferSchema } from "../../../schemas/transferSchema";
 
 function Transfer() {
+  const { data: beneficiaryList } = useGetBeneficiaries();
+    // fetch and cache all accounts
+  const { data: accounts} = useGetUsersAccounts()
 
   // handle user inputs
 	const { values, errors, touched, handleBlur, handleChange, handleSubmit} = useFormik({
@@ -29,28 +34,38 @@ function Transfer() {
         })()
       )
 		}
+   
+
 })
+
+
 
   const transferForm =(
 		<main className='transfer-form'>
       <form action="/home" onSubmit={handleSubmit}>
 
         <div className="input-holder">
-          <label>Account Number<span style={{color: 'red'}}> (From)</span></label><br/>
-          <input 
-          type="text" 
+          <label>Account<span style={{color: 'red'}}> (From)</span></label><br/>
+          <select placeholder={'Select source Account'} classNamePrefix="select"
           name="accountNumber"
-          required 
-          placeholder={'Enter an account number'} 
           onChange={handleChange}
           onBlur={handleBlur}
           value={values.accountNumber}
-          />
+          style={{ borderRadius: 15, height: 45, display: 'inline-block', width: '300px', border: '0', padding: '0 10px', color: '#000' }}
+          required >
+                     <option disabled key="empty" value="">Select an account</option>
+
+            {
+              accounts && accounts.map((account) => {
+                return <option value={account.accountNumber} key={account._id}>{account.accountType} {account.accountNumber} {account.accountBalance}</option>
+              })
+            }
+          </select>
           {touched.accountNumber 
             ? 
               errors.accountNumber 
               ? <p className="error">{errors.accountNumber}</p> 
-              : <CheckCircleIcon className='icon'/>
+              : <CheckCircleIcon className='icon' style={{ float: 'right' }} />
             :
             null
           }
@@ -66,7 +81,7 @@ function Transfer() {
           onChange={handleChange}
           onBlur={handleBlur}
           value={values.amount}
-          />							
+          />
           {touched.amount 
             ? 
               errors.amount 
@@ -78,16 +93,22 @@ function Transfer() {
         </div>
 
         <div className="input-holder">
-          <label>Account Number<span style={{color: 'green'}}> (Recipient)</span></label><br/>
-          <input 
-          type="text" 
+          <label>Beneficiary<span style={{color: 'green'}}> (Recipient)</span></label><br/>
+          <select placeholder={'Select Beneficiary'} classNamePrefix="select"
           name="destinationAccountNumber"
-          required 
-          placeholder={'Enter an account number'} 
           onChange={handleChange}
           onBlur={handleBlur}
           value={values.destinationAccountNumber}
-          />
+          style={{ borderRadius: 15, height: 45, display: 'inline-block', width: '300px', border: '0', padding: '0 10px', color: '#000' }}
+          required >
+                     <option disabled key="empty" value="">Select an account</option>
+
+            {
+              beneficiaryList && beneficiaryList.list?.map((beneficiary) => 
+                <option value={beneficiary.accountNumber} key={beneficiary._id}>{beneficiary.name} - {beneficiary.accountNumber}</option>
+              )
+            }
+          </select>
           {touched.destinationAccountNumber 
             ? 
               errors.destinationAccountNumber 
@@ -96,6 +117,7 @@ function Transfer() {
             :
             null
           }
+
         </div>
 
         <div className="input-holder">

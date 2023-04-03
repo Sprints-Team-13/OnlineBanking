@@ -17,7 +17,7 @@ function Navbar(props) {
       <div className="wrapper">
 
         <div className="search">
-          <input type="text" placeholder='Search...' />
+          <input type="text" placeholder='Search...' className="swal2-input" />
           <SearchOutlinedIcon/>
         </div>
 

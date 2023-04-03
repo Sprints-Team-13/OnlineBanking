@@ -58,11 +58,11 @@ export default function CustomizedDialogs({children, title, btn}) {
 
   return (
     <div>
-      <Button variant="text" onClick={handleClickOpen}>
+      <Button className='activate' variant="text" onClick={handleClickOpen}>
         {btn}
       </Button>
       <BootstrapDialog
-        // onClose={handleClose}
+        //  onClose={handleClose}
         aria-labelledby="customized-dialog-title"
         open={open}
         style={{zIndex: 20}}

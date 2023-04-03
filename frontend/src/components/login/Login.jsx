@@ -5,6 +5,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { AuthContext } from '../../context/Auth-context';
 import popAlert from '../../helpers/popAlert';
 
+
 export default function Login() {
 
   const navigate = useNavigate()
@@ -95,7 +96,7 @@ export default function Login() {
               <label>Password</label>
               <Link to="/forget-password"><label className="right-label "
               style={{color: "#007bff"}}>Forget password?</label></Link>
-              <br/>
+              <br/> 
               <input 
                 type="password" 
                 name="hash_password"   
@@ -105,14 +106,14 @@ export default function Login() {
                 value={login.hash_password}
               />
             </div>
-
+            
             <div className="input-holder">
             <button id="sub_btn" type="submit" >Login</button>
             </div>
-
+        
             <div className="error">{errorMessages}</div>
-
-          </form>
+            </form>
+        
               
         </div>
       </div>
