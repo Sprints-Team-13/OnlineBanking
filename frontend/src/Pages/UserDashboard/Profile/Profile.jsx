@@ -8,10 +8,24 @@ import { useFormik } from "formik";
 import popAction from "../../../helpers/popAction";
 import apiCrud from "../../../api/apiCrud";
 import useGetCurrentUser from '../../../hooks/queries/users/useGetCurrentUser'
+import { useState } from 'react';
 
 function Profile() {
   const {data: user} = useGetCurrentUser();
+  const [EmirratesId, setFile] = useState(null);
+  const [AADHAR, setFile2] = useState(null);
 
+  const handleFileSelect = (event) => {
+    setFile(event.target.files[0]);
+  };
+  const handleFileSelect2 = (event) => {
+    setFile2(event.target.files[0]);
+  };
+
+  const handleFileUpload = () => {
+    // Upload the file using an API or function
+    console.log('Uploading file:', EmirratesId);
+  };
   const schema = yup.object({
     fullName: yup.string()
       .required('Full Name is required'),
@@ -111,6 +125,16 @@ function Profile() {
                 {touched.emiratesID ? errors.emiratesID ? <p className="error">{errors.emiratesID}</p> : <CheckCircleIcon className='icon'/> : null}
             </div>
             <div className="input-holder">
+
+          <label htmlFor="file-upload"> Emirates Id File:</label>
+      <input
+        id="file-upload"
+        type="file"
+        accept="image/*"
+        onChange={handleFileSelect}
+      />
+      </div>
+            <div className="input-holder">
               <label>ADDHAR</label>
               <input name="addhar" 
                 onChange={handleChange}
@@ -118,6 +142,17 @@ function Profile() {
                 value={values.addhar} type="text" />
                 {touched.addhar ? errors.addhar ? <p className="error">{errors.addhar}</p> : <CheckCircleIcon className='icon'/> : null}
             </div>
+            <div className="input-holder">
+
+<label htmlFor="file-upload"> AADHAR File:</label>
+<input
+id="file-upload"
+type="file"
+accept="image/*"
+onChange={handleFileSelect2}
+/>
+</div>
+
             <div className="input-holder">
               <label>Security Question</label>
               <br/>
@@ -133,15 +168,22 @@ function Profile() {
               {touched.securityQuestion ? errors.securityQuestion ? <p className="error">{errors.securityQuestion}</p> : <CheckCircleIcon className='icon'/> : null}
             </div>
             <div className="input-holder">
-              <label>Answer</label>
+              <label>Your Answer</label>
               <input name="securityAnswer" 
                 onChange={handleChange}
                 onBlur={handleBlur}
                 value={values.securityAnswer} type="text" />
                 {touched.securityAnswer ? errors.securityAnswer ? <p className="error">{errors.securityAnswer}</p> : <CheckCircleIcon className='icon'/> : null}
             </div>
-            <button id="sub_btn" type="submit">Submit</button>
+            <div>
+    
+    </div>
+            <button id="sub_btn" type="submit">Save Profile</button>
           </form>
+
+          
+  
+
         </div>
         </div>)
         }
