@@ -40,6 +40,15 @@ exports.createAccount = (req, res) => {
                         .status(400)
                         .json(err)
                 } else {
+                    Transaction.create({
+                        accountNumber: accountNumber,
+                        transactionType: 'deposit',
+                        amount: accountBalance,
+                        transactionDate: new Date(),
+                        description: 'initial deposit',
+                        customerID: getID(req)
+                    });
+
                     console.log("Account Created: ", account);
                     res
                         .status(201)
@@ -120,7 +129,8 @@ exports.recharge = (req, res) => {
                 transactionDate: new Date(),
                 description: 'deposit',
                 customerID: account.customerID
-            });
+            }).exec();
+
             return res.status(200).json({
                 message: 'Account balance updated.'
             });
