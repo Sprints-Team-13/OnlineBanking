@@ -9,11 +9,14 @@ import useGetAllBeneficiaries from "../../../hooks/queries/users/useGetAllBenefi
 import useGetAccounts from '../../../hooks/queries/admin/useGetAccounts'
 import { transferSchema } from "../../../schemas/transferSchema";
 function Transfer() {
-  const { data: beneficiaryList } = useGetAllBeneficiaries();
+  // const { data: beneficiaryList } = useGetAllBeneficiaries();
   
     // fetch and cache all accounts
-  const { data: accounts} = useGetAccounts()
+  const { data: accountsdb} = useGetAccounts()
 
+  const accounts = accountsdb?.filter(
+    o => o.accountStatus === 'active'
+  );
 
   // handle user inputs
 	const { values, errors, touched, handleBlur, handleChange, handleSubmit} = useFormik({

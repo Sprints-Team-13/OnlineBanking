@@ -25,7 +25,7 @@ function Beneficiaries() {
 
     <div className='actions'>
     
-        <Button variant="contained" className="activate"
+        <Button variant="contained" className="deactivate"
           onClick={() => popAction(
             'Are you sure?', 
             "The benificiary will be deleted!",

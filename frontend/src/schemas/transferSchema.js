@@ -12,5 +12,7 @@ export const transferSchema = yup.object({
   destinationAccountNumber: yup.string()
     .min(6, 'Minimum  characters allowed are 11')
     .max(10, 'Maximum characters allowed are 11')
-    .required('Account number is required'),
+    .required('Account number is required')
+    .notOneOf([yup.ref('accountNumber'), null], 'You cannot transfer to the same account number')
+
 })

@@ -28,7 +28,7 @@ import popAction from "../../../helpers/popAction";
     
         
 
-        {params.row.beneficiaryStatus ==="pending"
+        {params.row.beneficiaryStatus !="active"
           ?
           <Button  variant="contained" className="activate"
           onClick={() => popAction(
@@ -43,20 +43,20 @@ import popAction from "../../../helpers/popAction";
           Approve
         </Button> 
         :
-        <Button  variant="contained" className="activate"
+        <Button  variant="contained" className="deactivate"
         onClick={() => popAction(
           'Are you sure?', 
           "The benificiary will be deactivated!",
           'DeActivate!',
           ()=>apiCrud(`/api/updateBeneficiary`, 'POST', 'Beneficiary deActivated', {
             id: params.row._id,
-            beneficiaryStatus:'pending'
+            beneficiaryStatus:'inactive'
           })
         )}>
-        deActivate
+        Reject
       </Button> 
         }         
-           <Button variant="contained" className="activate"
+           <Button variant="contained" className="deactivate"
           onClick={() => popAction(
             'Are you sure?', 
             "The benificiary will be deleted!",
@@ -65,7 +65,7 @@ import popAction from "../../../helpers/popAction";
               id: params.row._id
             })
           )}>
-          Delete
+          Remove
         </Button> 
     </div>
   )
@@ -75,6 +75,9 @@ import popAction from "../../../helpers/popAction";
     },
     { 
       field: 'accountNumber', headerName: 'Account Number', width: 150
+    },
+    { 
+      field: 'beneficiaryStatus', headerName: 'Status', width: 150
     },
     { 
       field: 'actions', 
