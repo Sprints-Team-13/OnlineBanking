@@ -135,17 +135,17 @@ function Staff() {
                     cursor: 'pointer'
                   },
                 }}
-                onRowClick={params => (
-                  navigate(`/adminpanel/users/${params.row.id}`, {
-                    state: {
-                      userName: params.row.fullName,
-                      userEmail: params.row.email,
-                      userPhone: params.row.phone,
-                      date: params.row.date,
-                      authorized: params.row.authorized,
-                    }
-                  })
-                )}
+                // onRowClick={params => (
+                //   navigate(`/adminpanel/users/${params.row.id}`, {
+                //     state: {
+                //       userName: params.row.fullName,
+                //       userEmail: params.row.email,
+                //       userPhone: params.row.phone,
+                //       date: params.row.date,
+                //       authorized: params.row.authorized,
+                //     }
+                //   })
+                // )}
               />
             }
           </div>

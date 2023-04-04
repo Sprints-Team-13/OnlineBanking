@@ -10,7 +10,11 @@ import useGetUsersAccounts from "../../../hooks/queries/users/useGetUserAccounts
 import { transferSchema } from "../../../schemas/transferSchema";
 
 function Transfer() {
-  const { data: beneficiaryList } = useGetBeneficiaries();
+  const { data: beneficiarydb } = useGetBeneficiaries();
+ 
+   const beneficiaryList = beneficiarydb?.list.filter(
+    o => o.beneficiaryStatus === 'active'
+  );
     // fetch and cache all accounts
   const { data: accounts} = useGetUsersAccounts()
 
@@ -25,7 +29,7 @@ function Transfer() {
 		onSubmit: (values)=> { 
       popAction(
         'Are you sure?', 
-        `$${values.amount} will be tranfered from account ${values.accountNumber} to account ${values.destinationAccountNumber}`,
+        `AED ${values.amount} will be tranfered from account ${values.accountNumber} to account ${values.destinationAccountNumber}`,
         'Proceed!',
         ()=>apiCrud(`/api/transfer`, 'POST', 'Successful transaction', {
           accountNumber: values.accountNumber,
@@ -57,7 +61,7 @@ function Transfer() {
 
             {
               accounts && accounts.map((account) => {
-                return <option value={account.accountNumber} key={account._id}>{account.accountType} {account.accountNumber} {account.accountBalance}</option>
+                return <option value={account.accountNumber} key={account._id}>{account.accountType} {account.accountNumber}  - AED {account.accountBalance}</option>
               })
             }
           </select>
@@ -104,7 +108,7 @@ function Transfer() {
                      <option disabled key="empty" value="">Select an account</option>
 
             {
-              beneficiaryList && beneficiaryList.list?.map((beneficiary) => 
+              beneficiaryList && beneficiaryList.map((beneficiary) => 
                 <option value={beneficiary.accountNumber} key={beneficiary._id}>{beneficiary.name} - {beneficiary.accountNumber}</option>
               )
             }

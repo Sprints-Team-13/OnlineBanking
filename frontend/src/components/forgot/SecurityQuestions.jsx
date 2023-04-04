@@ -56,8 +56,15 @@ export default function SecurityQuestions() {
         .catch(
           (error) => {
             if (error.response) {
+              if (error.response.status === 400) {
+                popAlert('Email dose not exists', 'error');
+              }
+                else {
+
+                  popAlert(`Wronge Answer`,'error');
+                }
               // Request made and server responded
-              popAlert(`Wronge Answer`,'error');
+              
 
             } else if (error.request) {
               // The request was made but no response was received

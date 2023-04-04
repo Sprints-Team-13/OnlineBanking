@@ -140,6 +140,8 @@ exports.recharge = (req, res) => {
 
 
 exports.transferMoney = (req, res) => {
+    if(req.body.accountNumber === req.body.destinationAccountNumber)
+    return res.status(400).json({message:'From account cannot be same To account'});
     Account.findOne({accountNumber: req.body.accountNumber})
     .exec( async (error, account) => {
         if(error) return res.status(400).json({error});

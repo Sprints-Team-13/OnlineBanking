@@ -34,13 +34,13 @@ import popAction from "../../../helpers/popAction";
           onClick={() => popAction(
             'Are you sure?', 
             "The benificiary will be activated!",
-            'Activate!',
+            'Approve!',
             ()=>apiCrud(`/api/updateBeneficiary`, 'POST', 'Beneficiary Activated', {
               id: params.row._id,
               beneficiaryStatus:'active'
             })
           )}>
-          Activate
+          Approve
         </Button> 
         :
         <Button  variant="contained" className="activate"

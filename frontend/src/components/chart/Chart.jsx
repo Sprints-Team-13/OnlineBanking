@@ -25,7 +25,7 @@ function Charts() {
             // colors: '#ffffff',
           },
           formatter: function (value) {
-            return "$" + value;
+            return "AED " + value;
           }
         },
       },
@@ -46,7 +46,7 @@ function Charts() {
       },
       {
         name: "Withdrawals",
-        data: [350, 410, 360, 260, 450, 480],
+        data: [350, 410, 360, 700, 450, 480],
         color: '#ff9d22'
       },
     ]
