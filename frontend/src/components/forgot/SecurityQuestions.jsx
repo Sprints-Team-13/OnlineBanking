@@ -10,9 +10,9 @@ import { useFormik } from "formik";
 import * as yup from 'yup'
 
 const options = [
-  { value: '1', label: 'Who is your fav actors?' },
+  { value: '1', label: 'Who is your favorite actors?' },
   { value: '2', label: 'What was your first car?' },
-  { value: '3', label: 'What is your fav movie?' }
+  { value: '3', label: 'What is your favorite movie?' }
 ]
 
 export default function SecurityQuestions() {

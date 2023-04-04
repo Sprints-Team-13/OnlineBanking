@@ -161,9 +161,9 @@ onChange={handleFileSelect2}
                 onBlur={handleBlur}
                 value={values.securityQuestion}
               style={{ borderRadius: 15, height: 45, display: 'inline-block', width: '300px', border: '0', padding: '0 10px' }}>
-                <option value="1">Who is your fav actor?</option>
+                <option value="1">Who is your favorite actor?</option>
                 <option value="2">What was your first car?</option>
-                <option value="3">What is your fav movie?</option>
+                <option value="3">What is your favorite movie?</option>
               </select>
               {touched.securityQuestion ? errors.securityQuestion ? <p className="error">{errors.securityQuestion}</p> : <CheckCircleIcon className='icon'/> : null}
             </div>
