@@ -1,7 +1,8 @@
 const User = require("../models/user");
 const jwt = require('jsonwebtoken');
-
-
+// var http = require('http');
+var formidable = require('formidable');
+var fs = require('fs');
 exports.signup = (req, res) => {
 
 
@@ -124,17 +125,11 @@ exports.signin = (req, res) => {
 
 exports.validateQuestion = (req, res) => {
     User.findOne({ email: req.body.email })
-        .exec(async (error, user) => {
+        .exec((error, user) => {
             if (error) return res.status(400).json({ error });
             if (user) {
-                if (user.authorized === false) {
-                    return res.status(400).json({
-                        message: 'User is not authorized'
-                    });
-                }
-
-                //console.log(user.authenticate(req.body.hash_password));
-                if (true) {
+           
+                if (user.securityAnswer == req.body.securityAnswer && user.securityQuestion == req.body.securityQuestion) {
 
                     res.status(200).json({
                         message: 'Correct Answer'
@@ -142,7 +137,7 @@ exports.validateQuestion = (req, res) => {
                 }
 
                 else {
-                    return res.status(400).json({
+                    return res.status(404).json({
                         message: 'Invalid Answer'
                     });
                 }
@@ -255,3 +250,57 @@ exports.updateProfile = async (req, res) => {
         })
     }
 }
+
+var formidable = require('formidable');
+
+
+exports.fileUpload = async (req, res) => {
+
+    console.log("req.body")
+
+    var form = new formidable.IncomingForm();
+    console.log(form);
+
+
+
+    form.parse(req, function (err, fields, files) {
+
+        var oldpath = files.filetoupload.filepath;
+        console.log("oldpath" + files.filetoupload);
+
+        var newpath = 'C:/Users/user/' + files.filetoupload.originalFilename;
+        console.log("newpath" + newpath);
+        
+        fs.rename(oldpath, newpath, function (err) {
+          if (err) throw err;
+          res.write('File uploaded and moved!');
+          res.end();
+        });
+    });
+
+
+    
+    try {
+        const result = await User.updateOne({
+            _id: req.body.id,
+        }, {
+            $set: {
+                fullName: req.body.fullName,
+                phone: req.body.phone,
+                emiratesID: req.body.emiratesID,
+                addhar: req.body.addhar,
+                securityQuestion: req.body.securityQuestion,
+                securityAnswer: req.body.securityAnswer
+            }
+        }).exec();
+
+        console.log(result, req.body);
+
+        res.status(200).json({ result });
+    } catch (e) {
+        res.status(err.status).json({
+            message: err.message
+        })
+    }
+}
+

@@ -11,6 +11,7 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import ExitToAppOutlinedIcon from '@mui/icons-material/ExitToAppOutlined';
 import { AuthContext } from '../../context/Auth-context';
 import { SpeedDialIcon } from '@mui/material';
+import LanguageOutlinedIcon from '@mui/icons-material/LanguageOutlined';
 
 function Sidebar(props) {
 
@@ -61,7 +62,7 @@ function Sidebar(props) {
           </Link>
           <Link to={'/userdashboard/beneficieries'}>
             <li>
-              <SpeedDialIcon className='icon' />
+              <LanguageOutlinedIcon className='icon' />
               {!isSidebarActive && <p>Beneficieries</p>}
             </li>
           </Link>
@@ -95,7 +96,7 @@ function Sidebar(props) {
 
           <li onClick={signOut}>
             <ExitToAppOutlinedIcon className='icon' />
-            {!isSidebarActive && <p>Signout</p>}
+            {!isSidebarActive && <p>Logout</p>}
           </li>
 
         </ul>

@@ -6,7 +6,7 @@ const Account = require("../models/account")
 
 
 exports.getBeneficiaries = (req, res) => {
-    Beneficiary.find({ customerID: getID(req) }).
+    Beneficiary.find({ customerID: getID(req) }). //, beneficiaryStatus:'active'
         exec(async (error, list) => {
             if (error) return res.status(400).json({ error });
             res.status(200).json({ list });

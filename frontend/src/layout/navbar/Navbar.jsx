@@ -6,10 +6,12 @@ import LanguageOutlinedIcon from '@mui/icons-material/LanguageOutlined';
 import DarkModeOutlinedIcon from '@mui/icons-material/DarkModeOutlined';
 import FullscreenExitOutlinedIcon from '@mui/icons-material/FullscreenExitOutlined';
 import ListOutlinedIcon from '@mui/icons-material/ListOutlined';
+import useGetCurrentUser from '../../hooks/queries/users/useGetCurrentUser'
 
 function Navbar(props) {
 
   const {isSidebarActive} = props
+  const {data: user} = useGetCurrentUser();
 
   return (
     <div className={isSidebarActive ? "navbar collapse" : "navbar"}>
@@ -29,11 +31,12 @@ function Navbar(props) {
           <div className="item">
             <DarkModeOutlinedIcon/>
           </div>
-          <div className="item">
+          {/* <div className="item">
             <FullscreenExitOutlinedIcon/>
-          </div>
+          </div> */}
           <div className="item">
-            <ListOutlinedIcon/>
+            {/* <ListOutlinedIcon/> */}
+            <a href="/userdashboard/profile" >{user?.fullName}</a>
           </div>
         </div>
 

@@ -33,7 +33,7 @@ export default function CreateStaff(){
 			})
 			.then((res) => {
 				console.log(res.data)
-				popAlert('You Registered successfully')
+				popAlert('Staff registered successfully')
 				return setTimeout(()=> window.location.reload(), 2000)
 			})
 			.catch(

@@ -8,10 +8,55 @@ import { useFormik } from "formik";
 import popAction from "../../../helpers/popAction";
 import apiCrud from "../../../api/apiCrud";
 import useGetCurrentUser from '../../../hooks/queries/users/useGetCurrentUser'
+import { useState } from 'react';
+import {Component} from 'react';
 
 function Profile() {
   const {data: user} = useGetCurrentUser();
+  const [EmiratesId, setFile] = useState(null);
 
+  // const handleFileSelect = (event) => {
+  //   setFile(event.target.files[0]);
+  // };
+
+   
+  // On file select (from the pop up)
+  const onFileChange = event => {
+   
+    // Update the state
+  setFile( event.target.files[0] );
+   
+  };
+   
+  // On file upload (click the upload button)
+  const onFileUpload = () => {
+    console.log(EmiratesId);
+
+    // Create an object of formData
+    const formData = new FormData();
+   
+    // Update the formData object
+    formData.append(
+      "myFile",
+      EmiratesId,
+      EmiratesId.name
+    );
+   
+    // Details of the uploaded file
+    console.log(EmiratesId);
+   
+    // Request made to the backend api
+    // Send formData object
+    apiCrud(`/api/fileupload`, 'POST', 'FIle Uploaded',formData)
+    // axios.post("api/uploadfile", formData);
+  };
+   
+
+
+  // const handleFileUpload = () => {
+  //   // Upload the file using an API or function
+  //   console.log('Uploading file:', EmirratesId);
+  // };
   const schema = yup.object({
     fullName: yup.string()
       .required('Full Name is required'),
@@ -79,7 +124,8 @@ function Profile() {
           user && (
             <div className="transfer">
           <div className="transfer-form">
-          <form action="/" onSubmit={handleSubmit}>
+          <form action="/" onSubmit={handleSubmit}   enctype='multipart/form-data' >
+
             <div className="input-holder">
               <label>Customer ID</label>
               <input type="text" value={user._id} disabled />
@@ -110,6 +156,7 @@ function Profile() {
                 value={values.emiratesID} name="emiratesID" />
                 {touched.emiratesID ? errors.emiratesID ? <p className="error">{errors.emiratesID}</p> : <CheckCircleIcon className='icon'/> : null}
             </div>
+         
             <div className="input-holder">
               <label>ADDHAR</label>
               <input name="addhar" 
@@ -118,6 +165,8 @@ function Profile() {
                 value={values.addhar} type="text" />
                 {touched.addhar ? errors.addhar ? <p className="error">{errors.addhar}</p> : <CheckCircleIcon className='icon'/> : null}
             </div>
+
+
             <div className="input-holder">
               <label>Security Question</label>
               <br/>
@@ -126,22 +175,42 @@ function Profile() {
                 onBlur={handleBlur}
                 value={values.securityQuestion}
               style={{ borderRadius: 15, height: 45, display: 'inline-block', width: '300px', border: '0', padding: '0 10px' }}>
-                <option value="1">Who is your fav actor?</option>
+                <option value="1">Who is your favorite actor?</option>
                 <option value="2">What was your first car?</option>
-                <option value="3">What is your fav movie?</option>
+                <option value="3">What is your favorite movie?</option>
               </select>
               {touched.securityQuestion ? errors.securityQuestion ? <p className="error">{errors.securityQuestion}</p> : <CheckCircleIcon className='icon'/> : null}
             </div>
             <div className="input-holder">
-              <label>Answer</label>
+              <label>Your Answer</label>
               <input name="securityAnswer" 
                 onChange={handleChange}
                 onBlur={handleBlur}
                 value={values.securityAnswer} type="text" />
                 {touched.securityAnswer ? errors.securityAnswer ? <p className="error">{errors.securityAnswer}</p> : <CheckCircleIcon className='icon'/> : null}
             </div>
-            <button id="sub_btn" type="submit">Submit</button>
+
+
+            <div className="input-holder">
+
+<label htmlFor="file-upload"> Emirates Id File:</label>
+
+
+<input type="file" onChange={onFileChange}  style={{width:'200px', padding:'0px'}}></input>
+      <button onClick={onFileUpload} >
+        Upload!
+      </button>
+      </div>
+
+            <div>
+    
+    </div>
+            <button id="sub_btn" type="submit">Save Profile</button>
           </form>
+
+          
+  
+
         </div>
         </div>)
         }

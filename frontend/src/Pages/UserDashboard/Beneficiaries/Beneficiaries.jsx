@@ -25,16 +25,16 @@ function Beneficiaries() {
 
     <div className='actions'>
     
-        <Button variant="contained" className="activate"
+        <Button variant="contained" className="deactivate"
           onClick={() => popAction(
             'Are you sure?', 
             "The benificiary will be deleted!",
-            'Delete!',
+            'Remove!',
             ()=>apiCrud(`/api/beneficiaries`, 'DELETE', 'Beneficiary Deleted', {
               id: params.row._id
             })
           )}>
-          Delete
+          Remove
         </Button>            
    
     </div>
@@ -45,6 +45,9 @@ function Beneficiaries() {
     },
     { 
       field: 'accountNumber', headerName: 'Account Number', width: 150
+    },
+    { 
+      field: 'beneficiaryStatus', headerName: 'Status', width: 150
     },
     { 
       field: 'actions', 

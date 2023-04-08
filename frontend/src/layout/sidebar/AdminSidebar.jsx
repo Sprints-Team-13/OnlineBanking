@@ -11,6 +11,7 @@ import ExitToAppOutlinedIcon from '@mui/icons-material/ExitToAppOutlined';
 import TransformOutlinedIcon from '@mui/icons-material/TransformOutlined';
 import { AuthContext } from '../../context/Auth-context';
  import { SpeedDialIcon } from '@mui/material';
+ import LanguageOutlinedIcon from '@mui/icons-material/LanguageOutlined';
 
 function Sidebar(props) {
 
@@ -48,7 +49,7 @@ function Sidebar(props) {
           <Link to={'/adminpanel/users'}>
             <li>
               <AccountCircleIcon className='icon'/>
-              {!isSidebarActive && <p>Users</p>}              
+              {!isSidebarActive && <p>Customers</p>}              
             </li>
           </Link>
 
@@ -60,14 +61,14 @@ function Sidebar(props) {
           </Link>
           <Link to={'/adminpanel/beneficieries'}>
             <li>
-              <SpeedDialIcon className='icon' />
+              <LanguageOutlinedIcon className='icon' />
               {!isSidebarActive && <p>Beneficieries</p>}
             </li>
           </Link>
           <Link to={'/adminpanel/transfer'}>
             <li>
               <TransformOutlinedIcon className='icon' />
-              {!isSidebarActive && <p>Money Transfer</p>}
+              {!isSidebarActive && <p>Credit/Debit Amount</p>}
             </li>
           </Link>
           <Link to={'/adminpanel/transactions'}>

@@ -9,11 +9,14 @@ import useGetAllBeneficiaries from "../../../hooks/queries/users/useGetAllBenefi
 import useGetAccounts from '../../../hooks/queries/admin/useGetAccounts'
 import { transferSchema } from "../../../schemas/transferSchema";
 function Transfer() {
-  const { data: beneficiaryList } = useGetAllBeneficiaries();
+  // const { data: beneficiaryList } = useGetAllBeneficiaries();
   
     // fetch and cache all accounts
-  const { data: accounts} = useGetAccounts()
+  const { data: accountsdb} = useGetAccounts()
 
+  const accounts = accountsdb?.filter(
+    o => o.accountStatus === 'active'
+  );
 
   // handle user inputs
 	const { values, errors, touched, handleBlur, handleChange, handleSubmit} = useFormik({
@@ -46,7 +49,7 @@ function Transfer() {
       <form action="/home" onSubmit={handleSubmit}>
 
         <div className="input-holder">
-          <label>Account<span style={{color: 'red'}}> (From)</span></label><br/>
+          <label>From Account<span style={{color: 'red'}}> (Sender)</span></label><br/>
           <select placeholder={'Select source Account'}  
           name="accountNumber"
           onChange={handleChange}
@@ -57,7 +60,7 @@ function Transfer() {
              <option disabled key="empty" value="">Select an account</option>
             {
               accounts && accounts.map((account) => 
-                <option value={account.accountNumber} key={account._id}>{account.accountType} {account.accountNumber} {account.accountBalance}</option>
+                <option value={account.accountNumber} key={account._id}>{account.accountType} {account.accountNumber} - AED {account.accountBalance}</option>
               )
             }
           </select>
@@ -93,7 +96,7 @@ function Transfer() {
         </div>
 
         <div className="input-holder">
-          <label>Beneficiary<span style={{color: 'green'}}> (Recipient)</span></label><br/>
+          <label>To Account<span style={{color: 'green'}}> (Recipient)</span></label><br/>
           <select placeholder={'Select Beneficiary'} classNamePrefix="select"
           name="destinationAccountNumber"
           onChange={handleChange}
@@ -103,9 +106,13 @@ function Transfer() {
           required >
          <option disabled key="empty" value="">Select an account</option>
 
-            {
+            {/* {
               beneficiaryList && beneficiaryList.list?.map((beneficiary) => 
                 <option value={beneficiary.accountNumber} key={beneficiary._id}>{beneficiary.name} - {beneficiary.accountNumber}</option>
+              ) */}
+              {
+              accounts && accounts.map((account) => 
+                <option value={account.accountNumber} key={account._id}>{account.accountType} {account.accountNumber} - AED {account.accountBalance}</option>
               )
             }
 
@@ -121,9 +128,9 @@ function Transfer() {
 
         </div>
 
-        <div className="input-holder">
+        {/* <div className="input-holder">
           <input type="checkbox" name="checkbox" id="checkbox" required /> <span>I agree to the <a href="https://google.com" target="_blank" rel="noopener noreferrer">terms of use</a></span>.
-        </div>
+        </div> */}
 
         <button id="sub_btn" type="submit">Transfer</button>
 
@@ -135,7 +142,7 @@ function Transfer() {
     <div className="transfer">
 
       <div className="title">
-        <h2>Money Transfer</h2>
+        <h2>Credit/Debit Amount</h2>
       </div>
 
       {transferForm}

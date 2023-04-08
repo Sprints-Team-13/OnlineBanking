@@ -59,7 +59,7 @@ function Users() {
     <div className="users">
 
       <div className="title">
-        <h2>Users</h2>
+        <h2>Customers</h2>
       </div>
       
       <div style={{ height: 700, width: '90%' }}>

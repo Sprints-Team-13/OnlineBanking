@@ -63,7 +63,7 @@ function Overview() {
         <div className="left-section-wrapper">
           <div className="left-section">
             <AdminPanelSettingsIcon className="icon"/>
-            <p>Total users</p>
+            <p>Total customers</p>
             <h3>{users?.length}</h3>
             <p>Total accounts</p>
             <h3>{accounts?.length}</h3>

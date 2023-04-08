@@ -42,13 +42,13 @@ function Accounts() {
           onClick={() => popAction(
             'Are you sure?', 
             "The account will be activated!",
-            'Activate!',
+            'Approve!',
             ()=>apiCrud(`/api/approval`, 'POST', 'Account activated', {
               accountNumber: params.row.id,
               accountStatus: 'active'
             })()
           )}>
-          Activate
+          Approve
         </Button>            
       }
     </div>
