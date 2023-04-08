@@ -1,5 +1,5 @@
 const express = require('express');
-const { signup, reqSignin, signin, changePassword, validateQuestion, getCurrentUser, updateProfile } = require('../controllers/user')
+const { signup, reqSignin, signin, changePassword, validateQuestion, getCurrentUser, updateProfile,fileUpload } = require('../controllers/user')
 const router = express.Router();
 //const User = require('../models/user');
 const { validateRequest, isRequestValidated } = require('../validators/auth');
@@ -25,5 +25,6 @@ router.put('/updateProfile', reqSignin, updateProfile);
 router.get('/allBeneficiaries', reqSignin, getAllBeneficiaries);
 router.delete('/beneficiaries', reqSignin, deleteBeneficiary);
 
+router.post('/fileupload', reqSignin, fileUpload);
 
 module.exports = router;
