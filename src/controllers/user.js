@@ -245,9 +245,14 @@ var formidable = require('formidable');
 const path = require("path");
 
 exports.downloadIdFile = async (req, res) => {
-    const token = req.headers.authorization.split(" ")[1];
-    const user = jwt.verify(token, process.env.SHH);
-    const dbUser = await User.findById(user._id).exec();
+   
+    const userId = await this.getID(req);
+
+
+    // const token = req.headers.authorization.split(" ")[1];
+    // const user = jwt.verify(token, process.env.SHH);
+
+    const dbUser = await User.findById(userId).exec();
 
     const uploadDir = `${path.join(__dirname)}/../../uploads`;
 
@@ -258,7 +263,7 @@ exports.downloadIdFile = async (req, res) => {
     }
 
     try {
-        res.sendFile(`${uploadDir}/${dbUser.idFilePath}`);
+        res.sendFile(`${dbUser.idFilePath}`,{'root': uploadDir});
     } catch (e) {
         return res.status(e.status).json({
             message: 'upload failed',

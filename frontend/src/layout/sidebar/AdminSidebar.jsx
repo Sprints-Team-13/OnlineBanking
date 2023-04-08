@@ -68,7 +68,7 @@ function Sidebar(props) {
           <Link to={'/adminpanel/transfer'}>
             <li>
               <TransformOutlinedIcon className='icon' />
-              {!isSidebarActive && <p>Credit/Debit Amount</p>}
+              {!isSidebarActive && <p>Transfer Amount</p>}
             </li>
           </Link>
           <Link to={'/adminpanel/transactions'}>

@@ -96,7 +96,7 @@ function Sidebar(props) {
 
           <li onClick={signOut}>
             <ExitToAppOutlinedIcon className='icon' />
-            {!isSidebarActive && <p>Logout</p>}
+            {!isSidebarActive && <p>Signout</p>}
           </li>
 
         </ul>

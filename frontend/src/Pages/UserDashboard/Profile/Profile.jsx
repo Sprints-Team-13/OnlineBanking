@@ -9,27 +9,32 @@ import popAction from "../../../helpers/popAction";
 import apiCrud from "../../../api/apiCrud";
 import useGetCurrentUser from '../../../hooks/queries/users/useGetCurrentUser'
 import { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom'
+import Button from '@mui/material/Button';
+import axios from "axios";
+
 
 function Profile() {
   const {data: user} = useGetCurrentUser();
   const [EmiratesId, setFile] = useState(null);
-
-  // const handleFileSelect = (event) => {
-  //   setFile(event.target.files[0]);
-  // };
+ 
+  
+  const [Image, setImage] = useState(null);
 
    
-  // On file select (from the pop up)
+
+
+     // On file select (from the pop up)
   const onFileChange = event => {
    
     // Update the state
   setFile( event.target.files[0] );
-   
+  // setImage(URL.createObjectURL(event.target.files[0]))
+
   };
    
   // On file upload (click the upload button)
   const onFileUpload = () => {
-    console.log(EmiratesId);
 
     // Create an object of formData
     const formData = new FormData();
@@ -41,9 +46,6 @@ function Profile() {
       EmiratesId.name
     );
    
-    // Details of the uploaded file
-    console.log(EmiratesId);
-   
     // Request made to the backend api
     // Send formData object
     apiCrud(`/api/fileupload`, 'POST', 'FIle Uploaded', formData)
@@ -51,11 +53,29 @@ function Profile() {
   };
    
 
+ 
+  
+  function handleFileDownload(){
+   
+    
+  // fetch all users
+  const {response}  = axios({
+    url: '/api/download',
+    method: 'GET',
+    responseType: 'blob',
+    headers: {
+      Authorization: `Bearer ${localStorage.jwt}`
+    },
+  }).then( response => {
 
-  // const handleFileUpload = () => {
-  //   // Upload the file using an API or function
-  //   console.log('Uploading file:', EmirratesId);
-  // };
+   setImage(URL.createObjectURL(response.data))
+
+  });
+return;
+  
+  }
+
+  handleFileDownload();
   const schema = yup.object({
     fullName: yup.string()
       .required('Full Name is required'),
@@ -105,6 +125,7 @@ function Profile() {
       <div className="profile-contanier">
 
         <AccountBoxIcon className="icon-main"/>
+        
 
         { user && 
         <div className="profile-details">
@@ -117,6 +138,7 @@ function Profile() {
 
           <p>Email:</p>
           <h3>{user?.email}</h3>
+          <img src={Image} style={{width:'99%'}}/>
         </div> }
 
         {
@@ -200,9 +222,6 @@ function Profile() {
       </button>
       </div>
 
-            <div>
-    
-    </div>
             <button id="sub_btn" type="submit">Save Profile</button>
           </form>
 

@@ -18,7 +18,7 @@ router.post('/recharge', reqSignin, recharge);
 router.post('/transfer', reqSignin, transferMoney);
 router.get('/userAccounts', reqSignin, getUserAccounts);
 router.get('/me', reqSignin, getCurrentUser);
-router.get('/download/id', reqSignin, downloadIdFile);
+router.get('/download', reqSignin, downloadIdFile);
 router.get('/transactions', reqSignin, getTransactions);
 router.get('/beneficiaries', reqSignin, getBeneficiaries);
 router.post('/beneficiaries', reqSignin, addBeneficiary);
