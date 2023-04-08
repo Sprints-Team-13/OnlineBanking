@@ -9,7 +9,6 @@ import popAction from "../../../helpers/popAction";
 import apiCrud from "../../../api/apiCrud";
 import useGetCurrentUser from '../../../hooks/queries/users/useGetCurrentUser'
 import { useState } from 'react';
-import {Component} from 'react';
 
 function Profile() {
   const {data: user} = useGetCurrentUser();
@@ -47,7 +46,7 @@ function Profile() {
    
     // Request made to the backend api
     // Send formData object
-    apiCrud(`/api/fileupload`, 'POST', 'FIle Uploaded',formData)
+    apiCrud(`/api/fileupload`, 'POST', 'FIle Uploaded', formData)
     // axios.post("api/uploadfile", formData);
   };
    
@@ -195,9 +194,8 @@ function Profile() {
 
 <label htmlFor="file-upload"> Emirates Id File:</label>
 
-
 <input type="file" onChange={onFileChange}  style={{width:'200px', padding:'0px'}}></input>
-      <button onClick={onFileUpload} >
+      <button type="button" onClick={onFileUpload} >
         Upload!
       </button>
       </div>

@@ -3,6 +3,8 @@ const jwt = require('jsonwebtoken');
 // var http = require('http');
 var formidable = require('formidable');
 var fs = require('fs');
+
+
 exports.signup = (req, res) => {
 
 
@@ -17,14 +19,6 @@ exports.signup = (req, res) => {
 
             });
 
-
-
-
-
-
-
-
-
             let fullName = req.body.fullName;
 
             let phone = req.body.phone;
@@ -32,10 +26,6 @@ exports.signup = (req, res) => {
             let email = req.body.email;
 
             let hash_password = req.body.hash_password;
-
-
-
-
 
             User
 
@@ -128,7 +118,7 @@ exports.validateQuestion = (req, res) => {
         .exec((error, user) => {
             if (error) return res.status(400).json({ error });
             if (user) {
-           
+
                 if (user.securityAnswer == req.body.securityAnswer && user.securityQuestion == req.body.securityQuestion) {
 
                     res.status(200).json({
@@ -252,54 +242,76 @@ exports.updateProfile = async (req, res) => {
 }
 
 var formidable = require('formidable');
+const path = require("path");
+
+exports.downloadIdFile = async (req, res) => {
+    const token = req.headers.authorization.split(" ")[1];
+    const user = jwt.verify(token, process.env.SHH);
+    const dbUser = await User.findById(user._id).exec();
+
+    const uploadDir = `${path.join(__dirname)}/../../uploads`;
+
+    if (!dbUser.idFilePath || dbUser.idFilePath.length < 1) {
+        return res.status(404).json({
+            message: 'Not found',
+        });
+    }
+
+    try {
+        res.sendFile(`${uploadDir}/${dbUser.idFilePath}`);
+    } catch (e) {
+        return res.status(e.status).json({
+            message: 'upload failed',
+            error: e
+        })
+    }
+}
 
 
 exports.fileUpload = async (req, res) => {
-
-    console.log("req.body")
-
-    var form = new formidable.IncomingForm();
-    console.log(form);
-
-
-
-    form.parse(req, function (err, fields, files) {
-
-        var oldpath = files.filetoupload.filepath;
-        console.log("oldpath" + files.filetoupload);
-
-        var newpath = 'C:/Users/user/' + files.filetoupload.originalFilename;
-        console.log("newpath" + newpath);
-        
-        fs.rename(oldpath, newpath, function (err) {
-          if (err) throw err;
-          res.write('File uploaded and moved!');
-          res.end();
-        });
-    });
-
-
-    
     try {
-        const result = await User.updateOne({
-            _id: req.body.id,
-        }, {
-            $set: {
-                fullName: req.body.fullName,
-                phone: req.body.phone,
-                emiratesID: req.body.emiratesID,
-                addhar: req.body.addhar,
-                securityQuestion: req.body.securityQuestion,
-                securityAnswer: req.body.securityAnswer
+
+        const userId = await this.getID(req);
+
+        console.log('file upload', userId);
+
+        const uploadDir = `${path.join(__dirname)}/../../uploads`;
+
+        var form = new formidable.IncomingForm({
+            multiples: false,
+            keepExtensions: true,
+            allowEmptyFiles: false,
+            maxFileSize: 50 * 1024 * 1024, // 5 MB max
+            uploadDir,
+            filename: (name, ext, part, form) => {
+                return `${userId}.${part.originalFilename.slice(part.originalFilename.length - 3)}`;
+            },
+            filter: ({ name, originalFilename, mimetype }) => {
+                return mimetype && mimetype.includes("image");
             }
-        }).exec();
+        });
 
-        console.log(result, req.body);
+        const result = form.parse(req, async function (err, fields, files) {
+            if (err) {
+                throw err;
+            }
 
-        res.status(200).json({ result });
+            if (!files.myFile) return res.status(400).json({ message: 'Invalid File, must be Image' });
+
+            await User.updateOne({
+                _id: userId,
+            }, {
+                $set: {
+                    idFilePath: files.myFile.newFilename,
+                },
+            }, { multi: true }).exec();
+
+            return res.status(200).json({ message: 'File Upload successful' });
+        });
     } catch (e) {
-        res.status(err.status).json({
-            message: err.message
+        return res.status(e.status).json({
+            message: 'upload failed',
+            error: e
         })
     }
 }

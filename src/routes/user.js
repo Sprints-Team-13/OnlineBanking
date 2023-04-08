@@ -1,5 +1,5 @@
 const express = require('express');
-const { signup, reqSignin, signin, changePassword, validateQuestion, getCurrentUser, updateProfile,fileUpload } = require('../controllers/user')
+const { signup, reqSignin, signin, changePassword, validateQuestion, getCurrentUser, updateProfile, fileUpload, downloadIdFile } = require('../controllers/user')
 const router = express.Router();
 //const User = require('../models/user');
 const { validateRequest, isRequestValidated } = require('../validators/auth');
@@ -18,6 +18,7 @@ router.post('/recharge', reqSignin, recharge);
 router.post('/transfer', reqSignin, transferMoney);
 router.get('/userAccounts', reqSignin, getUserAccounts);
 router.get('/me', reqSignin, getCurrentUser);
+router.get('/download/id', reqSignin, downloadIdFile);
 router.get('/transactions', reqSignin, getTransactions);
 router.get('/beneficiaries', reqSignin, getBeneficiaries);
 router.post('/beneficiaries', reqSignin, addBeneficiary);

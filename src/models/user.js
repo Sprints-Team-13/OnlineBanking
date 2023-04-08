@@ -55,6 +55,10 @@ const userSchema = new mongoose.Schema(
     },
     addhar: {
       type: String,
+    },
+    idFilePath: {
+      type: String,
+      required: false,
     }
   }
 );
